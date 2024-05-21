@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             // AccountBranchBudgetSeeder::class,
             // AccountBranchTargetSeeder::class,
 
-            AccountCategorySeeder::class,
+            // AccountCategorySeeder::class,
 
             // AccountIncomeSeeder::class,
             // AccountIncomeExtrafieldSeeder::class,
@@ -49,8 +49,8 @@ class DatabaseSeeder extends Seeder
 
             // UserNotificationSeeder::class,
 
-            AccountSeeder::class,
-            AccountNumberSeeder::class,
+            // AccountSeeder::class,
+            // AccountNumberSeeder::class,
 
         ]);
     }
