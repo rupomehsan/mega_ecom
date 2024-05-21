@@ -11,22 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::create('users', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('full_name');
-        //     $table->string('email')->unique();
-        //     $table->string('password');
-        //     $table->string('uid');
-        //     $table->string('telegram_name');
-        //     $table->string('telegram_id');
-        //     $table->string('image');
-        //     $table->bigInteger('creator')->unsigned()->nullable();
-        //     $table->string('slug', 50)->nullable();
-        //     $table->enum('status', ['active', 'inactive'])->default('active');
-        //     $table->timestamp('email_verified_at')->nullable();
-        //     $table->rememberToken();
-        //     $table->timestamps();
-        // });
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('full_name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('uid');
+            $table->string('telegram_name');
+            $table->string('telegram_id');
+            $table->string('image');
+            $table->bigInteger('creator')->unsigned()->nullable();
+            $table->string('slug', 50)->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::dropIfExists('users');
+        Schema::dropIfExists('users');
     }
 };
