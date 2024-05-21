@@ -21,18 +21,6 @@ class Seeder extends SeedersSeeder
         $roles = [
             'super_admin',
             'admin',
-            'cp',
-            'sg',
-            'bm_manager',
-            'bm_support_manager',
-            'division_admin',
-            'division_support_admin',
-            'division_without_audit',
-            'branch',
-            'auditor',
-            'division_employee',
-            'well_wisher',
-            'loan_recipient',
         ];
 
         foreach ($roles as $key => $role) {
