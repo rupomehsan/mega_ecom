@@ -79,8 +79,8 @@
                     <div class="header-right">
                         <div class="icon-block">
                             <ul>
-                                <li class="mobile-user " onclick="openAccount()">
-                                    <a href="javascript:void(0)">
+                                <li class="mobile-user " >
+                                    <Link href="/profile">
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                             viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
@@ -102,7 +102,7 @@
                                                 </g>
                                             </g>
                                         </svg>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <!-- <li class="mobile-setting" onclick="openSetting()">
                                     <a href="javascript:void(0)">

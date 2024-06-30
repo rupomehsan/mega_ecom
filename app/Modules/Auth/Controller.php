@@ -6,8 +6,10 @@ use App\Modules\Auth\Actions\Login;
 use App\Modules\Auth\Actions\Register;
 
 use App\Http\Controllers\Controller as ControllersController;
+use App\Modules\Auth\Actions\CheckUser;
 use App\Modules\Auth\Validations\LoginValidation;
 use App\Modules\Auth\Validations\RegisterValidation;
+use Psy\VersionUpdater\Checker;
 
 class Controller extends ControllersController
 {
@@ -25,11 +27,7 @@ class Controller extends ControllersController
 
     public function checkUser()
     {
-        if (auth()->check()) {
-            return response()->json([
-                'user' => auth()->user()->load(['role', 'permissions']),
-            ], 200);
-        }
-        return response()->json(["User not found"], 404);
+        $data = CheckUser::execute();
+        return $data;
     }
 }

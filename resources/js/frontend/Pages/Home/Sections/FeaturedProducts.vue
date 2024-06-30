@@ -33,12 +33,11 @@
 </template>
 
 <script>
-import axios from "axios";
+
 import ProductItem from "../../../Components/ProductItem.vue";
 
-
-
 export default {
+
     components: {
         ProductItem,
     },
@@ -50,14 +49,9 @@ export default {
     },
     methods: {
         get_featured_products: async function () {
-            let res = await axios.get("/api/v1/featured-products");
-            let data = res.data;
-            this.products = data;
+            let res = await window.publicAxios("/featured-products");
+            this.products = res;
         },
-
-
-
-
     },
 };
 </script>

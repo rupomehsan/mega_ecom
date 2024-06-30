@@ -9,6 +9,7 @@ class All
     public static function execute()
     {
         try {
+
             $pageLimit = request()->input('limit') ?? 10;
             $orderByColumn = request()->input('sort_by_col') ?? 'id';
             $orderByType = request()->input('sort_type')    ?? 'asc';
@@ -17,7 +18,7 @@ class All
             $with = ['product:id,slug,title,purchase_price,customer_sales_price','product.product_image:id,product_id,url'];
             $condition = [];
 
-            $data = self::$model::query()->where('user_id', 3);
+            $data = self::$model::query()->where('user_id', auth()->user()->id);
 
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');

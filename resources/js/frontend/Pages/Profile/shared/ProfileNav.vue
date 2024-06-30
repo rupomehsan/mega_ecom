@@ -19,7 +19,7 @@
                                 </a>
                                 <p>Change profile picture</p>
                             </div>
-                            <input class="d-none" type="file" ref="fileInput" accept="image/*" @change="previewImage" >
+                            <input class="d-none" type="file" ref="fileInput" accept="image/*" @change="previewImage">
                         </div>
                         <div>
                             <h4>
@@ -29,67 +29,72 @@
                     </li>
                     <li :class="{ 'active': $page.url === '/profile' }">
                         <Link href="/profile">
-                            At a glance
+                        At a glance
                         </Link>
                     </li>
                     <li :class="{ 'active': $page.url === '/profile/orders' }">
-                        <Link href="/profile/orders" >
-                            Orders
+                        <Link href="/profile/orders">
+                        Orders
                         </Link>
                     </li>
                     <li :class="{ 'active': $page.url === '/profile/wish-list' }">
-                        <Link href="/profile/wish-list" >
-                            Wish List
+                        <Link href="/profile/wish-list">
+                        Wish List
                         </Link>
                     </li>
                     <li :class="{ 'active': $page.url === '/profile/account' }">
-                        <Link href="/profile/account" >
-                            Edit Account
+                        <Link href="/profile/account">
+                        Edit Account
                         </Link>
                     </li>
                     <li :class="{ 'active': $page.url === '/profile/address' }">
-                        <Link href="/profile/address" >
-                            Edit Address
+                        <Link href="/profile/address">
+                        Edit Address
                         </Link>
                     </li>
                     <li :class="{ 'active': $page.url === '/profile/password' }">
-                        <Link href="/profile/password" >
-                            Password
+                        <Link href="/profile/password">
+                        Password
                         </Link>
                     </li>
 
-                    <li class="last"><a href="javascript:void(0)">Log Out</a></li>
+                    <li class="last"><a @click="log_out()" href="javascript:void(0)">Log Out</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </template>
 <script>
-
+import { mapActions } from "pinia";
+import { auth_store } from "../../../Store/auth_store";
 export default {
     props: {
         auth: Object,
     },
-    data: ()=>({
+    data: () => ({
         user: {},
         previewUrl: null,
     }),
-    created(){
-        let data = window.page_data();
-        if(data.props.auth){
-            this.user = data.props.auth;
-            this.previewUrl =  this.user?.photo
-        }else{
-            window.location.reload();
-        }
+    created() {
+        // let data = window.page_data();
+        // if(data.props.auth){
+        //     this.user = data.props.auth;
+        //     this.previewUrl =  this.user?.photo
+        // }else{
+        //     window.location.reload();
+        // }
     },
     methods: {
+        ...mapActions(auth_store, {
+            log_out: "log_out",
+        }),
+
         check_image_url: function (url) {
             try {
                 new URL(url);
                 return url;
             } catch (e) {
-                return "/"+url;
+                return "/" + url;
             }
         },
         triggerFileInput() {

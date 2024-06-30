@@ -14,7 +14,28 @@ return new class extends Migration
     {
         Schema::create('search_key_words', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 150)->nullable();
+            $table->string('type', 50)->nullable();
+            $table->text('title')->nullable();
+
+            $table->bigInteger('creator')->unsigned()->nullable();
+            $table->string('slug', 50)->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->timestamps();
+        });
+        Schema::create('url_counts', function (Blueprint $table) {
+            $table->id();
+            $table->text('url_link')->nullable();
+            $table->integer('count')->default(1)->unsigned();
+
+            $table->bigInteger('creator')->unsigned()->nullable();
+            $table->string('slug', 50)->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->timestamps();
+        });
+        Schema::create('url_visit_tracks', function (Blueprint $table) {
+            $table->id();
+            $table->text('url_link')->nullable();
+            $table->text('from_link')->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
@@ -29,5 +50,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('search_key_words');
+        Schema::dropIfExists('url_counts');
+        Schema::dropIfExists('url_visit_tracks');
     }
 };

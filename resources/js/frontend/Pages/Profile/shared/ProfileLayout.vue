@@ -2,18 +2,18 @@
     <Layout>
         <div class="breadcrumb-main py-3">
             <div class="container">
-                <BreadCumb :bread_cumb="bread_cumb"/>
+                <BreadCumb :bread_cumb="bread_cumb" />
             </div>
         </div>
         <section class="section-big-py-space b-g-light">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3">
-                        <ProfileNav/>
+                        <ProfileNav />
                     </div>
                     <div class="col-lg-9">
                         <div class="dashboard-right">
-                            <slot/>
+                            <slot />
                         </div>
                     </div>
                 </div>
@@ -23,8 +23,10 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
 import BreadCumb from "../../../Components/BreadCumb.vue";
 import Layout from "../../../Shared/Layout.vue";
+import { auth_store } from "../../../Store/auth_store.js";
 import ProfileNav from "./ProfileNav.vue";
 export default {
     components: { Layout, ProfileNav, BreadCumb },
@@ -35,8 +37,24 @@ export default {
             default: [],
         },
     },
-    created: function(){
-    }
+    created: async function () {
+        await this.check_is_auth();
+        if (!this.is_auth) {
+            window.location.href = "/login";
+        }
+    },
+    methods: {
+        ...mapActions(auth_store, {
+            check_is_auth: "check_is_auth",
+        }),
+    },
+    computed: {
+        ...mapState(auth_store, {
+            is_auth: "is_auth",
+        }),
+    },
+
+
 };
 </script>
 

@@ -17,7 +17,7 @@ class All
             $with = ['product:id,slug,title,purchase_price,customer_sales_price','product.product_image:id,product_id,url'];
             $condition = [];
 
-            $data = self::$model::query()->where('user_id', 3);
+            $data = self::$model::query()->where('user_id', auth()->id());
 
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');

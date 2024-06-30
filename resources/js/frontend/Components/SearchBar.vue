@@ -14,6 +14,8 @@
                 <ul>
                     <li><a href="#" @click.prevent="search_type='products'" :class="{active :search_type=='products',}">Products</a></li>
                     <li><a href="#" @click.prevent="search_type='categories'" :class="{active :search_type=='categories',}">Categories</a></li>
+                    <li><a href="#" @click.prevent="search_type='brand'" :class="{active :search_type=='brand',}">Brand</a></li>
+                    <li><a href="#" @click.prevent="search_type='tag'" :class="{active :search_type=='tag',}">Tag</a></li>
                 </ul>
             </div>
             <div class="search_items">

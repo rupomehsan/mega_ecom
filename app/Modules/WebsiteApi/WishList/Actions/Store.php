@@ -9,7 +9,7 @@ class Store
     public static function execute()
     {
         try {
-            $isWishListExist = self::$model::where('product_id', request()->product_id)->where('user_id', 3)->first();
+            $isWishListExist = self::$model::where('product_id', request()->product_id)->where('user_id', auth()->id())->first();
 
             if ($isWishListExist) {
                 return messageResponse('Item already added', $isWishListExist, 200, 'warning');
@@ -17,7 +17,7 @@ class Store
 
             $requestData = [
                 'product_id' => request()->product_id,
-                'user_id' =>  auth()->id() ?? 3,
+                'user_id' =>  auth()->id(),
             ];
 
             $data = self::$model::query()->create($requestData);

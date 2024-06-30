@@ -1,4 +1,5 @@
 import "../frontend/plugins/sweet_alert.js";
+import "../frontend/plugins/axios_setup.js";
 
 
 import { createApp, h } from "vue";

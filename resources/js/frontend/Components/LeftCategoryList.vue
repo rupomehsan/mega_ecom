@@ -14,7 +14,7 @@
     </ul>
 </template>
 <script>
-import axios from 'axios';
+
 
 export default {
     data: () => ({
@@ -25,7 +25,7 @@ export default {
     },
     methods: {
         get_categories: async function () {
-            let res = await axios.get('/api/v1/nav-categories');
+            let res = await axios.get('/nav-categories');
             let data = res.data;
             this.top_categories = data;
         },

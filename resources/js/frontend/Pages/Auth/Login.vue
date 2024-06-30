@@ -12,17 +12,18 @@
                     <div class="col-xl-4 col-lg-6 col-md-8 offset-xl-4 offset-lg-3 offset-md-2">
                         <div class="theme-card">
                             <h3 class="text-center">Login</h3>
-                            <form class="theme-form" @submit.prevent="login_submit" method="post">
+                            <form class="theme-form" @submit.prevent="loginFormHandler($event)" method="post">
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="text" v-model="form.email" class="form-control" placeholder="Email" />
-                                    <div class="text-danger" v-if="form.errors.email">{{ form.errors.email }}</div>
+                                    <input type="text" name="email" id="email" class="form-control"
+                                        placeholder="Email" />
+
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="password" v-model="form.password" class="form-control"
+                                    <input type="password" name="password" id="password" class="form-control"
                                         placeholder="Enter your password" />
-                                    <div class="text-danger" v-if="form.errors.password">{{ form.errors.password }}</div>
+
                                 </div>
                                 <button class="btn btn-normal">Login</button>
                                 <a class="float-end txt-default mt-2" href="forget-pwd.html">
@@ -42,11 +43,10 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions, mapState } from "pinia";
 import BreadCumb from "../../Components/BreadCumb.vue";
 import Layout from "../../Shared/Layout.vue";
-import { useForm } from '@inertiajs/vue3'
-import { router } from '@inertiajs/vue3'
+import { auth_store } from "../../Store/auth_store.js";
 export default {
     components: { Layout, BreadCumb },
     data: () => ({
@@ -57,21 +57,28 @@ export default {
                 active: true,
             },
         ],
-        form: useForm({
-            email: null,
-            password: null,
-        })
-    }),
-    methods: {
-        login_submit: function () {
-            // axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('[name="csrf-token"]').content;
-            // axios.post('login', new FormData(event.target))
-            //     .then(res => { })
 
-            this.form.clearErrors();
-            this.form.post('/login');
+    }),
+    created: async function () {
+        await this.check_is_auth();
+        if (this.is_auth) {
+            window.location.href = "/profile";
         }
-    }
+    },
+    methods: {
+        ...mapActions(auth_store, {
+            check_is_auth: "check_is_auth",
+            user_login: "user_login",
+        }),
+        loginFormHandler: async function (event) {
+            this.user_login(event.target);
+        }
+    },
+    computed: {
+        ...mapState(auth_store, {
+            is_auth: "is_auth",
+        }),
+    },
 };
 </script>
 

@@ -9,7 +9,7 @@
             <div class="box-account box-info">
                 <div class="table-responsive">
                     <table class="product_info_table table table-bordered mb-0">
-                        <tr v-for="i in 10">
+                        <tr v-for="i in 10" :key="i">
                             <td>
                                 <img src="https://www.startech.com.bd/image/cache/catalog/processor/AMD/athlon-3000g/athlon-3000g-1-500x500.jpg" alt="">
                                 <span>
