@@ -35,11 +35,21 @@
                                 </div>
                                 <div class="footer-contant">
                                     <ul>
-                                        <li><Link href="/about">about us</Link></li>
-                                        <li><Link href="/contact">contact us</Link></li>
-                                        <li><Link href="/terms_conditions">terms &amp; conditions</Link></li>
-                                        <li><Link href="/returns_exchanges">returns &amp; exchanges</Link></li>
-                                        <li><Link href="/shipping_delivery">shipping &amp; delivery</Link></li>
+                                        <li>
+                                            <Link href="/about">about us</Link>
+                                        </li>
+                                        <li>
+                                            <Link href="/contact">contact us</Link>
+                                        </li>
+                                        <li>
+                                            <Link href="/terms_conditions">terms &amp; conditions</Link>
+                                        </li>
+                                        <li>
+                                            <Link href="/returns_exchanges">returns &amp; exchanges</Link>
+                                        </li>
+                                        <li>
+                                            <Link href="/shipping_delivery">shipping &amp; delivery</Link>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -376,8 +386,9 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
-                                                <div class="modal-body"><img src="/frontend/assets/images/size-chart.jpg"
-                                                        alt="" class="img-fluid "></div>
+                                                <div class="modal-body"><img
+                                                        src="/frontend/assets/images/size-chart.jpg" alt=""
+                                                        class="img-fluid "></div>
                                             </div>
                                         </div>
                                     </div>
@@ -805,28 +816,30 @@
                     </a>
                 </div>
             </div>
-            <form class="theme-form">
+            <form class="theme-form" @submit.prevent="loginFormHandler($event)" method="post">
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" placeholder="Email" required="">
+                    <label>Email</label>
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Email" />
+
                 </div>
                 <div class="form-group">
-                    <label for="review">Password</label>
-                    <input type="password" class="form-control" id="review" placeholder="Enter your password"
-                        required="">
+                    <label>Password</label>
+                    <input type="password" name="password" id="password" class="form-control"
+                        placeholder="Enter your password" />
+
                 </div>
-                <div class="form-group">
-                    <a href="javascript:void(0)" class="btn btn-solid btn-md btn-block ">Login</a>
-                </div>
+                <button class="btn btn-normal">Login</button>
+                <a class="float-end txt-default mt-3" href="forget-pwd.html">
+                    Forgot your password?
+                </a>
                 <div class="accout-fwd">
-                    <a href="https://themes.pixelstrap.com/bigdeal/html/forget-pwd.html" class="d-block">
-                        <h5>forget password?</h5>
-                    </a>
+
                     <a href="https://themes.pixelstrap.com/bigdeal/html/register.html" class="d-block">
                         <h6>you have no account ?<span>signup now</span></h6>
                     </a>
                 </div>
             </form>
+
         </div>
     </div>
     <!-- Add to account bar end-->
@@ -883,17 +896,31 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { common_store } from "../Store/common_store";
+import { auth_store } from "../Store/auth_store.js";
+
 export default {
     created: async function () {
-        // await this.get_all_cart_data();
+        // Uncomment the following line if you want to call the method on creation
+
+
     },
 
     methods: {
+
         ...mapActions(common_store, {
             get_all_cart_data: "get_all_cart_data",
             remove_cart_item: "remove_cart_item",
             cart_quantity_update: "cart_quantity_update",
         }),
+
+        ...mapActions(auth_store, {
+            user_login: "user_login",
+        }),
+
+        loginFormHandler: async function (event) {
+            this.user_login(event.target);
+        },
+
     },
 
     computed: {
@@ -901,8 +928,10 @@ export default {
             all_cart_data: "all_cart_data",
             total_cart_price: "total_cart_price",
         }),
+       
     },
 };
 </script>
+
 
 <style></style>

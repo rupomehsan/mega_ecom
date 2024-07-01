@@ -28,6 +28,8 @@ window.privateAxios = async function (apiEndPoint = null, type = 'get', payload 
             response = await window.axios.get(apiEndPoint);
         } else if (type == 'post') {
             response = await window.axios.post(apiEndPoint, payload);
+        } else if (type == 'delete') {
+            response = await window.axios.delete(apiEndPoint, payload);
         }
         return response.data;
     } catch (error) {

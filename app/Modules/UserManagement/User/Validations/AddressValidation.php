@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class Validation extends FormRequest
+class AddressValidation extends FormRequest
 {
     /**
      * Determine if the  is authorized to make this request.
@@ -43,15 +43,11 @@ class Validation extends FormRequest
     {
         // dd(auth()->id());
         return [
-            'name' => 'required | sometimes',
-            'user_name' => 'required | sometimes',
-            'email' => 'required|unique:users,email,' . auth()->id(),
-            'phone_number' => 'required | sometimes',
-            'photo' => 'sometimes',
-            'password' => 'required | sometimes',
-            'confirmed' => 'sometimes|required|same:password',
-            'role_id' => 'sometimes',
-            'status' => ['sometimes', Rule::in(['active', 'inactive'])],
+            'address' => 'required | sometimes',
+            'country_id' => 'required | sometimes',
+            'state_division_id' => 'required | sometimes',
+            'district_id' => 'required | sometimes',
+            'station_id' => 'required | sometimes',
         ];
     }
 }

@@ -9,7 +9,7 @@ class CheckUser
     {
         try {
             if (auth()->check()) {
-                $data = auth()->user()->load(['role', 'permissions']);
+                $data = auth()->user()->load(['role', 'permissions','user_delivery_address']);
                 return entityResponse($data);
             }
             return response()->json(["User not found"], 404);

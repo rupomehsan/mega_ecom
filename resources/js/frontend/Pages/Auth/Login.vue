@@ -44,9 +44,9 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
+import { auth_store } from "../../Store/auth_store.js";
 import BreadCumb from "../../Components/BreadCumb.vue";
 import Layout from "../../Shared/Layout.vue";
-import { auth_store } from "../../Store/auth_store.js";
 export default {
     components: { Layout, BreadCumb },
     data: () => ({

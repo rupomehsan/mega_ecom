@@ -7,6 +7,7 @@
                     back</span>
             </div>
             <div class="block-content">
+
                 <ul>
                     <li class="profile_nav_top">
                         <div class="profile_image">
@@ -20,6 +21,7 @@
                                 <p>Change profile picture</p>
                             </div>
                             <input class="d-none" type="file" ref="fileInput" accept="image/*" @change="previewImage">
+
                         </div>
                         <div>
                             <h4>
@@ -40,6 +42,11 @@
                     <li :class="{ 'active': $page.url === '/profile/wish-list' }">
                         <Link href="/profile/wish-list">
                         Wish List
+                        </Link>
+                    </li>
+                    <li :class="{ 'active': $page.url === '/profile/compare-list' }">
+                        <Link href="/profile/compare-list">
+                        Compare List
                         </Link>
                     </li>
                     <li :class="{ 'active': $page.url === '/profile/account' }">
@@ -67,26 +74,31 @@
 <script>
 import { mapActions } from "pinia";
 import { auth_store } from "../../../Store/auth_store";
+import { watch } from 'vue';
 export default {
     props: {
         auth: Object,
+        userInfo: {
+            type: Object,
+            required: true,
+        },
     },
     data: () => ({
         user: {},
         previewUrl: null,
     }),
     created() {
-        // let data = window.page_data();
-        // if(data.props.auth){
-        //     this.user = data.props.auth;
-        //     this.previewUrl =  this.user?.photo
-        // }else{
-        //     window.location.reload();
-        // }
+        watch(() => this.userInfo, (newUserInfo) => {
+            this.user = { ...newUserInfo };
+            this.previewUrl = this.user?.photo
+        }
+        );
+
     },
     methods: {
         ...mapActions(auth_store, {
             log_out: "log_out",
+            // update_profile_picture: "update_profile_picture",
         }),
 
         check_image_url: function (url) {
@@ -104,9 +116,24 @@ export default {
             const file = event.target.files[0];
             if (file) {
                 this.previewUrl = URL.createObjectURL(file);
-                console.log(this.previewUrl);
+                this.update_profile_picture(file);
             }
         },
+        async update_profile_picture(file) {
+            try {
+                let formData = new FormData();
+                formData.append("profile_picture", file);
+
+                let response = await window.privateAxios("/customers/update-profile-picture", 'post', formData);
+
+                if (response.status === 'success') {
+                    window.s_alert(response.message);
+                }
+            } catch (error) {
+                console.log('Error uploading image:', error);
+
+            }
+        }
     }
 }
 </script>

@@ -3,15 +3,15 @@
         <div class="dashboard">
             <div class="page-title">
                 <h2>
-                    Wish List
+                    Compare List
                 </h2>
                 <hr>
             </div>
             <div class="box-account box-info">
                 <div class="table-responsive">
-                    <template v-if="all_wish_list_data.length > 0">
+                    <template v-if="all_compare_list_data.length > 0">
                         <table class="product_info_table table table-bordered mb-0">
-                            <tr v-for="item in all_wish_list_data" :key="item.id">
+                            <tr v-for="item in all_compare_list_data" :key="item.id">
                                 <td>
                                     <img :src="`/${item.product?.product_image?.url}`" alt="">
                                     <span>
@@ -34,7 +34,7 @@
                                 </td>
                                 <td>
                                     <div class="action">
-                                        <a @click="remove_wish_list_item(item.id)" class="btn btn-danger text-light">
+                                        <a @click="remove_compare_list_item(item.id)" class="btn btn-danger text-light">
                                             <i class="fa fa-trash"></i>
                                             Remove
                                         </a>
@@ -44,7 +44,7 @@
                         </table>
                     </template>
                     <template v-else>
-                        <h2 class="td-color text-center">No item found in wish list</h2>
+                        <h2 class="td-color text-center">No item found in compare list</h2>
                     </template>
 
                 </div>
@@ -68,25 +68,25 @@ export default {
                 active: false,
             },
             {
-                title: 'wish list',
-                url: '/profile/wish-list',
+                title: 'compare list',
+                url: '/profile/compare-list',
                 active: true,
             },
         ]
     }),
     created: async function () {
-        await this.get_all_wish_list_items();
+        await this.get_all_compare_list_items();
     },
     methods: {
         ...mapActions(common_store, {
-            get_all_wish_list_items: "get_all_wish_list_items",
-            remove_wish_list_item: "remove_wish_list_item",
+            get_all_compare_list_items: "get_all_compare_list_items",
+            remove_compare_list_item: "remove_compare_list_item",
         }),
     },
 
     computed: {
         ...mapState(common_store, {
-            all_wish_list_data: "all_wish_list_data",
+            all_compare_list_data: "all_compare_list_data",
         }),
     },
 };

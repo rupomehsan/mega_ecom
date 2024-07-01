@@ -45,6 +45,16 @@ class ProfileController extends Controller
             ]
         ]);
     }
+    public function compare_list()
+    {
+        return Inertia::render('Profile/pages/Comparelist', [
+            'event' => [
+                'title' => 'Compare List',
+                'image' => 'https://etek.com.bd/frontend/images/etek_logo.png',
+                'description' => 'Best eCommerce in bangladesh'
+            ]
+        ]);
+    }
     public function account()
     {
         return Inertia::render('Profile/pages/Account', [
@@ -58,7 +68,6 @@ class ProfileController extends Controller
     }
     public function address()
     {
-        $address = UserAddressModel::where('user_id',auth()->user()->id)->where('address_types','delivery')->latest()->first();
 
         return Inertia::render('Profile/pages/Address', [
             'event' => [
@@ -66,7 +75,6 @@ class ProfileController extends Controller
                 'image' => 'https://etek.com.bd/frontend/images/etek_logo.png',
                 'description' => 'Best eCommerce in bangladesh'
             ],
-            'user_address' => $address,
         ]);
     }
     public function password()
@@ -81,7 +89,7 @@ class ProfileController extends Controller
     }
 
     public function edit_account(){
-        // dd(request()->all());
+        dd(request()->all(),auth()->user()->id);
         $this->validate(request(), [
             "name" => ['required'],
             "user_name" => ['required'],

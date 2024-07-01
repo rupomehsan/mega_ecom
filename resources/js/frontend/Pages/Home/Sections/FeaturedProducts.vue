@@ -24,12 +24,13 @@
     <section class="my-5 py-5">
         <div class="custom-container">
             <div class="product_list">
-                <div v-for="i in products" :key="i.name">
-                    <ProductItem :product="i" />
+                <div v-for="product in products" :key="product.name">
+                    <ProductItem :product="product" />
                 </div>
             </div>
         </div>
     </section>
+
 </template>
 
 <script>

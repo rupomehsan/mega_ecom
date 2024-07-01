@@ -4,35 +4,37 @@
             <div class="page-title">
                 <h2>
                     Edit Acount Information
+
+
                 </h2>
             </div>
             <div class="box-account box-info">
 
-                <form action="" method="post" @submit.prevent="edit_account" enctype="multipart/form-data"
-                    class="form-horizontal">
+                <form action="" method="post" @submit.prevent="accountFormSubmitHandler($event)"
+                    enctype="multipart/form-data" class="form-horizontal">
                     <div class="multiple-form-group">
                         <div class="form-group required">
-                            <label for="input-name">Name </label>
-                            <input type="text" name="name" v-model="form.name" placeholder="Name"
-                                id="input-name" class="form-control">
-                        </div>
-                        <div class="form-group required">
-                            <label for="input-user_name">User Name</label>
-                            <input type="text" name="user_name" v-model="form.user_name" placeholder="User Name" id="input-user_name"
+                            <label for="name">Name </label>
+                            <input type="text" name="name" id="name" placeholder="Name" :value="user_info.name"
                                 class="form-control">
                         </div>
+                        <div class="form-group required">
+                            <label for="user_name">User Name</label>
+                            <input type="text" name="user_name" placeholder="User Name" id="user_name"
+                                class="form-control" :value="user_info.user_name">
+                        </div>
                     </div>
                     <div class="form-group required">
-                        <label for="input-email">E-Mail</label>
-                        <input type="email" name="email" v-model="form.email" placeholder="E-Mail" readonly=""
-                            id="input-email" class="form-control">
+                        <label for="email">E-Mail</label>
+                        <input type="email" name="email" placeholder="E-Mail" :value="user_info.email" id="email"
+                            class="form-control">
                     </div>
                     <div class="form-group required">
-                        <label for="input-phone_number">Phone Number</label>
-                        <input type="tel" name="phone_number" v-model="form.phone_number" placeholder="Phone Number" readonly=""
-                            id="input-phone_number" class="form-control">
+                        <label for="phone_number">Phone Number</label>
+                        <input type="tel" name="phone_number" :value="user_info.phone_number" placeholder="Phone Number"
+                            id="phone_number" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-primary">Continue</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
 
             </div>
@@ -42,13 +44,14 @@
 
 <script>
 import ProfileLayout from "../shared/ProfileLayout.vue";
-import { useForm } from '@inertiajs/vue3'
+import { auth_store } from "../../../Store/auth_store.js";
+import { ref, onMounted, watch } from 'vue';
 export default {
     components: { ProfileLayout },
-    props:{
+    props: {
         user_info: Object,
     },
-    data: ()=>({
+    data: () => ({
         bread_cumb: [
             {
                 title: 'profile',
@@ -61,33 +64,39 @@ export default {
                 active: true,
             },
         ],
-        form: useForm({
-            name: null,
-            user_name: null,
-            email: null,
-            phone_number: null,
-        })
+
     }),
-    created(){
-        this.form.reset()
-        for (const key in this.user_info) {
-            if (Object.hasOwnProperty.call(this.user_info, key)) {
-                const element = this.user_info[key];
-                this.form[key] = element
+    setup() {
+        const authStore = auth_store();
+        const user_info = ref(authStore.auth_info);
+
+        onMounted(async () => {
+            if (authStore.is_auth) {
+                user_info.value = authStore.auth_info;
+            }
+        });
+
+        watch(() => authStore.auth_info, (newVal) => {
+            user_info.value = newVal;
+        });
+
+        return {
+            user_info,
+        };
+    },
+
+    methods: {
+        accountFormSubmitHandler: async function (event) {
+            let formData = new FormData(event.target);
+            let response = await window.privateAxios('/customers/account-info-update', 'post', formData);
+
+            if (response.status === "success") {
+                window.s_alert(response.message);
             }
         }
     },
-    methods: {
-        edit_account: function () {
-            // axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('[name="csrf-token"]').content;
-            // axios.post('login', new FormData(event.target))
-            //     .then(res => { })
-            console.log("edit submit clicked",this.form.name,this.form.user_name);
 
-            this.form.clearErrors();
-            this.form.post('/profile/edit-account');
-        }
-    }
+
 };
 </script>
 

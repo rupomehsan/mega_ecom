@@ -2,12 +2,13 @@
 
 namespace App\Modules\UserManagement\User\Validations;
 
+
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Rule;
 
-class Validation extends FormRequest
+
+class PasswordValidation extends FormRequest
 {
     /**
      * Determine if the  is authorized to make this request.
@@ -34,6 +35,7 @@ class Validation extends FormRequest
         parent::failedValidation($validator);
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -41,17 +43,10 @@ class Validation extends FormRequest
      */
     public function rules(): array
     {
-        // dd(auth()->id());
         return [
-            'name' => 'required | sometimes',
-            'user_name' => 'required | sometimes',
-            'email' => 'required|unique:users,email,' . auth()->id(),
-            'phone_number' => 'required | sometimes',
-            'photo' => 'sometimes',
-            'password' => 'required | sometimes',
-            'confirmed' => 'sometimes|required|same:password',
-            'role_id' => 'sometimes',
-            'status' => ['sometimes', Rule::in(['active', 'inactive'])],
+            'current_password' => 'required',
+            'new_password' => 'required',
+            'confirm_password' => 'required|same:new_password',
         ];
     }
 }

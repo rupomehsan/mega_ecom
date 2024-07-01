@@ -10,12 +10,13 @@ class Store
     {
         try {
 
-
+            // dd(request()->all());
 
             $isCartExist = self::$model::where('product_id', request()->product_id)->where('user_id', auth()->user()->id)->first();
 
             if ($isCartExist) {
-                $isCartExist->increment('quantity');
+                $isCartExist->quantity = $isCartExist->quantity + request()->quantity;
+                $isCartExist->save();
                 return messageResponse('Cart Quantity updated', $isCartExist, 200);
             }
 

@@ -93,7 +93,8 @@ export const common_store = defineStore("common_store", {
             if (response.status === "success") {
                 window.s_alert(response.message);
             }
-            if (response.data.status === "warning") {
+
+            if (response.status === "warning") {
                 window.w_alert(response.message);
             }
         },
@@ -103,7 +104,7 @@ export const common_store = defineStore("common_store", {
                 let response = await window.privateAxios(`/remove-wish-list-item/${id}`, 'delete');
                 if (response.status == "success") {
                     window.s_alert(response.message);
-                    this.get_all_cart_data();
+                    this.get_all_wish_list_items();
                 }
             }
         },
@@ -137,7 +138,7 @@ export const common_store = defineStore("common_store", {
                 let response = await window.privateAxios(`/remove-compare-list-item/${id}`, 'delete');
                 if (response.status == "success") {
                     window.s_alert(response.message);
-                    this.get_all_cart_data();
+                    this.get_all_compare_list_items();
                 }
             }
         },

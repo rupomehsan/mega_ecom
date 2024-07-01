@@ -1,33 +1,37 @@
 <template>
     <Layout>
-        <div class="breadcrumb-main py-3">
-            <div class="container">
-                <BreadCumb :bread_cumb="bread_cumb" />
+        <div id="customer-dashboard" class="d-none">
+            <div class="breadcrumb-main py-3">
+                <div class="container">
+                    <BreadCumb :bread_cumb="bread_cumb" />
+                </div>
             </div>
-        </div>
-        <section class="section-big-py-space b-g-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <ProfileNav />
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="dashboard-right">
-                            <slot />
+            <section class="section-big-py-space b-g-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <ProfileNav :userInfo="userInfo" />
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="dashboard-right">
+                                <slot />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </Layout>
 </template>
 
 <script>
-import { mapActions, mapState } from "pinia";
+
 import BreadCumb from "../../../Components/BreadCumb.vue";
 import Layout from "../../../Shared/Layout.vue";
-import { auth_store } from "../../../Store/auth_store.js";
 import ProfileNav from "./ProfileNav.vue";
+
+import { auth_store } from "../../../Store/auth_store.js";
+
 export default {
     components: { Layout, ProfileNav, BreadCumb },
     props: {
@@ -36,24 +40,29 @@ export default {
             type: Array,
             default: [],
         },
-    },
-    created: async function () {
-        await this.check_is_auth();
-        if (!this.is_auth) {
-            window.location.href = "/login";
-        }
-    },
-    methods: {
-        ...mapActions(auth_store, {
-            check_is_auth: "check_is_auth",
-        }),
-    },
-    computed: {
-        ...mapState(auth_store, {
-            is_auth: "is_auth",
-        }),
-    },
 
+
+    },
+    data: () => ({
+        userInfo: {},
+    }),
+
+    created: async function () {
+
+
+        const authStore = auth_store();
+        await authStore.check_is_auth();
+        this.userInfo = authStore.auth_info;
+
+
+        if (!authStore.is_auth) {
+            this.$inertia.visit('/login');
+        } else {
+            this.userInfo = { ...authStore.auth_info }; // Ensure reactivity
+            document.getElementById("customer-dashboard").classList.remove("d-none");
+        }
+
+    },
 
 };
 </script>

@@ -8,23 +8,23 @@
             </div>
             <div class="box-account box-info">
 
-                <form action="https://www.startech.com.bd/account/password" method="post" enctype="multipart/form-data">
+                <form @submit.prevent="changePasswordHandler($event)" method="post" enctype="multipart/form-data">
                     <div class="form-group required">
-                        <label for="input-old">Old Password</label>
-                        <input type="password" name="old" value="" placeholder="Old Password" id="input-old"
+                        <label for="current_password">Old Password</label>
+                        <input type="password" name="current_password" value="" placeholder="Old Password" id="current_password"
                             class="form-control" />
                     </div>
                     <div class="form-group required">
-                        <label for="input-password">New Password</label>
-                        <input type="password" name="password" value="" placeholder="New Password" id="input-password"
+                        <label for="new_password">New Password</label>
+                        <input type="password" name="new_password" value="" placeholder="New Password" id="new_password"
                             class="form-control" />
                     </div>
                     <div class="form-group required">
-                        <label for="input-confirm">Password Confirm</label>
-                        <input type="password" name="confirm" value="" placeholder="Password Confirm" id="input-confirm"
-                            class="form-control" />
+                        <label for="confirm_password">Confirm Password</label>
+                        <input type="password" name="confirm_password" value="" placeholder="Password Confirm"
+                            id="confirm_password" class="form-control" />
                     </div>
-                    <button type="submit" class="btn btn-primary">Continue</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
 
 
@@ -37,7 +37,7 @@
 import ProfileLayout from "../shared/ProfileLayout.vue";
 export default {
     components: { ProfileLayout },
-    data: ()=>({
+    data: () => ({
         bread_cumb: [
             {
                 title: 'profile',
@@ -51,6 +51,16 @@ export default {
             },
         ]
     }),
+    methods: {
+        changePasswordHandler: async function (event) {
+            let formData = new FormData(event.target);
+            let response = await window.privateAxios('/customers/change-password', 'post', formData);
+
+            if (response.status === "success") {
+                window.s_alert(response.message);
+            }
+        }
+    },
 };
 </script>
 

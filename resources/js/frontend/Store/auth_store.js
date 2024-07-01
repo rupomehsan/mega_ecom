@@ -36,6 +36,7 @@ export const auth_store = defineStore("auth_store", {
                 this.role = response.data.role;
             }
         },
+     
 
     },
 });

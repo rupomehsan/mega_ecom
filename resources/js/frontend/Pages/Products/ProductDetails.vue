@@ -1,4 +1,5 @@
 <template>
+
     <Head>
         <title>
             {{ product.title }}
@@ -20,8 +21,8 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div>
-                                    <img :src="check_image_url(product.product_image.url)"
-                                        alt="" class="img-fluid image_zoom_cls-0" />
+                                    <img :src="check_image_url(product.product_image.url)" alt=""
+                                        class="img-fluid image_zoom_cls-0" />
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -160,19 +161,21 @@
                                     <h6 class="product-title d-block mt-3">quantity</h6>
                                     <div class="qty-box">
                                         <div class="input-group">
-                                            <button class="qty-minus"></button>
-                                            <input class="qty-adj form-control" type="number" value="1">
-                                            <button class="qty-plus"></button>
+                                            <button class="qty-minus" @click="AdujustQuantity('minus')"></button>
+                                            <input class="qty-adj form-control" type="number" min="1"
+                                                v-model="quantity" />
+                                            <button class="qty-plus" @click="AdujustQuantity('plus')"></button>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="product-buttons ps-3 d-flex flex-wrap gap-2 mt-4">
-                                    <a class="btn-normal">
+                                    <button @click="is_auth ? add_to_cart(product.id) : openAccount()"
+                                        class="btn btn-normal">
                                         <i class="icon icon-shopping-cart"></i>
                                         Add to Cart
-                                    </a>
-                                    <a href="javascript:void(0)"
+                                    </button>
+                                    <a @click="is_auth ? add_to_wish_list(product.id) : openAccount()"
                                         class="btn px-4 btn-normal btn-outline add-to-wish tooltip-top"
                                         data-tippy-content="Add to wishlist">
                                         <i class="fa fa-heart" aria-hidden="true"></i>
@@ -424,7 +427,9 @@
                                                 <div class="card-header d-flex gap-3 justify-content-between">
                                                     <div class="title-n-action">
                                                         <h2 class="ask_question_heading">Questions (1)</h2>
-                                                        <p class="ask_question_pg p-0 mt-1">Have question about this product? Get specific details about this product from expert.</p>
+                                                        <p class="ask_question_pg p-0 mt-1">Have question about this
+                                                            product? Get specific details about this product from
+                                                            expert.</p>
                                                     </div>
                                                     <div class="q-action">
                                                         <a href="#" class="btn btn-info">Ask Question</a>
@@ -433,17 +438,23 @@
                                                 <div class="card-body">
                                                     <div id="question" class="questions">
                                                         <div class="question-wrap">
-                                                            <p class="author"><span class="name">Fahim Uddin </span> on 15 Nov 2023</p>
+                                                            <p class="author"><span class="name">Fahim Uddin </span> on
+                                                                15 Nov 2023</p>
                                                             <h3 class="question text-sm">
                                                                 <span class="hint">Q:</span>
                                                                 <span>
-                                                                    Assalamu alaikum. Is this AMD Athlon 3000G Processor with Radeon Graphics good for programing. I am a student of CSE.
+                                                                    Assalamu alaikum. Is this AMD Athlon 3000G Processor
+                                                                    with Radeon Graphics good for programing. I am a
+                                                                    student of CSE.
                                                                 </span>
                                                             </h3>
                                                             <p class="answer">
                                                                 <span class="hint">A:</span>
                                                                 <span>
-                                                                    Yes sir, you can do Basic programming with AMD Athlon 3000G Processor with Radeon Graphics. But for running heavy programming language, it will depend on your full PC configuration.
+                                                                    Yes sir, you can do Basic programming with AMD
+                                                                    Athlon 3000G Processor with Radeon Graphics. But for
+                                                                    running heavy programming language, it will depend
+                                                                    on your full PC configuration.
                                                                 </span>
                                                             </p>
                                                             <p class="author answerer">
@@ -462,7 +473,15 @@
                                     <div class="tab-pane fade" id="top-policy" role="tabpanel"
                                         aria-labelledby="policy-top-tab">
                                         <p>
-                                            This electric device is covered by a one-year limited warranty from the date of purchase. The warranty covers defects in materials and workmanship under normal use. If a defect arises during the warranty period, we will repair or replace the device at no charge. This warranty does not cover damage caused by misuse, accidents, modifications, or unauthorized repairs. To obtain warranty service, please contact our customer support with proof of purchase. Shipping costs for returns may apply. This warranty gives you specific legal rights, and you may also have other rights which vary by jurisdiction.
+                                            This electric device is covered by a one-year limited warranty from the date
+                                            of purchase. The warranty covers defects in materials and workmanship under
+                                            normal use. If a defect arises during the warranty period, we will repair or
+                                            replace the device at no charge. This warranty does not cover damage caused
+                                            by misuse, accidents, modifications, or unauthorized repairs. To obtain
+                                            warranty service, please contact our customer support with proof of
+                                            purchase. Shipping costs for returns may apply. This warranty gives you
+                                            specific legal rights, and you may also have other rights which vary by
+                                            jurisdiction.
                                         </p>
                                     </div>
                                     <div class="tab-pane fade" id="top-bestproduct" role="tabpanel"
@@ -478,51 +497,52 @@
                                                     <tr class="compare-name">
                                                         <td>Product</td>
                                                         <td>
-                                                            <a href="https://www.ultratech.com.bd/intel-core-i5-3470-3rd-gen-processor"><strong>Intel Core i5-3470 3rd Gen Processor</strong></a>
+                                                            <a
+                                                                href="https://www.ultratech.com.bd/intel-core-i5-3470-3rd-gen-processor"><strong>Intel
+                                                                    Core i5-3470 3rd Gen Processor</strong></a>
                                                         </td>
                                                         <td>
-                                                            <a href="https://www.ultratech.com.bd/intel-core-i5-2400-2nd-gen-310-ghz-processor"><strong>Intel Core i5-2400 2nd Gen 3.10 GHz Processor</strong></a>
+                                                            <a
+                                                                href="https://www.ultratech.com.bd/intel-core-i5-2400-2nd-gen-310-ghz-processor"><strong>Intel
+                                                                    Core i5-2400 2nd Gen 3.10 GHz Processor</strong></a>
                                                         </td>
                                                         <td>
-                                                            <a href="https://www.ultratech.com.bd/intel-core-i3-6100-6th-gen-processor-bulk"><strong>Intel Core i3 6100 6th Gen Processor (Bulk)</strong></a>
+                                                            <a
+                                                                href="https://www.ultratech.com.bd/intel-core-i3-6100-6th-gen-processor-bulk"><strong>Intel
+                                                                    Core i3 6100 6th Gen Processor (Bulk)</strong></a>
                                                         </td>
                                                         <td>
-                                                            <a href="https://www.ultratech.com.bd/intel-core-i5-4460-4th-generation-32-ghz-processor-tray"><strong>Intel Core i5 4460 4th Generation 3.2 GHz Processor TRAY</strong></a>
+                                                            <a
+                                                                href="https://www.ultratech.com.bd/intel-core-i5-4460-4th-generation-32-ghz-processor-tray"><strong>Intel
+                                                                    Core i5 4460 4th Generation 3.2 GHz Processor
+                                                                    TRAY</strong></a>
                                                         </td>
                                                     </tr>
                                                     <tr class="compare-image">
                                                         <td>Image</td>
                                                         <td class="text-left">
-                                                            <img
-                                                                src="https://www.ultratech.com.bd/image/cache/catalog/products_2023/intel-core-i5-3470-3rd-gen-processor-90x90.jpg.webp"
+                                                            <img src="https://www.ultratech.com.bd/image/cache/catalog/products_2023/intel-core-i5-3470-3rd-gen-processor-90x90.jpg.webp"
                                                                 alt="Intel Core i5-3470 3rd Gen Processor"
                                                                 title="Intel Core i5-3470 3rd Gen Processor"
-                                                                class="img-thumbnail"
-                                                            />
+                                                                class="img-thumbnail" />
                                                         </td>
                                                         <td class="text-left">
-                                                            <img
-                                                                src="https://www.ultratech.com.bd/image/cache/catalog/products_2023/intel-core-i5-2400-2nd-gen-310-ghz-processor-90x90.jpg.webp"
+                                                            <img src="https://www.ultratech.com.bd/image/cache/catalog/products_2023/intel-core-i5-2400-2nd-gen-310-ghz-processor-90x90.jpg.webp"
                                                                 alt="Intel Core i5-2400 2nd Gen 3.10 GHz Processor"
                                                                 title="Intel Core i5-2400 2nd Gen 3.10 GHz Processor"
-                                                                class="img-thumbnail"
-                                                            />
+                                                                class="img-thumbnail" />
                                                         </td>
                                                         <td class="text-left">
-                                                            <img
-                                                                src="https://www.ultratech.com.bd/image/cache/catalog/processor/intel/core-i3-6100/intel-core-i3-6100-6th-gen-processor-bulk-90x90.jpg.webp"
+                                                            <img src="https://www.ultratech.com.bd/image/cache/catalog/processor/intel/core-i3-6100/intel-core-i3-6100-6th-gen-processor-bulk-90x90.jpg.webp"
                                                                 alt="Intel Core i3 6100 6th Gen Processor (Bulk)"
                                                                 title="Intel Core i3 6100 6th Gen Processor (Bulk)"
-                                                                class="img-thumbnail"
-                                                            />
+                                                                class="img-thumbnail" />
                                                         </td>
                                                         <td class="text-left">
-                                                            <img
-                                                                src="https://www.ultratech.com.bd/image/cache/catalog/processor/intel%20/core-i5-4460/intel-core-i5-4460-4th-generation-32-ghz-processor-tray-90x90.jpg.webp"
+                                                            <img src="https://www.ultratech.com.bd/image/cache/catalog/processor/intel%20/core-i5-4460/intel-core-i5-4460-4th-generation-32-ghz-processor-tray-90x90.jpg.webp"
                                                                 alt="Intel Core i5 4460 4th Generation 3.2 GHz Processor TRAY"
                                                                 title="Intel Core i5 4460 4th Generation 3.2 GHz Processor TRAY"
-                                                                class="img-thumbnail"
-                                                            />
+                                                                class="img-thumbnail" />
                                                         </td>
                                                     </tr>
                                                     <tr class="compare-price">
@@ -556,34 +576,74 @@
                                                     <tr class="compare-rating">
                                                         <td>Rating</td>
                                                         <td class="rating">
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <br />
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span> <br />
                                                             Based on 1 reviews.
                                                         </td>
                                                         <td class="rating">
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <br />
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span> <br />
                                                             Based on 1 reviews.
                                                         </td>
                                                         <td class="rating">
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <br />
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span> <span
+                                                                class="fa fa-stack"><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span> <br />
                                                             Based on 2 reviews.
                                                         </td>
                                                         <td class="rating">
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <br />
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i
+                                                                    class="fa fa-star fa-stack-2x"></i><i
+                                                                    class="fa fa-star-o fa-stack-2x"></i></span> <br />
                                                             Based on 1 reviews.
                                                         </td>
                                                     </tr>
@@ -594,22 +654,30 @@
                                                         <td></td>
                                                         <td class="out-of-stock">
                                                             <div class="compare-buttons">
-                                                                <button class="btn btn-primary btn-cart" onclick="cart.add('7955', '1');"><span>Add to Cart</span></button>
+                                                                <button class="btn btn-primary btn-cart"
+                                                                    onclick="cart.add('7955', '1');"><span>Add to
+                                                                        Cart</span></button>
                                                             </div>
                                                         </td>
                                                         <td class="out-of-stock">
                                                             <div class="compare-buttons">
-                                                                <button class="btn btn-primary btn-cart" onclick="cart.add('7956', '1');"><span>Add to Cart</span></button>
+                                                                <button class="btn btn-primary btn-cart"
+                                                                    onclick="cart.add('7956', '1');"><span>Add to
+                                                                        Cart</span></button>
                                                             </div>
                                                         </td>
                                                         <td class="out-of-stock">
                                                             <div class="compare-buttons">
-                                                                <button class="btn btn-primary btn-cart" onclick="cart.add('1333', '1');"><span>Add to Cart</span></button>
+                                                                <button class="btn btn-primary btn-cart"
+                                                                    onclick="cart.add('1333', '1');"><span>Add to
+                                                                        Cart</span></button>
                                                             </div>
                                                         </td>
                                                         <td class="out-of-stock">
                                                             <div class="compare-buttons">
-                                                                <button class="btn btn-primary btn-cart" onclick="cart.add('5549', '1');"><span>Add to Cart</span></button>
+                                                                <button class="btn btn-primary btn-cart"
+                                                                    onclick="cart.add('5549', '1');"><span>Add to
+                                                                        Cart</span></button>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -632,7 +700,8 @@
                                             <tbody>
                                                 <tr v-for="i in 10" :key="i">
                                                     <td class="compatibility-table-name">
-                                                        <a href="#" class="compatibility_product_title">Intel Core i5 6500 6th gen 3.20GHz Processor (Tray)</a>
+                                                        <a href="#" class="compatibility_product_title">Intel Core i5
+                                                            6500 6th gen 3.20GHz Processor (Tray)</a>
                                                     </td>
                                                     <td class="compatibility-table-price">
                                                         <p class="price">
@@ -687,8 +756,8 @@
                                                                 </a>
                                                                 <a href="#" class="tooltip-top"
                                                                     data-tippy-content="Compare">
-                                                                        <i class="fa fa-recycle"></i>
-                                                                    </a>
+                                                                    <i class="fa fa-recycle"></i>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -729,9 +798,11 @@
 </template>
 
 <script>
-import axios from "axios";
+
 import ProductItem from "../../Components/ProductItem.vue";
 import Layout from "../../Shared/Layout.vue";
+import { mapActions, mapState } from "pinia";
+import { common_store } from "../../Store/common_store";
 export default {
     components: { Layout, ProductItem },
     props: {
@@ -740,21 +811,29 @@ export default {
     data: () => ({
         product: {},
         products: [],
+        is_auth: false,
+        quantity: 1,
     }),
-    created: async function(){
+    created: async function () {
         // console.log(this.slug);
+        this.is_auth = localStorage.getItem("token") ? true : false;
         await this.get_product();
         await this.get_featured_products();
     },
     methods: {
-        get_product: async function(){
-            await axios.get('/api/v1/product/'+this.slug)
-                .then(res=>{
+        ...mapActions(common_store, {
+            add_to_wish_list: "add_to_wish_list",
+            get_all_cart_data: "get_all_cart_data",
+        }),
+
+        get_product: async function () {
+            await axios.get('/product/' + this.slug)
+                .then(res => {
                     this.product = res.data;
                 })
         },
         get_featured_products: async function () {
-            let res = await axios.get('/api/v1/featured-products');
+            let res = await axios.get('/featured-products');
             let data = res.data;
             this.products = data;
         },
@@ -763,7 +842,31 @@ export default {
                 new URL(url);
                 return url;
             } catch (e) {
-                return "/"+url;
+                return "/" + url;
+            }
+        },
+        openAccount() {
+            document.getElementById("myAccount").classList.add('open-side');
+        },
+        AdujustQuantity: function (type) {
+            if (type == "plus") {
+                this.quantity++;
+            } else {
+                if (this.quantity > 1) {
+                    this.quantity--;
+                }
+            }
+        },
+        add_to_cart: async function (productId) {
+            const response = await window.privateAxios(`/add-to-cart?quantity=${this.quantity}`, 'post',
+                {
+                    product_id: productId,
+                }
+            );
+
+            if (response.status === "success") {
+                window.s_alert(response.message);
+                this.get_all_cart_data();
             }
         },
     }
