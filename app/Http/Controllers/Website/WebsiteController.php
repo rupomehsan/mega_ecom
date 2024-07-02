@@ -29,6 +29,16 @@ class WebsiteController extends Controller
             ]
         ]);
     }
+    public function blogDetails()
+    {
+        return Inertia::render('Blogs/Details', [
+            'event' => [
+                'title' => 'ETEK Blog Details',
+                'image' => 'https://etek.com.bd/frontend/images/etek_logo.png',
+                'description' => 'Best eCommerce in bangladesh'
+            ]
+        ]);
+    }
 
     public function products($slug)
     {

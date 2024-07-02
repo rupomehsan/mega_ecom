@@ -929,6 +929,8 @@ if (!function_exists('migration')) {
                         $type = 'date';
                     } elseif ($type == 'datetime') {
                         $type = 'datetime';
+                    } elseif ($type == 'json') {
+                        $type = 'json';
                     } elseif ($type == 'enum') {
                         $type = 'enum';
                     } elseif ($type == 'float') {

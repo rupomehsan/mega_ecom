@@ -157,3 +157,11 @@ php artisan make:module BannerManagement/HomeSideBanner [banner_one:string-150,b
 
 --- BannerManagement---
 --- END---
+
+--- Blog Management---
+--- Blog Management---
+
+php artisan make:module BlogManagement/BlogCategory [title:string-100,parent_id:bigint,image:string-100]
+ php artisan make:module BlogManagement/Blog [title:string-100,description:longtext,tags:longtext,publish_date:data,writer:string-50,meta_title:string-100,meta_description-string-100,meta_keywords:string-200,thumbnail_image:100,image:json,blog_type:string-20,video_url:string-150,privecy_status:enum-public.private]
+--- Blog Management---
+--- END---

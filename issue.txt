@@ -39,7 +39,7 @@ user review table userid productid rating description-dn
 
 todaysoffer table -> date,title,discount percent,product id,-dn
 
-accesor running price ,percentage
+accesor running price ,percentage -dn
 
 
 

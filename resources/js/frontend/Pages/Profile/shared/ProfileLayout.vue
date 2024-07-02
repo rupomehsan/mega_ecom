@@ -1,25 +1,27 @@
 <template>
     <Layout>
-        <div id="customer-dashboard" class="d-none">
-            <div class="breadcrumb-main py-3">
-                <div class="container">
-                    <BreadCumb :bread_cumb="bread_cumb" />
+        <div style="min-height: 500px">
+            <div id="customer-dashboard" v-if="loaded">
+                <div class="breadcrumb-main py-3">
+                    <div class="container">
+                        <BreadCumb :bread_cumb="bread_cumb" />
+                    </div>
                 </div>
-            </div>
-            <section class="section-big-py-space b-g-light">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <ProfileNav :userInfo="userInfo" />
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="dashboard-right">
-                                <slot />
+                <section class="section-big-py-space b-g-light">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <ProfileNav :userInfo="userInfo" />
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="dashboard-right">
+                                    <slot />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
     </Layout>
 </template>
@@ -45,6 +47,7 @@ export default {
     },
     data: () => ({
         userInfo: {},
+        loaded: false
     }),
 
     created: async function () {
@@ -59,7 +62,7 @@ export default {
             this.$inertia.visit('/login');
         } else {
             this.userInfo = { ...authStore.auth_info }; // Ensure reactivity
-            document.getElementById("customer-dashboard").classList.remove("d-none");
+            this.loaded = true
         }
 
     },

@@ -218,8 +218,16 @@ import axios from "axios";
 import Layout from "../../Shared/Layout.vue";
 import { mapActions, mapState } from "pinia";
 import { common_store } from "../../Store/common_store";
+import { auth_store } from "../../Store/auth_store.js";
 export default {
     components: { Layout },
+    created: async function () {
+        const authStore = auth_store();
+        await authStore.check_is_auth();
+        if (!authStore.is_auth) {
+            this.$inertia.visit('/login');
+        }
+    },
     methods: {
 
         ...mapActions(common_store, {
@@ -229,14 +237,16 @@ export default {
 
         checkoutFormSubmit: async function ($event) {
             let formData = new FormData($event.target);
-            let response = await axios.post('/api/v1/customer-ecommerce-order', formData);
+            let response = await axios.post('/customer-ecommerce-order', formData);
 
             if (response.data.status === "success") {
                 console.log("response", response);
             }
 
         }
+
     },
+
 
     computed: {
         ...mapState(common_store, {

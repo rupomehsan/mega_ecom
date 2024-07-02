@@ -41,7 +41,7 @@ export default {
     },
     methods: {
         get_brands: async function () {
-            let res = await axios.get('/api/v1/brands');
+            let res = await axios.get('/brands');
             let data = res.data;
             this.brands = data;
         },

@@ -7,7 +7,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //     return view('app');
     // });
     Route::get('/', 'Website\WebsiteController@home')->name('website_home');
+
     Route::get('/blogs', 'Website\WebsiteController@blogs')->name('website_blogs');
+    Route::get('/blog-details/{slug}', 'Website\WebsiteController@blogDetails')->name('website_blog_details');
 
     Route::get('/category/{slug}', 'Website\WebsiteController@products')->name('website_products');
     Route::get('/product-details/{slug}', 'Website\WebsiteController@products_details')->name('website_products_details');

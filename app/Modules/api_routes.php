@@ -95,6 +95,8 @@ include_once  base_path("app/Modules/BannerManagement/HomeSideBanner/Route.php")
 |--------------------------------------------------------------------------
 */
 
+include_once  base_path("app/Modules/websiteApi/SliderAndBanner/Route.php");
+
 include_once  base_path("app/Modules/websiteApi/Category/Route.php");
 include_once  base_path("app/Modules/websiteApi/Brand/Route.php");
 include_once  base_path("app/Modules/websiteApi/Product/Route.php");
@@ -103,3 +105,5 @@ include_once  base_path("app/Modules/websiteApi/Cart/Route.php");
 include_once  base_path("app/Modules/websiteApi/WishList/Route.php");
 include_once  base_path("app/Modules/websiteApi/CompareList/Route.php");
 include_once  base_path("app/Modules/websiteApi/Order/Route.php");
+
+include_once  base_path("app/Modules/websiteApi/SearchHandling/Route.php");

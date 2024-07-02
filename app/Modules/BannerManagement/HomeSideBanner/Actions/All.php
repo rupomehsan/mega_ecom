@@ -19,14 +19,7 @@ class All
 
             $data = self::$model::query();
 
-            if (request()->has('search') && request()->input('search')) {
-                $searchKey = request()->input('search');
-                $data = $data->where(function ($q) use ($searchKey) {
-                    $q->where('title', $searchKey);
-                    $q->orWhere('description', 'like', '%' . $searchKey . '%');
-                });
-            }
-
+    
 
             $data = $data
                 ->with($with)

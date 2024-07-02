@@ -143,7 +143,7 @@ export default {
     created: async function () {
         await this.check_is_auth();
         if (!this.is_auth) {
-            window.location.href = "/login";
+            this.$inertia.visit("/login");
         }
     },
     methods: {

@@ -24,7 +24,7 @@
                             </Suspense>
                         </div>
                         <div class="top_banner_right">
-                            <img src="/frontend/assets/images/banner_right.png" class="w-100" />
+                            <img :src="`${home_hero_slider_side_banner.banner_one}`" class="w-100" />
                             <!-- <div class="offer-banner-img">
                                 <img src="https://themes.pixelstrap.com/bigdeal/assets/images/layout-1/offer-banner.png" alt="offer-banner" class="img-fluid" />
                             </div>
@@ -44,15 +44,15 @@
                     <div class="bottom_banner">
                         <div class="bottom_banner_left">
                             <div class="img">
-                                <img src="/frontend/assets/images/bottom_banner_1.png" />
+                                <img :src="`${home_hero_slider_side_banner.banner_two}`" />
                             </div>
                             <div class="img">
-                                <img src="/frontend/assets/images/bottom_banner_2.png" />
+                                <img :src="`${home_hero_slider_side_banner.banner_three}`" />
                             </div>
                         </div>
                         <div class="bottom_banner_right">
                             <div class="img">
-                                <img src="/frontend/assets/images/bottom_banner_3.png" />
+                                <img :src="`${home_hero_slider_side_banner.banner_four}`" />
                             </div>
                         </div>
                     </div>
@@ -78,11 +78,25 @@ export default {
             import('./Slider.vue')
         ),
     },
+    data: () => ({
+
+        home_hero_slider_side_banner: {},
+    }),
     created() {
+
+        this.get_all_home_slider_side_banners()
+
     },
-    methods:{
-        toggle_category: function(){
+    methods: {
+        toggle_category: function () {
             document.getElementById('banner_left').classList.toggle('active')
+        },
+
+        get_all_home_slider_side_banners: async function () {
+            let response = await axios.get('/get-home-page-hero-slider-side-banners')
+            if (response.data.status === "success") {
+                this.home_hero_slider_side_banner = response.data.data
+            }
         }
     }
 };

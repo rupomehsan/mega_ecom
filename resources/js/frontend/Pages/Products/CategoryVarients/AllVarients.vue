@@ -14,7 +14,7 @@ export default {
     },
     methods: {
         get_varients: async function () {
-            let res = await axios.get('/api/v1/varients');
+            let res = await axios.get('/varients');
             let data = res.data;
             this.varients = data;
         },

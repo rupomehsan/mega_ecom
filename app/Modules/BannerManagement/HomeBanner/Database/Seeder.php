@@ -15,7 +15,7 @@ class Seeder extends SeederClass
     {
 
         self::$model::truncate();
-        for ($i = 1; $i < 10; $i++) {
+        for ($i = 1; $i < 5; $i++) {
             self::$model::create([
                 'title' => facker()->name,
                 'short_des' => facker()->name,
@@ -25,5 +25,7 @@ class Seeder extends SeederClass
                 'is_show' => rand(0, 1),
             ]);
         }
+
     }
 }
+
