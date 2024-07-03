@@ -42,10 +42,12 @@ class WebsiteController extends Controller
 
     public function products($slug)
     {
+        $page = request()->page ? request()->page : 1;
         return Inertia::render('Products/Index', [
             'slug' => $slug,
+            'page' => $page,
             'event' => [
-                'title' => 'ETEK Blogs',
+                'title' => 'ETEK Products',
                 'image' => 'https://etek.com.bd/frontend/images/etek_logo.png',
                 'description' => 'Best eCommerce in bangladesh'
             ]
