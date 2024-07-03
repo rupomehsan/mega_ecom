@@ -11,11 +11,12 @@ class Model extends EloquentModel
     static $productBrandModel = \App\Modules\ProductManagement\ProductBrand\Models\Model::class;
     static $productImageModel = \App\Modules\ProductManagement\Product\Models\ProductImageModel::class;
     static $productVariantPriceModel = \App\Modules\ProductManagement\Product\Models\ProductVarientPriceModel::class;
+    static $ProductRegionModel = \App\Modules\ProductManagement\Product\Models\ProductRegionModel::class;
 
     protected $table = "products";
     protected $guarded = [];
 
-    protected $appends = ['current_price','amount_in_percent'];
+    protected $appends = ['current_price', 'amount_in_percent'];
 
 
     protected static function booted()
@@ -55,10 +56,18 @@ class Model extends EloquentModel
     {
         return $this->hasMany(self::$productImageModel, 'product_id', 'id');
     }
+
     public function product_verient_price()
     {
         return $this->hasMany(self::$productVariantPriceModel, 'product_id', 'id');
     }
+    public function product_region()
+    {
+        return $this->hasMany(self::$ProductRegionModel, 'product_id', 'id');
+    }
+
+
+
     public function getCurrentPriceAttribute()
     {
 

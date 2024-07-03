@@ -2,9 +2,10 @@
 
     <Head>
         <title>
-            {{ product.title }}
+            {{ product_details.title }}
         </title>
     </Head>
+
     <Layout v-if="Object.keys(product).length">
         <section class="section-big-pt-space b-g-light">
             <div class="collection-wrapper">
@@ -13,8 +14,17 @@
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="filter-main-btn mb-2">
-                                    <span class="filter-btn"><i class="fa fa-filter" aria-hidden="true"></i>
-                                        filter</span>
+                                    <div class="filter-btn">
+                                        <i class="fa fa-filter" aria-hidden="true"></i>
+                                        <div>
+                                        </div>
+                                    </div>
+                                    //
+                                    <div class="filter-btn">
+                                        // <i class="fa fa-filter" aria-hidden="true"></i>
+                                        // filter
+                                        //
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -28,7 +38,6 @@
                             <div class="col-lg-7">
                                 <div class="single-product-info ps-3">
                                     <div class="single-product-info-top">
-
                                         <h3 class="single-product-title">
                                             {{ product.title }}
                                         </h3>
@@ -148,15 +157,14 @@
                                         </span>
                                     </div>
                                     <!-- <div class="product-core-info-list">
-                                        <span class="p-core-info-list-title">
-                                            EMI facilities
-                                        </span>
-                                        <span class="p-core-info-list-sub-title emi-facility">
-                                            <a target="_blank" href="#">Check EMI facility</a>
-                                        </span>
-                                    </div> -->
+                        <span class="p-core-info-list-title">
+                            EMI facilities
+                        </span>
+                        <span class="p-core-info-list-sub-title emi-facility">
+                            <a target="_blank" href="#">Check EMI facility</a>
+                        </span>
+                        </div> -->
                                 </div>
-
                                 <div class="ps-3">
                                     <h6 class="product-title d-block mt-3">quantity</h6>
                                     <div class="qty-box">
@@ -168,7 +176,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="product-buttons ps-3 d-flex flex-wrap gap-2 mt-4">
                                     <button @click="is_auth ? add_to_cart(product.id) : openAccount()"
                                         class="btn btn-normal">
@@ -181,14 +188,11 @@
                                         <i class="fa fa-heart" aria-hidden="true"></i>
                                     </a>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-
                     <section class="tab-product tab-exes creative-card creative-inner">
                         <div class="row">
-
                             <div class="col-xl-8">
                                 <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
                                     <li class="nav-item">
@@ -323,7 +327,6 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-
                                     </div>
                                     <div class="tab-pane fade active show" id="top-profile" role="tabpanel"
                                         aria-labelledby="profile-top-tab">
@@ -429,7 +432,8 @@
                                                         <h2 class="ask_question_heading">Questions (1)</h2>
                                                         <p class="ask_question_pg p-0 mt-1">Have question about this
                                                             product? Get specific details about this product from
-                                                            expert.</p>
+                                                            expert.
+                                                        </p>
                                                     </div>
                                                     <div class="q-action">
                                                         <a href="#" class="btn btn-info">Ask Question</a>
@@ -439,7 +443,8 @@
                                                     <div id="question" class="questions">
                                                         <div class="question-wrap">
                                                             <p class="author"><span class="name">Fahim Uddin </span> on
-                                                                15 Nov 2023</p>
+                                                                15 Nov 2023
+                                                            </p>
                                                             <h3 class="question text-sm">
                                                                 <span class="hint">Q:</span>
                                                                 <span>
@@ -468,7 +473,6 @@
                                                 </div>
                                             </div>
                                         </section>
-
                                     </div>
                                     <div class="tab-pane fade" id="top-policy" role="tabpanel"
                                         aria-labelledby="policy-top-tab">
@@ -648,7 +652,6 @@
                                                         </td>
                                                     </tr>
                                                 </tbody>
-
                                                 <tfoot>
                                                     <tr>
                                                         <td></td>
@@ -684,7 +687,6 @@
                                                 </tfoot>
                                             </table>
                                         </div>
-
                                     </div>
                                     <div class="tab-pane fade" id="top-pricereview" role="tabpanel"
                                         aria-labelledby="pricereview-top-tab">
@@ -712,16 +714,14 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-xl-4">
                                 <div class="theme-card creative-card creative-inner related_product_card">
                                     <h5 class="title-border">Related Products</h5>
                                     <div class="media-banner plrb-0 b-g-white1 border-0">
-                                        <div class="media-banner-box" v-for="i in 3">
+                                        <div class="media-banner-box" v-for="i in 3" :key="i">
                                             <div class="media">
                                                 <a href="product-page(left-sidebar).html" tabindex="0">
                                                     <img :src="`https://themes.pixelstrap.com/bigdeal/assets/images/layout-2/media-banner/${i}.jpg`"
@@ -766,14 +766,12 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </section>
                 </div>
             </div>
         </section>
-
         <section class="section-big-py-space  ratio_asos b-g-light">
             <div class="custom-container">
                 <div class="row">
@@ -813,12 +811,22 @@ export default {
         products: [],
         is_auth: false,
         quantity: 1,
+        product_details: {},
+        slug: '',
     }),
+
     created: async function () {
         // console.log(this.slug);
+        let url = window.location.pathname.split('/');
+        this.slug = url[url.length - 1];
         this.is_auth = localStorage.getItem("token") ? true : false;
+
         await this.get_product();
         await this.get_featured_products();
+        await this.get_single_product_details();
+
+
+
     },
     methods: {
         ...mapActions(common_store, {
@@ -831,6 +839,14 @@ export default {
                 .then(res => {
                     this.product = res.data;
                 })
+        },
+
+        get_single_product_details: async function () {
+            let response = await axios.get('/get-product-details/' + this.slug)
+            if (response.data.status === "success") {
+                this.product_details = response.data.data
+            }
+            console.log(this.product_details);
         },
         get_featured_products: async function () {
             let res = await axios.get('/featured-products');

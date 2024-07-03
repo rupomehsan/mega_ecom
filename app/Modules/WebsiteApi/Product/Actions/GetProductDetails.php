@@ -9,7 +9,7 @@ class GetProductDetails
     public static function execute($slug)
     {
         try {
-            $with = ['product_images:id,product_id,url', 'product_categories:id,title', 'product_brand:id,title'];
+            $with = ['product_images:id,product_id,url', 'product_categories:id,title', 'product_brand:id,title','product_region','product_region.country'];
             $fields = request()->input('fields') ?? ['*'];
             if (empty($fields)) {
                 $fields = ['*'];

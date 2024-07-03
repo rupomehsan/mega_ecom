@@ -54,7 +54,7 @@ class WebsiteController extends Controller
 
     public function products_details($slug)
     {
-        return Inertia::render('Products/ProductDetails', [
+        return Inertia::render('ProductDetails/Index', [
             'slug' => $slug,
             'event' => [
                 'title' => 'ETEK Product Details',
