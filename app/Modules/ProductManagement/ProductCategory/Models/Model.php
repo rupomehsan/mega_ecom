@@ -4,6 +4,7 @@ namespace App\Modules\ProductManagement\ProductCategory\Models;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;
+use App\Modules\ProductManagement\ProductCategoryWiseAdvertise\Models\Model as AdvertiseModel;
 
 class Model extends EloquentModel
 {
@@ -33,7 +34,15 @@ class Model extends EloquentModel
         return $this->belongsToMany(self::$productModel,'product_category_products','product_id','product_category_id');
     }
 
+    public function childrens()
+    {
+        return $this->hasMany(Model::class, 'parent_id');
+    }
 
+    public function advertises()
+    {
+        return $this->hasMany(AdvertiseModel::class, 'product_category_id');
+    }
 
 
     public function scopeActive($q)
