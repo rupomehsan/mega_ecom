@@ -1,20 +1,20 @@
 {
-  "__plugin-vue_export-helper-dce490b2.js": {
-    "file": "assets/_plugin-vue_export-helper-dce490b2.js"
+  "__plugin-vue_export-helper-5785fed7.js": {
+    "file": "assets/_plugin-vue_export-helper-5785fed7.js"
   },
   "resources/js/backend/app.js": {
-    "file": "assets/app-4b0e6c00.js",
+    "file": "assets/app-2d3805a2.js",
     "imports": [
-      "__plugin-vue_export-helper-dce490b2.js"
+      "__plugin-vue_export-helper-5785fed7.js"
     ],
     "isEntry": true,
     "src": "resources/js/backend/app.js"
   },
   "resources/js/frontend/Components/Slider.vue": {
-    "file": "assets/Slider-696f4dd6.js",
+    "file": "assets/Slider-aecb3285.js",
     "imports": [
       "resources/js/frontend/app.js",
-      "__plugin-vue_export-helper-dce490b2.js"
+      "__plugin-vue_export-helper-5785fed7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/frontend/Components/Slider.vue"
@@ -30,9 +30,9 @@
     "dynamicImports": [
       "resources/js/frontend/Components/Slider.vue"
     ],
-    "file": "assets/app-7c5a868c.js",
+    "file": "assets/app-706476fa.js",
     "imports": [
-      "__plugin-vue_export-helper-dce490b2.js"
+      "__plugin-vue_export-helper-5785fed7.js"
     ],
     "isEntry": true,
     "src": "resources/js/frontend/app.js"

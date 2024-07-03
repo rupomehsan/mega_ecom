@@ -42,10 +42,9 @@ class TestController extends Controller
 
     public function attach_category_into_products()
     {
-        DB::table('product_category_products')->truncate();
+        // DB::table('product_category_products')->truncate();
         function make_data($j, $limit)
         {
-
             $data = [];
             for ($i = $limit; $i < $limit + 20; $i++) {
                 array_push($data, [
