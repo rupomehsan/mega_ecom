@@ -169,7 +169,7 @@
                         <div class="navbar-menu">
                             <div class="nav-block">
                                 <div class="nav-left">
-                                    <nav class="navbar">
+                                    <nav class="navbar" @click="toggle_category">
                                         <button class="navbar-toggler" type="button">
                                             <span class="navbar-icon"><i class="fa fa-arrow-down"></i></span>
                                         </button>
@@ -248,6 +248,10 @@ export default {
         ...mapActions(common_store, {
             get_all_cart_data: "get_all_cart_data",
         }),
+
+        toggle_category: function () {
+            document.querySelector('.modal_category_all_page').classList.toggle('active');
+        },
     },
     computed: {
         ...mapState(common_store, {
