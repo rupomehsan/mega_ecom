@@ -4,8 +4,6 @@
             <div class="page-title">
                 <h2>
                     Edit Acount Information
-
-
                 </h2>
             </div>
             <div class="box-account box-info">
