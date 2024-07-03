@@ -1,17 +1,19 @@
 <template>
-    <ul class="category_list">
-        <li class="category_modal_close" @click="close_category">
-            <i class="fa fa-close"></i>
-        </li>
-        <li v-for="category in top_categories" :key="category.id">
-            <Link :href="`/category/${category.slug}`">
-                <img :src="category.image" :alt="category.title">
-                <span class="link_title">
-                    {{ category.title }}
-                </span>
-            </Link>
-        </li>
-    </ul>
+    <div class="all_category_parent">
+        <ul class="category_list">
+            <li class="category_modal_close" @click="close_category">
+                <i class="fa fa-close"></i>
+            </li>
+            <li v-for="category in top_categories" :key="category.id">
+                <Link :href="`/category/${category.slug}`">
+                    <img :src="category.image" :alt="category.title">
+                    <span class="link_title">
+                        {{ category.title }}
+                    </span>
+                </Link>
+            </li>
+        </ul>
+    </div>
 </template>
 <script>
 import axios from 'axios';
