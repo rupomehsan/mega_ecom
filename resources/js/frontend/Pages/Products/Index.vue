@@ -150,7 +150,7 @@ export default {
     },
     methods: {
         get_category: async function () {
-            let res = await axios.get('/api/v1/category/'+this.slug);
+            let res = await axios.get('/category/'+this.slug);
             let data = res.data;
             this.category = data;
         },

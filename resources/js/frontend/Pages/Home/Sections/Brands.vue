@@ -22,7 +22,7 @@ export default {
     },
     methods: {
         get_brands: function(){
-            axios.get('/api/v1/brands')
+            axios.get('/brands')
                 .then(res=>{
                     this.brands = res.data;
                 })

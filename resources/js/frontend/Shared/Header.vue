@@ -76,33 +76,32 @@
                     <div class="input-block">
                         <SearchBar />
                     </div>
-                    <div class="header-right">
+                    <div class="header-right ">
                         <div class="icon-block">
                             <ul>
-                                <li class="mobile-user " onclick="openAccount()">
-                                    <a href="javascript:void(0)">
-                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                            viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
-                                            xml:space="preserve">
+                                <li class="mobile-user ">
+                                    <Link href="/profile">
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+                                        style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                        <g>
                                             <g>
-                                                <g>
-                                                    <path
-                                                        d="M256,0c-74.439,0-135,60.561-135,135s60.561,135,135,135s135-60.561,135-135S330.439,0,256,0z M256,240
+                                                <path
+                                                    d="M256,0c-74.439,0-135,60.561-135,135s60.561,135,135,135s135-60.561,135-135S330.439,0,256,0z M256,240
                             c-57.897,0-105-47.103-105-105c0-57.897,47.103-105,105-105c57.897,0,105,47.103,105,105C361,192.897,313.897,240,256,240z">
-                                                    </path>
-                                                </g>
+                                                </path>
                                             </g>
+                                        </g>
+                                        <g>
                                             <g>
-                                                <g>
-                                                    <path
-                                                        d="M297.833,301h-83.667C144.964,301,76.669,332.951,31,401.458V512h450V401.458C435.397,333.05,367.121,301,297.833,301z
+                                                <path
+                                                    d="M297.833,301h-83.667C144.964,301,76.669,332.951,31,401.458V512h450V401.458C435.397,333.05,367.121,301,297.833,301z
                             M451.001,482H451H61v-71.363C96.031,360.683,152.952,331,214.167,331h83.667c61.215,0,118.135,29.683,153.167,79.637V482z">
-                                                    </path>
-                                                </g>
+                                                </path>
                                             </g>
-                                        </svg>
-                                    </a>
+                                        </g>
+                                    </svg>
+                                    </Link>
                                 </li>
                                 <!-- <li class="mobile-setting" onclick="openSetting()">
                                     <a href="javascript:void(0)">
@@ -148,9 +147,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <div class="item-count-contain">
-                                        3
-                                    </div>
+                                    <div class="item-count-contain">{{ all_cart_data.length }}</div>
                                 </li>
                             </ul>
                         </div>
@@ -190,19 +187,19 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <a class="dark-menu-item" href="javascript:void(0)">
-                                                Home
-                                            </a>
+                                            <Link href="/" class="dark-menu-item" >
+                                            Home
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a class="dark-menu-item" href="javascript:void(0)">
+                                            <Link  href="/blogs" class="dark-menu-item" >
                                                 Blog
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a class="dark-menu-item" href="javascript:void(0)">
+                                            <Link  href="/contact" class="dark-menu-item" >
                                                 Contact us
-                                            </a>
+                                            </Link>
                                         </li>
                                         <!-- <li>
                                             <a class="dark-menu-item has-submenu" href="javascript:void(0)">Home
@@ -234,14 +231,28 @@
 </template>
 
 <script>
-import { Link } from '@inertiajs/vue3';
-import SearchBar from '../Components/SearchBar.vue';
+import { Link } from "@inertiajs/vue3";
+import SearchBar from "../Components/SearchBar.vue";
+import { common_store } from "../Store/common_store";
+import { mapActions, mapState } from "pinia";
 export default {
     components: { Link, SearchBar },
+    created: async function () {
+        await this.get_all_cart_data();
+    },
     methods: {
-        toggle_nav: function(){
-            this.$refs.main_menu.classList.toggle('active');
-        }
-    }
+        toggle_nav: function () {
+            this.$refs.main_menu.classList.toggle("active");
+        },
+
+        ...mapActions(common_store, {
+            get_all_cart_data: "get_all_cart_data",
+        }),
+    },
+    computed: {
+        ...mapState(common_store, {
+            all_cart_data: "all_cart_data",
+        }),
+    },
 };
 </script>

@@ -4,7 +4,8 @@
             <div class="product-imgbox">
                 <div class="product-front">
                     <Link :href="`/product-details/${product.slug}`">
-                        <img :src="check_image_url(`${product.product_image?.url}`)" class="img-fluid" alt="product">
+                    <img :src="check_image_url(`${product.product_image?.url}`)
+                        " class="img-fluid" alt="product" />
                     </Link>
                     <a onclick="openCart()" class="buy_now_btn">
                         <i class="icon-shopping-cart icon"></i>
@@ -12,7 +13,8 @@
                     </a>
                 </div>
                 <div class="product-icon">
-                    <button onclick="openCart()" class="tooltip-left" data-tippy-content="Add to cart" tabindex="0">
+                    <button @click="is_auth ? add_to_cart(product.id) : openAccount()" title="add to cart"
+                        class="tooltip-left" data-tippy-content="Add to cart" tabindex="0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="feather feather-shopping-cart">
@@ -21,7 +23,8 @@
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                         </svg>
                     </button>
-                    <a href="javascript:void(0)" class="add-to-wish tooltip-left" data-tippy-content="Add to Wishlist"
+                    <a @click="is_auth ? add_to_wish_list(product.id) : openAccount()" href="javascript:void(0)"
+                        title="add to wish list" class="add-to-wish tooltip-left" data-tippy-content="Add to Wishlist"
                         tabindex="0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -31,7 +34,8 @@
                             </path>
                         </svg>
                     </a>
-                    <a href="compare.html" class="tooltip-left" data-tippy-content="Compare" tabindex="0">
+                    <a @click="is_auth ? add_to_compare_list(product.id) : openAccount()" title="add to compare list"
+                        class="tooltip-left" data-tippy-content="Compare" tabindex="0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="feather feather-refresh-cw">
@@ -41,30 +45,28 @@
                         </svg>
                     </a>
                 </div>
-                <div class="new-label" v-if="parseInt(Math.random() * 9 ) % 2 == 0">
-                    <div>
-                        new
-                    </div>
+                <div class="new-label" v-if="parseInt(Math.random() * 9) % 2 == 0">
+                    <div>new</div>
                 </div>
                 <div class="on-sale">
-                    save $ {{ ( Math.random() * 9 ).toFixed(2) }}
+                    save $ {{ (Math.random() * 9).toFixed(2) }}
                 </div>
             </div>
             <div class="product-detail">
                 <div class="detail-title">
                     <div class="detail-left">
                         <Link :href="`/product-details/${product.slug}`">
-                            <h6 class="price-title">
-                                {{ product.title }}
-                            </h6>
+                        <h6 class="price-title">
+                            {{ product.title }}
+                        </h6>
                         </Link>
                     </div>
                     <div class="detail-right">
                         <div class="check-price">
-                            $ {{ ( Math.random() * 999 ).toFixed(2) }}
+                            $ {{ (Math.random() * 999).toFixed(2) }}
                         </div>
                         <div class="price">
-                            $ {{ ( Math.random() * 100 ).toFixed(2) }}
+                            $ {{ (Math.random() * 100).toFixed(2) }}
                         </div>
                     </div>
                 </div>
@@ -74,19 +76,41 @@
     </div>
 </template>
 <script>
-import { Link } from '@inertiajs/vue3'
+
+import { mapActions, mapState } from "pinia";
+import { common_store } from "../Store/common_store";
 export default {
-    components: { Link },
-    props: ['product'],
+    props: ["product"],
+
+    data: () => ({
+        is_auth: false,
+    }),
+
+    created() {
+        this.is_auth = localStorage.getItem("token") ? true : false;
+    },
+
     methods: {
         check_image_url: function (url) {
             try {
                 new URL(url);
                 return url;
             } catch (e) {
-                return "/"+url;
+                return "/" + url;
             }
+        },
+        ...mapActions(common_store, {
+            get_all_cart_data: "get_all_cart_data",
+            add_to_cart: "add_to_cart",
+            add_to_wish_list: "add_to_wish_list",
+            add_to_compare_list: "add_to_compare_list",
+        }),
+
+        openAccount() {
+            document.getElementById("myAccount").classList.add('open-side');
         }
-    }
-}
+    },
+
+
+};
 </script>

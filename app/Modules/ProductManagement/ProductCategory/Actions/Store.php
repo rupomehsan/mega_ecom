@@ -12,12 +12,12 @@ class Store
             $requestData = $request->validated();
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $requestData['image'] = uploader($image, 'product_category');
+                $requestData['image'] = uploader($image, 'uploads/product_category');
             }
             if ($data = self::$model::query()->create($requestData)) {
                 return messageResponse('Item added successfully', $data, 201);
             }
-            
+
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(),[], 500, 'server_error');
         }

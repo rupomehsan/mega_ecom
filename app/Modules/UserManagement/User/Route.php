@@ -7,7 +7,7 @@ use App\Modules\UserManagement\User\Controllers\SupplierController;
 use App\Modules\UserManagement\User\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('v1')->group(function () {
+Route::prefix('v1')->middleware('auth:api')->group(function () {
 
     Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index']);
@@ -31,6 +31,11 @@ Route::prefix('v1')->group(function () {
         Route::post('restore', [CustomerController::class, 'restore']);
         Route::post('import', [CustomerController::class, 'import']);
         Route::post('bulk-actions', [CustomerController::class, 'bulkAction']);
+
+        Route::post('account-info-update', [CustomerController::class, 'AccountInfoUpdate']);
+        Route::post('address-info-update', [CustomerController::class, 'AddressInfoUpdate']);
+        Route::post('update-profile-picture', [CustomerController::class, 'UpdateProfilePicture']);
+        Route::post('change-password', [CustomerController::class, 'ChangePassword']);
     });
 
     Route::prefix('suppliers')->group(function () {
@@ -68,5 +73,4 @@ Route::prefix('v1')->group(function () {
         Route::post('import', [EmployeeController::class, 'import']);
         Route::post('bulk-actions', [EmployeeController::class, 'bulkAction']);
     });
-
 });

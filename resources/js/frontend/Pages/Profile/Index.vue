@@ -5,7 +5,7 @@
                 <h2>My Dashboard</h2>
             </div>
             <div class="welcome-msg">
-                <p>Hello, Mr shefat !</p>
+                <p>Hello, {{ user_info.name }} !</p>
                 <p>
                     From your My Account Dashboard you have the ability to view a snapshot of your
                     recent account activity and update your account information. Select a link below
@@ -42,6 +42,8 @@
 
 <script>
 import ProfileLayout from "./shared/ProfileLayout.vue";
+import { auth_store } from "../../Store/auth_store.js";
+import { ref, onMounted, watch } from 'vue';
 export default {
     components: { ProfileLayout },
     data: ()=>({
@@ -53,8 +55,24 @@ export default {
             },
         ]
     }),
-    created: function(){
-    }
+    setup() {
+        const authStore = auth_store();
+        const user_info = ref(authStore.auth_info);
+
+        onMounted(async () => {
+            if (authStore.is_auth) {
+                user_info.value = authStore.auth_info;
+            }
+        });
+
+        watch(() => authStore.auth_info, (newVal) => {
+            user_info.value = newVal;
+        });
+
+        return {
+            user_info,
+        };
+    },
 };
 </script>
 

@@ -12,46 +12,103 @@
         <div v-if="search_key.length" class="search_results">
             <div class="search_types">
                 <ul>
-                    <li><a href="#" @click.prevent="search_type='products'" :class="{active :search_type=='products',}">Products</a></li>
-                    <li><a href="#" @click.prevent="search_type='categories'" :class="{active :search_type=='categories',}">Categories</a></li>
+                    <li><a href="#" @click.prevent="search_type = 'products'"
+                            :class="{ active: search_type == 'products', }">Products</a></li>
+                    <li><a href="#" @click.prevent="search_type = 'categories'"
+                            :class="{ active: search_type == 'categories', }">Categories</a></li>
+                    <li><a href="#" @click.prevent="search_type = 'brand'"
+                            :class="{ active: search_type == 'brand', }">Brand</a></li>
+                    <li><a href="#" @click.prevent="search_type = 'tag'"
+                            :class="{ active: search_type == 'tag', }">Tag</a>
+                    </li>
                 </ul>
             </div>
             <div class="search_items">
-                <div class="products" v-if="search_type=='products'">
-                    <div class="search_item" v-for="i in 10 " :key="i">
-                        <a href="#">
-                            <div class="left">
-                                <img src="https://www.startech.com.bd/image/cache/catalog/mouse/dareu/lm106g/lm106g-01-80x80.webp" alt="">
-                            </div>
-                            <div class="right">
-                                <h3 class="product_title">
-                                    Dareu LM106G Wireless Office Mouse
-                                </h3>
-                                <div class="price">
-                                    <div class="old">
-                                        450৳
-                                    </div>
-                                    <div class="new">
-                                        320৳
+                <div class="products" v-if="search_type == 'products'">
+                    <template v-if="search_data.product?.length">
+                        <div class="search_item" v-for="product in search_data.product" :key="product.id">
+                            <a href="#">
+                                <div class="left">
+                                    <img :src="`${product.product_image?.url}`"
+                                        alt="">
+                                </div>
+                                <div class="right">
+                                    <h3 class="product_title">
+                                        {{ product.title }}
+                                    </h3>
+                                    <div class="price">
+                                        <div class="old">
+                                            {{ product.purchase_price }}৳
+                                        </div>
+                                        <div class="new">
+                                            {{ product.current_price }}৳
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <p class="alert alert-info">No item found in search</p>
+                    </template>
+
                 </div>
-                <div class="categories" v-if="search_type=='categories'">
-                    <div class="search_item">
-                        <a href="#">
-                            <div class="left">
-                                <img src="https://www.startech.com.bd/image/cache/catalog/brand-logo/dahua-80x80.png" alt="">
-                            </div>
-                            <div class="right">
-                                <h3 class="product_title">
-                                    Dahua CC Camera Package
-                                </h3>
-                            </div>
-                        </a>
-                    </div>
+                <div class="categories" v-if="search_type == 'categories'">
+                    <template v-if="search_data.category?.length">
+                        <div class="search_item" v-for="category in search_data.category" :key="category.id">
+                            <a href="#">
+                                <div class="left">
+                                    <img :src="`${category.image}`" alt="">
+                                </div>
+                                <div class="right">
+                                    <h3 class="product_title">
+                                        {{ category.title }}
+                                    </h3>
+                                </div>
+                            </a>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <p class="alert alert-info">No item found in search</p>
+                    </template>
+                </div>
+                <div class="categories" v-if="search_type == 'brand'">
+                    <template v-if="search_data.brand?.length">
+                        <div class="search_item" v-for="brand in search_data.brand" :key="brand.id">
+                            <a href="#">
+                                <div class="left">
+                                    <img :src="`${brand.image}`" alt="">
+                                </div>
+                                <div class="right">
+                                    <h3 class="product_title">
+                                        {{ brand.title }}
+                                    </h3>
+                                </div>
+                            </a>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <p class="alert alert-info">No item found in search</p>
+                    </template>
+                </div>
+                <div class="categories" v-if="search_type == 'tag'">
+                    <template v-if="search_data.tag?.length">
+                        <div class="search_item" v-for="tag in search_data.tag" :key="tag.id">
+                            <a href="#">
+                                <div class="left">
+                                    <img :src="`${tag.image}`" alt="">
+                                </div>
+                                <div class="right">
+                                    <h3 class="product_title">
+                                        {{ tag.title }}
+                                    </h3>
+                                </div>
+                            </a>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <p class="alert alert-info">No item found in search</p>
+                    </template>
                 </div>
             </div>
             <div class="search_action">
@@ -69,10 +126,27 @@ export default {
     data: () => ({
         search_type: 'products',
         search_key: '',
-    })
+        search_data: {}
+    }),
+    methods: {
+        global_search: async function (search_key) {
+            let response = await axios.get(`/home-page-global-search?search_key=${search_key}`)
+            if (response.data.status === "success") {
+                this.search_data = response.data.data
+            }
+            console.log(this.search_data)
+        },
+    },
+
+    watch: {
+        search_key(newVal) {
+            clearTimeout(this.searchTimer);
+            this.searchTimer = setTimeout(async () => {
+                this.global_search(newVal)
+            }, 1000);
+        }
+    },
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

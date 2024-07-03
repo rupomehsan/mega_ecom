@@ -5,40 +5,48 @@
                 <h2>
                     Wish List
                 </h2>
+                <hr>
             </div>
             <div class="box-account box-info">
                 <div class="table-responsive">
-                    <table class="product_info_table table table-bordered mb-0">
-                        <tr v-for="i in 10">
-                            <td>
-                                <img src="https://www.startech.com.bd/image/cache/catalog/processor/AMD/athlon-3000g/athlon-3000g-1-500x500.jpg" alt="">
-                                <span>
-                                    Remax RPP-88 10000mAh DOT Series Power Bank
-                                </span>
-                            </td>
-                            <td>
-                                <div class="price">
-                                    1,160৳
-                                </div>
-                            </td>
-                            <td>
-                                <div class="action">
-                                    <a href="" class="btn btn-primary text-light">
+                    <template v-if="all_wish_list_data.length > 0">
+                        <table class="product_info_table table table-bordered mb-0">
+                            <tr v-for="item in all_wish_list_data" :key="item.id">
+                                <td>
+                                    <img :src="`/${item.product?.product_image?.url}`" alt="">
+                                    <span>
+                                        {{ item.product.title }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="price">
+                                        {{ item.product.current_price }}৳
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action">
+                                        <Link :href="`/product-details/${item.product.slug}`"
+                                            class="btn btn-primary text-light">
                                         <i class="fa fa-shopping-cart"></i>
                                         Buy
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="action">
-                                    <a href="" class="btn btn-danger text-light">
-                                        <i class="fa fa-trash"></i>
-                                        Remove
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                                        </Link>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action">
+                                        <a @click="remove_wish_list_item(item.id)" class="btn btn-danger text-light">
+                                            <i class="fa fa-trash"></i>
+                                            Remove
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </template>
+                    <template v-else>
+                        <h2 class="td-color text-center">No item found in wish list</h2>
+                    </template>
+
                 </div>
 
             </div>
@@ -47,10 +55,12 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
+import { common_store } from "../../../Store/common_store";
 import ProfileLayout from "../shared/ProfileLayout.vue";
 export default {
     components: { ProfileLayout },
-    data: ()=>({
+    data: () => ({
         bread_cumb: [
             {
                 title: 'profile',
@@ -64,6 +74,21 @@ export default {
             },
         ]
     }),
+    created: async function () {
+        await this.get_all_wish_list_items();
+    },
+    methods: {
+        ...mapActions(common_store, {
+            get_all_wish_list_items: "get_all_wish_list_items",
+            remove_wish_list_item: "remove_wish_list_item",
+        }),
+    },
+
+    computed: {
+        ...mapState(common_store, {
+            all_wish_list_data: "all_wish_list_data",
+        }),
+    },
 };
 </script>
 

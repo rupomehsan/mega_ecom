@@ -5,10 +5,14 @@
                 <div class="col-12">
                     <div class="discount-banner-contain">
                         <h2>Featured Products</h2>
-                        <h1>every <span> discount </span> we <span> offer is the best in market!</span></h1>
+                        <h1>
+                            every <span> discount </span> we
+                            <span> offer is the best in market!</span>
+                        </h1>
                         <div class="rounded-contain">
                             <div class="rounded-subcontain">
-                                don't just scroll, your friends have already started buying!
+                                don't just scroll, your friends have already
+                                started buying!
                             </div>
                         </div>
                     </div>
@@ -20,35 +24,35 @@
     <section class="my-5 py-5">
         <div class="custom-container">
             <div class="product_list">
-                <div v-for="i in products" :key="i.name">
-                    <ProductItem :product="i"/>
+                <div v-for="product in products" :key="product.name">
+                    <ProductItem :product="product" />
                 </div>
             </div>
         </div>
     </section>
+
 </template>
 
 <script>
-import axios from 'axios';
-import ProductItem from '../../../Components/ProductItem.vue';
+
+import ProductItem from "../../../Components/ProductItem.vue";
+
 export default {
+
     components: {
         ProductItem,
     },
     data: () => ({
         products: [],
     }),
-    created: function () {
-        this.get_featured_products();
+    created: async function () {
+        await this.get_featured_products();
     },
     methods: {
         get_featured_products: async function () {
-            let res = await axios.get('/api/v1/featured-products');
-            let data = res.data;
-            this.products = data;
+            let res = await window.publicAxios("/featured-products");
+            this.products = res;
         },
-    }
-
-
-}
+    },
+};
 </script>

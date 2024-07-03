@@ -1,10 +1,10 @@
 <template>
     <div class="theme-slider">
         <carousel :items-to-show="1">
-            <slide v-for="i in 2" :key="i">
+            <slide v-for="slider in home_hero_sliders" :key="slider.id">
                 <div>
                     <div class="slider-banner">
-                        <img :src="`/frontend/assets/images/banner_${i}.png`" class="w-100" />
+                        <img :src="`${slider.image}`" class="w-100" />
                     </div>
                 </div>
             </slide>
@@ -45,7 +45,21 @@ export default {
         Pagination,
         Navigation,
     },
-    created() {
+    data: () => ({
+        home_hero_sliders: [],
+    }),
+    created: async function () {
+        await this.get_all_home_hero_sliders()
     },
+    methods: {
+
+        get_all_home_hero_sliders: async function () {
+            let response = await axios.get('/get-home-page-hero-sliders?get_all=1&is_show=1')
+            if (response.data.status === "success") {
+                this.home_hero_sliders = response.data.data
+            }
+        },
+
+    }
 };
 </script>

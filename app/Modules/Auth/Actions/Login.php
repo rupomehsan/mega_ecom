@@ -13,7 +13,9 @@ class Login
     public static function execute(LoginValidation $request)
     {
         try {
-            $check_auth_user = self::$model::where('email', $request->email)->first();
+            // dd($request->all());
+            // $check_auth_user = self::$model::where('email', $request->email)->first();
+            $check_auth_user = self::$model::where('status', 'active')->whereAny(['user_name', 'email', 'phone_number'], request()->email)->first();
 
             // if ($check_auth_user->is_blocked) {
             //     return response()->json(['status' => 'error', 'message' => 'Sorry,you are blocked'], 404);
@@ -32,7 +34,7 @@ class Login
                 return response()->json(['status' => 'error', 'message' => 'Sorry,user not found'], 404);
             }
         } catch (\Exception $e) {
-            return messageResponse($e->getMessage(), [],500, 'server_error');
+            return messageResponse($e->getMessage(), [], 500, 'server_error');
         }
     }
 }
