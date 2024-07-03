@@ -5,21 +5,24 @@
             {{ product_details.title }}
         </title>
     </Head>
-    <div v-if="Object.keys(product_details).length">
-        <Layout>
-            <section class="section-big-pt-space b-g-light">
-                <div class="collection-wrapper">
-                    <div class="custom-container">
-                        <div class="container-fluid">
-                            <product-basic-info :product="product_details"></product-basic-info>
-                        </div>
-                        <product-bottom-details :product="product_details"></product-bottom-details>
+    <Layout>
+        <section v-if="Object.keys(product_details).length" class="section-big-pt-space b-g-light">
+            <div class="collection-wrapper">
+                <div class="custom-container">
+                    <div class="container-fluid">
+                        <product-basic-info :product="product_details"></product-basic-info>
                     </div>
+                    <product-bottom-details :product="product_details"></product-bottom-details>
                 </div>
-            </section>
-            <top-products :products="products"></top-products>
-        </Layout>
-    </div>
+            </div>
+        </section>
+        <section v-else>
+            <div class="custom-container">
+                <img src="/frontend/images/product_skeleton.png" class="w-100" alt="product-loading">
+            </div>
+        </section>
+        <top-products :products="products"></top-products>
+    </Layout>
 </template>
 
 <script>
@@ -74,7 +77,7 @@ export default {
             if (response.data.status === "success") {
                 this.product_details = response.data.data
             }
-            console.log(this.product_details);
+            // console.log(this.product_details);
         },
         get_featured_products: async function () {
             let res = await axios.get('/featured-products');
