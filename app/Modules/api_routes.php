@@ -93,17 +93,18 @@ include_once  base_path("app/Modules/BannerManagement/HomeSideBanner/Route.php")
 | Website and Mobile api  Routes
 | Website and Mobile api  Routes
 |--------------------------------------------------------------------------
+app/Modules/WebsiteApi/SliderAndBanner/Route.php
 */
 
-include_once  base_path("app/Modules/websiteApi/SliderAndBanner/Route.php");
+include_once  base_path("app/Modules/WebsiteApi/SliderAndBanner/Route.php");
 
-include_once  base_path("app/Modules/websiteApi/Category/Route.php");
-include_once  base_path("app/Modules/websiteApi/Brand/Route.php");
-include_once  base_path("app/Modules/websiteApi/Product/Route.php");
+include_once  base_path("app/Modules/WebsiteApi/Category/Route.php");
+include_once  base_path("app/Modules/WebsiteApi/Brand/Route.php");
+include_once  base_path("app/Modules/WebsiteApi/Product/Route.php");
 
-include_once  base_path("app/Modules/websiteApi/Cart/Route.php");
-include_once  base_path("app/Modules/websiteApi/WishList/Route.php");
-include_once  base_path("app/Modules/websiteApi/CompareList/Route.php");
-include_once  base_path("app/Modules/websiteApi/Order/Route.php");
+include_once  base_path("app/Modules/WebsiteApi/Cart/Route.php");
+include_once  base_path("app/Modules/WebsiteApi/WishList/Route.php");
+include_once  base_path("app/Modules/WebsiteApi/CompareList/Route.php");
+include_once  base_path("app/Modules/WebsiteApi/Order/Route.php");
 
-include_once  base_path("app/Modules/websiteApi/SearchHandling/Route.php");
+include_once  base_path("app/Modules/WebsiteApi/SearchHandling/Route.php");
