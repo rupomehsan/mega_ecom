@@ -1,5 +1,5 @@
 <template>
-    <div class="all_category_parent">
+    <div class="modal_category">
         <ul class="category_list">
             <li class="category_modal_close" @click="close_category">
                 <i class="fa fa-close"></i>
