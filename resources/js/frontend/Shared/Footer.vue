@@ -143,6 +143,8 @@
     </footer>
     <!-- footer end -->
 
+    <all-categories/>
+
     <!--Newsletter modal popup start-->
     <!-- <div class="modal fade bd-example-modal-lg blackfriday-modal theme-modal " id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog  modal-dialog-centered" role="document">
@@ -902,8 +904,10 @@
 import { mapActions, mapState } from "pinia";
 import { common_store } from "../Store/common_store";
 import { auth_store } from "../Store/auth_store.js";
+import AllCategories from '../Components/AllCategories.vue';
 
 export default {
+    components: { AllCategories },
     created: async function () {
         // Uncomment the following line if you want to call the method on creation
 
@@ -933,7 +937,7 @@ export default {
             all_cart_data: "all_cart_data",
             total_cart_price: "total_cart_price",
         }),
-       
+
     },
 };
 </script>
