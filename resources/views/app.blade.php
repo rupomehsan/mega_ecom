@@ -49,6 +49,12 @@
     @vite(['resources/js/frontend/app.js'])
 
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/custom.css">
+
+    <script>
+        if(window.innerWidth < 991){
+            location.href = "https://m.etek.com.bd";
+        }
+    </script>
 </head>
 
 <body>
