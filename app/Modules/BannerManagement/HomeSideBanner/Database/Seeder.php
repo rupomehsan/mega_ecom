@@ -16,10 +16,10 @@ class Seeder extends SeederClass
 
         self::$model::truncate();
         self::$model::create([
-            'banner_one' => facker()->imageUrl(250, 500),
-            'banner_two' => facker()->imageUrl(550, 300),
-            'banner_three' => facker()->imageUrl(550, 300),
-            'banner_four' => facker()->imageUrl(250, 270),
+            'banner_one' => "frontend/assets/images/banners/10.png",
+            'banner_two' => "frontend/assets/images/banners/6.png",
+            'banner_three' => "frontend/assets/images/banners/9.png",
+            'banner_four' => "frontend/assets/images/banners/12.png",
         ]);
     }
 }

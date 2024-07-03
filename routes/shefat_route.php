@@ -23,8 +23,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/returns_exchanges', 'Website\WebsiteController@returns_exchanges')->name('website_returns_exchanges');
     Route::get('/shipping_delivery', 'Website\WebsiteController@shipping_delivery')->name('website_shipping_delivery');
 
-    Route::get('/uploads_variant', 'Website\TestController@uploads_variant');
-
     Route::get('/profile', 'Website\ProfileController@profile')->name('website_profile');
     Route::get('/profile/orders', 'Website\ProfileController@orders')->name('website_profile_orders');
     Route::get('/profile/wish-list', 'Website\ProfileController@wish_list')->name('website_profile_wish_list');
@@ -38,6 +36,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('/login', 'Website\AuthController@login')->name('login');
     Route::post('/login', 'Website\AuthController@login_submit')->name('login_submit');
+
+    Route::get('/uploads_variant', 'Website\TestController@uploads_variant');
+    Route::get('/attach_category_into_products', 'Website\TestController@attach_category_into_products');
 });
 
 // Route::get("/about", function () {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Modules\ProductManagement\ProductVarient\Models\Model as ProductVarient;
 use App\Modules\ProductManagement\ProductVarientValue\Models\Model as ProductVarientValue;
+use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
@@ -37,5 +38,30 @@ class TestController extends Controller
                 ]);
             }
         }
+    }
+
+    public function attach_category_into_products()
+    {
+        DB::table('product_category_products')->truncate();
+        function make_data($j, $limit)
+        {
+
+            $data = [];
+            for ($i = $limit; $i < $limit + 20; $i++) {
+                array_push($data, [
+                    "product_category_id" => $j,
+                    "product_id" => $i
+                ]);
+            }
+            DB::table('product_category_products')->insert($data);
+        };
+
+        for ($i = 1; $i <= 15; $i += 4) {
+            make_data($i, 1);
+            make_data($i + 2, 10);
+            make_data($i + 3, 20);
+            make_data($i + 4, 30);
+        }
+
     }
 }

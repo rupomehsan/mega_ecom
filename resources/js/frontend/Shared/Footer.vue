@@ -143,6 +143,8 @@
     </footer>
     <!-- footer end -->
 
+    <all-categories/>
+
     <!--Newsletter modal popup start-->
     <!-- <div class="modal fade bd-example-modal-lg blackfriday-modal theme-modal " id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog  modal-dialog-centered" role="document">
@@ -159,11 +161,16 @@
                         <div>
                             <h2><span>up to </span>80%</h2>
                             <div class="lable">get  30% off + free shipping</div>
-                            <h3>black friday</h3>
+                            <h3>Special June</h3>
                             <div class="timer">
-                                <p id="demo4"><span>126<span class="timer-cal">Days</span></span><span>6<span class="timer-cal">Hrs</span></span><span>22<span class="timer-cal">Min</span></span><span>53<span class="timer-cal">Sec</span></span> </p>
+                                <p id="demo4">
+                                    <span>126<span class="timer-cal">Days</span></span>
+                                    <span>6<span class="timer-cal">Hrs</span></span>
+                                    <span>22<span class="timer-cal">Min</span></span>
+                                    <span>53<span class="timer-cal">Sec</span></span>
+                                </p>
                             </div>
-                            <h4>Friday, 26 November 2021</h4>
+                            <h4>Sunday, 30 June 2024</h4>
                         </div>
                     </div>
 
@@ -897,8 +904,10 @@
 import { mapActions, mapState } from "pinia";
 import { common_store } from "../Store/common_store";
 import { auth_store } from "../Store/auth_store.js";
+import AllCategories from '../Components/AllCategories.vue';
 
 export default {
+    components: { AllCategories },
     created: async function () {
         // Uncomment the following line if you want to call the method on creation
 
@@ -928,7 +937,7 @@ export default {
             all_cart_data: "all_cart_data",
             total_cart_price: "total_cart_price",
         }),
-       
+
     },
 };
 </script>

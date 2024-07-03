@@ -15,16 +15,26 @@ class Seeder extends SeederClass
     {
 
         self::$model::truncate();
-        for ($i = 1; $i < 5; $i++) {
+
+        for ($i = 1; $i <= 2; $i++) {
             self::$model::create([
                 'title' => facker()->name,
                 'short_des' => facker()->name,
                 'offer_title' => facker()->name,
                 'button_url' => facker()->name,
-                'image' => facker()->imageUrl(1100, 500),
-                'is_show' => rand(0, 1),
+                'image' => "frontend/assets/images/banner_$i.png",
+                'is_show' => 1,
             ]);
         }
+
+        self::$model::create([
+            'title' => facker()->name,
+            'short_des' => facker()->name,
+            'offer_title' => facker()->name,
+            'button_url' => facker()->name,
+            'image' => "frontend/assets/images/banners/13.png",
+            'is_show' => 1,
+        ]);
 
     }
 }
