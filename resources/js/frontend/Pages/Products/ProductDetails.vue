@@ -4,8 +4,8 @@
             {{ product.title }}
         </title>
     </Head>
-    <Layout v-if="Object.keys(product).length">
-        <section class="section-big-pt-space b-g-light">
+    <Layout >
+        <section v-if="Object.keys(product).length" class="section-big-pt-space b-g-light">
             <div class="collection-wrapper">
                 <div class="custom-container">
                     <div class="container-fluid">
@@ -704,8 +704,15 @@
                 </div>
             </div>
         </section>
+        <section v-else>
+            <div class="collection-wrapper">
+                <div class="custom-container">
+                    <img class="w-100" src="/frontend/images/product_skeleton.png" alt="product-details">
+                </div>
+            </div>
+        </section>
 
-        <section class="section-big-py-space  ratio_asos b-g-light">
+        <section v-if="products.length" class="section-big-py-space  ratio_asos b-g-light">
             <div class="custom-container">
                 <div class="row">
                     <div class="col-12 product-related">

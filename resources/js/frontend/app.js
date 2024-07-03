@@ -2,6 +2,7 @@ import { createApp, h } from "vue";
 import { createInertiaApp, Head, Link } from "@inertiajs/vue3";
 window.page_data = () => JSON.parse(document.querySelector('#app').dataset.page);
 
+let window_width = window.innerWidth;
 createInertiaApp({
     // title: title => title ? `${title} - Ping CRM` : 'Ping CRM',
     resolve: (name) => {
@@ -16,3 +17,4 @@ createInertiaApp({
         app.mount(el);
     },
 });
+

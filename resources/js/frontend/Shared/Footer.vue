@@ -149,11 +149,16 @@
                         <div>
                             <h2><span>up to </span>80%</h2>
                             <div class="lable">get  30% off + free shipping</div>
-                            <h3>black friday</h3>
+                            <h3>Special June</h3>
                             <div class="timer">
-                                <p id="demo4"><span>126<span class="timer-cal">Days</span></span><span>6<span class="timer-cal">Hrs</span></span><span>22<span class="timer-cal">Min</span></span><span>53<span class="timer-cal">Sec</span></span> </p>
+                                <p id="demo4">
+                                    <span>126<span class="timer-cal">Days</span></span>
+                                    <span>6<span class="timer-cal">Hrs</span></span>
+                                    <span>22<span class="timer-cal">Min</span></span>
+                                    <span>53<span class="timer-cal">Sec</span></span>
+                                </p>
                             </div>
-                            <h4>Friday, 26 November 2021</h4>
+                            <h4>Sunday, 30 June 2024</h4>
                         </div>
                     </div>
 
