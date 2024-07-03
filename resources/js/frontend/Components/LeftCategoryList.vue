@@ -1,5 +1,5 @@
 <template>
-    <div class="modal_category">
+    <div class="modal_category_left_side_show">
         <ul class="category_list">
             <li class="category_modal_close" @click="close_category">
                 <i class="fa fa-close"></i>
@@ -16,8 +16,6 @@
     </div>
 </template>
 <script>
-
-
 export default {
     data: () => ({
         top_categories: [],
@@ -32,7 +30,8 @@ export default {
             this.top_categories = data;
         },
         close_category: function(){
-            document.getElementById('banner_left').classList.remove('active')
+            document.querySelector('.modal_category_left_side_show').classList.toggle('modal_category');
+            document.querySelector('.modal_category_left_side_show').classList.toggle('active');
         }
     }
 }
