@@ -78,7 +78,7 @@ class CategoryController extends Controller
     public function category($slug)
     {
         $category = Category::where('slug', $slug)->first();
-        $products = $category->products()->with('product_image')->paginate(10);
+        $products = $category->products()->with('product_image')->paginate(30);
         $advertise = $category->advertises()->where('status', 'active')->first();
         $childrens = $category->childrens()->get();
 
