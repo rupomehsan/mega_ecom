@@ -9,7 +9,7 @@ class ProductController extends Controller
 {
     public function featured_products()
     {
-        $data = Product::where('is_featured', 1)->with('product_image')->get();
+        $data = Product::where('is_featured', 1)->limit(30)->with('product_image')->get();
         return $data;
     }
 
