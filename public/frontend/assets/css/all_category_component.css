@@ -36,7 +36,7 @@
 
     .category_list {
         display: grid;
-        padding: 15px;
+        /* padding: 15px; */
         margin-bottom: 15px;
 
         li {
@@ -139,6 +139,7 @@
         flex-wrap: wrap;
         gap: 24px;
         position: relative;
+        padding: 15px;
 
         li {
             div,
@@ -208,6 +209,13 @@
         overflow-y: auto;
         overflow-x: hidden;
         border-right: 1px solid #ed573730;
+
+        ul{
+            li{
+                display: block;
+                margin-bottom: 10px;
+            }
+        }
 
         .cat_item {
             color: #444;
