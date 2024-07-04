@@ -44,6 +44,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/uploads_variant', 'Website\TestController@uploads_variant');
     Route::get('/attach_category_into_products', 'Website\TestController@attach_category_into_products');
 
+    Route::get('/product_and_category_upload', 'Website\TestController@product_and_category_upload');
+    // Route::get('/upload_categories', 'Website\TestController@upload_categories');
+    Route::get('/set_category_image', 'Website\TestController@set_category_image');
+    Route::get('/set_nav_category', 'Website\TestController@set_nav_category');
+
+    Route::get('/upload_product_list', 'Website\TestController@upload_product_list');
+    Route::get('/upload_product', 'Website\TestController@upload_product');
 });
 
 // Route::get("/about", function () {
