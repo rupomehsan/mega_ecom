@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Website;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\modules\ProductManagement\Product\Models\Model as ProductModel;
 
 class WebsiteController extends Controller
 {
@@ -42,10 +43,12 @@ class WebsiteController extends Controller
 
     public function products($slug)
     {
+        $page = request()->page ? request()->page : 1;
         return Inertia::render('Products/Index', [
             'slug' => $slug,
+            'page' => $page,
             'event' => [
-                'title' => 'ETEK Blogs',
+                'title' => 'ETEK Products',
                 'image' => 'https://etek.com.bd/frontend/images/etek_logo.png',
                 'description' => 'Best eCommerce in bangladesh'
             ]
@@ -54,8 +57,10 @@ class WebsiteController extends Controller
 
     public function products_details($slug)
     {
+        // $product = ProductModel::where('slug', $slug)->first();
         return Inertia::render('ProductDetails/Index', [
             'slug' => $slug,
+            // 'product_details' => $product,
             'event' => [
                 'title' => 'ETEK Product Details',
                 'image' => 'https://etek.com.bd/frontend/images/etek_logo.png',

@@ -18,6 +18,10 @@ class Model extends EloquentModel
 
     protected $appends = ['current_price', 'amount_in_percent'];
 
+    protected $casts = [
+        'specifications' => 'array'
+    ];
+
 
     protected static function booted()
     {
@@ -71,7 +75,7 @@ class Model extends EloquentModel
     public function getCurrentPriceAttribute()
     {
 
-        $price = $this->purchase_price;
+        $price = $this->customer_sales_price;
 
         if ($this->discount_amount && $this->discount_type) {
             switch ($this->discount_type) {
@@ -79,7 +83,7 @@ class Model extends EloquentModel
                     $price -= $this->discount_amount;
                     break;
                 case 'percent':
-                    $price -= ($this->purchase_price * ($this->discount_amount / 100));
+                    $price -= ($this->customer_sales_price * ($this->discount_amount / 100));
                     break;
                 case 'flat':
                     $price -= $this->discount_amount;
@@ -95,7 +99,7 @@ class Model extends EloquentModel
         if (($this->discount_amount && $this->discount_type) && $this->discount_type != 'percent') {
             switch ($this->discount_type) {
                 case 'off' || 'flat':
-                    return ($this->discount_amount / $this->purchase_price) * 100;
+                    return ($this->discount_amount / $this->customer_sales_price) * 100;
             }
         }
 

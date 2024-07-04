@@ -7,7 +7,7 @@
                     <img :src="check_image_url(`${product.product_image?.url}`)
                         " class="img-fluid" alt="product" />
                     </Link>
-                    <a onclick="openCart()" class="buy_now_btn">
+                    <a @click="is_auth ? buyNow(product.id) : openAccount()" class="buy_now_btn c-pointer">
                         <i class="icon-shopping-cart icon"></i>
                         Buy Now
                     </a>
@@ -108,7 +108,17 @@ export default {
 
         openAccount() {
             document.getElementById("myAccount").classList.add('open-side');
+        },
+
+        buyNow: async function (productId) {
+            const response = await window.privateAxios(`/add-to-cart`, 'post',
+                {
+                    product_id: productId,
+                }
+            );
+            this.$inertia.get(`/checkout`);
         }
+
     },
 
 

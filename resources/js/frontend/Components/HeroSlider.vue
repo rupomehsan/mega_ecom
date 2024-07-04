@@ -2,12 +2,6 @@
     <section class="color_bg_banner">
         <div class="custom-container">
             <div class="website_banner">
-                <div class="category_modal_toggler" @click="toggle_category">
-                    <img src="/frontend/images/categories24.svg" alt="">
-                    <span class="text">
-                        categories
-                    </span>
-                </div>
                 <div class="left" id="banner_left">
                     <left-category-list></left-category-list>
                 </div>
@@ -79,19 +73,12 @@ export default {
         ),
     },
     data: () => ({
-
         home_hero_slider_side_banner: {},
     }),
     created() {
-
         this.get_all_home_slider_side_banners()
-
     },
     methods: {
-        toggle_category: function () {
-            document.getElementById('banner_left').classList.toggle('active')
-        },
-
         get_all_home_slider_side_banners: async function () {
             let response = await axios.get('/get-home-page-hero-slider-side-banners')
             if (response.data.status === "success") {

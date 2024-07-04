@@ -16,13 +16,13 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('product_varient_group_id')->nullable();
             $table->bigInteger('product_varient_id')->nullable();
-            $table->string('title', 50)->nullable()->comment('varient title'); //
-            $table->string('value', 20)->nullable()->comment('varient value ex:red, blue, etc');
-            $table->string('value2', 20)->nullable()->comment('varient value 2 ex:  #00000,#11111');
+            $table->text('title')->nullable()->comment('varient title'); //
+            $table->string('value', 120)->nullable()->comment('varient value ex:red, blue, etc');
+            $table->string('value2', 120)->nullable()->comment('varient value 2 ex:  #00000,#11111');
             $table->tinyInteger('is_default')->default(0);
 
             $table->bigInteger('creator')->unsigned()->nullable();
-            $table->string('slug', 50)->nullable();
+            $table->string('slug', 150)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });

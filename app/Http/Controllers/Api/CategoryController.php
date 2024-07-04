@@ -11,12 +11,39 @@ use App\Modules\ProductManagement\ProductVarientValue\Models\Model as ProductVar
 
 class CategoryController extends Controller
 {
+    public function all_categories()
+    {
+        $data = Category::where('parent_id', 0)
+            ->select([
+                'id', 'is_nav', 'is_featured', 'parent_id', 'title',
+                'serial', 'image', 'slug'
+            ])
+            ->where('status', 'active')
+            ->orderBy('serial', 'ASC')
+            ->get();
+        return response()->json($data);
+    }
+
+    public function sub_categories($slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+
+        $data = $category->childrens()->get();
+
+        if ($data->count()) {
+            $data->prepend($category);
+            return response()->json($data);
+        } else {
+            return response()->json([$category]);
+        }
+    }
+
     public function featured()
     {
         $data = Category::where('is_nav', 1)
             ->select([
                 'id', 'is_nav', 'is_featured', 'title',
-                'serial', 'image', 'slug'
+                'serial', 'image', 'slug',
             ])
             ->where('status', 'active')
             ->orderBy('serial', 'ASC')
@@ -50,12 +77,18 @@ class CategoryController extends Controller
 
     public function category($slug)
     {
-        $data = Category::where('slug',$slug)->first();
-        $products = $data->products()->with('product_image')->limit(30)->get();
+        $category = Category::where('slug', $slug)->first();
+        $products = $category->products()->with('product_image')->paginate(10);
+        $advertise = $category->advertises()->where('status', 'active')->first();
+        $childrens = $category->childrens()->get();
+
+        $products->setPath('/category/'.$slug);
 
         return response()->json([
-            "data" => $data,
+            "category" => $category,
             "products" => $products,
+            "advertise" => $advertise,
+            "childrens" => $childrens,
         ]);
     }
 }

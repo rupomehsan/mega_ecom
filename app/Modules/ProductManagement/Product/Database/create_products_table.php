@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('short_description')->nullable();
             $table->longText('description')->nullable();
+            $table->json('specifications')->nullable();
             $table->string('video_url')->nullable();
 
             $table->integer('product_menufecturer_id')->nullable();
@@ -65,16 +66,17 @@ return new class extends Migration
             $table->float('retailer_sales_price')->nullable()->unsigned();
             $table->float('minimum_sale_price')->nullable()->unsigned();
             $table->float('maximum_sale_price')->nullable()->unsigned();
+            $table->float('emi_price')->nullable();
             $table->float('profit_margin_percent')->nullable();
 
 
             $table->enum('discount_type', ['off', 'percent', 'flat'])->nullable();
             $table->float('discount_amount')->nullable();
 
-            $table->string('meta_title', 100)->nullable();
-            $table->string('meta_description', 150)->nullable();
-            $table->string('meta_keywords', 150)->nullable();
-            $table->string('search_keywords', 150)->nullable();
+            $table->string('meta_title', 150)->nullable();
+            $table->text('meta_description')->nullable();
+            $table->text('meta_keywords')->nullable();
+            $table->text('search_keywords')->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 150)->nullable();

@@ -13,18 +13,20 @@ export const common_store = defineStore("common_store", {
         //cart
         //cart
         get_all_cart_data: async function () {
-
-            this.total_cart_price = 0;
-            let response = await window.privateAxios(`/get-cart-items?get_all=1`);
-            if (response.status == "success") {
-                this.all_cart_data = response.data;
-                if (this.all_cart_data) {
-                    let itemTotal = this.all_cart_data.map(
-                        (item) => item.quantity * item.product?.current_price
-                    );
-                    itemTotal.forEach((item2) => {
-                        this.total_cart_price = this.total_cart_price + item2;
-                    });
+            let token = localStorage.getItem('token');
+            if (token) {
+                this.total_cart_price = 0;
+                let response = await window.privateAxios(`/get-cart-items?get_all=1`);
+                if (response.status == "success") {
+                    this.all_cart_data = response.data;
+                    if (this.all_cart_data) {
+                        let itemTotal = this.all_cart_data.map(
+                            (item) => item.quantity * item.product?.current_price
+                        );
+                        itemTotal.forEach((item2) => {
+                            this.total_cart_price = this.total_cart_price + item2;
+                        });
+                    }
                 }
             }
         },

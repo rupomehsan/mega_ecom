@@ -22,17 +22,17 @@ return new class extends Migration
             $table->Integer('serial')->nullable();
             $table->string('image', 100)->nullable();
 
-            $table->string('meta_title', 100)->nullable();
-            $table->string('meta_description', 150)->nullable();
-            $table->string('meta_keywords', 150)->nullable();
-            $table->string('search_keywords', 150)->nullable();
+            $table->string('meta_title', 150)->nullable();
+            $table->text('meta_description')->nullable();
+            $table->text('meta_keywords')->nullable();
+            $table->text('search_keywords')->nullable();
 
-            $table->string('page_header_title', 150)->nullable();
-            $table->string('page_header_description', 150)->nullable();
-            $table->string('page_full_description_title', 150)->nullable();
-            $table->string('page_full_description', 150)->nullable();
+            $table->string('page_header_title', 200)->nullable();
+            $table->text('page_header_description')->nullable();
+            $table->string('page_full_description_title', 200)->nullable();
+            $table->text('page_full_description')->nullable();
 
-            $table->string('related_product_title', 150)->nullable();
+            $table->string('related_product_title', 200)->nullable();
 
 
             $table->bigInteger('creator')->unsigned()->nullable();

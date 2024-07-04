@@ -4,7 +4,7 @@
             <slide v-for="slider in home_hero_sliders" :key="slider.id">
                 <div>
                     <div class="slider-banner">
-                        <img :src="`${slider.image}`" class="w-100" />
+                        <img :src="`/${slider.image}`" class="w-100" />
                     </div>
                 </div>
             </slide>

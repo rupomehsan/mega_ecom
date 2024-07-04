@@ -137,143 +137,22 @@
                     </div>
                     <div class="tab-pane fade active show" id="top-profile" role="tabpanel"
                         aria-labelledby="profile-top-tab">
-                        <p class="ps-0">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the
-                            1500s, when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book. It has survived not only five
-                            centuries, but also the leap into electronic typesetting, remaining
-                            essentially unchanged. It was popularised in the 1960s with the
-                            release of Letraset sheets containing Lorem Ipsum passages, and more
-                            recently with desktop publishing software like Aldus PageMaker including
-                            versions of Lorem Ipsum.
-                        </p>
-                        <div class="single-product-tables">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>Febric</td>
-                                        <td>Chiffon</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Color</td>
-                                        <td>Red</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Material</td>
-                                        <td>Crepe printed</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>Length</td>
-                                        <td>50 Inches</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Size</td>
-                                        <td>S, M, L .XXL</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        {{ product.description }}
                     </div>
                     <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
-                        <div class="mt-3 text-center">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/BUWzX78Ye_8"
-                                allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+                        <div class="mt-3 text-center" v-if="video_url">
+                            <iframe width="560" height="315" :src="video_url" allow="autoplay; encrypted-media"
+                                allowfullscreen=""></iframe>
+                        </div>
+                        <div class="mt-3 text-center" v-else>
+                            No video found
                         </div>
                     </div>
                     <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
-                        <form class="theme-form">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="media">
-                                        <label>Rating</label>
-                                        <div class="media-body ms-3">
-                                            <div class="rating three-star"><i class="fa fa-star"></i> <i
-                                                    class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter Your name"
-                                        required="" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Email</label>
-                                    <input type="text" class="form-control" placeholder="Email" required="" />
-                                </div>
-                                <div class="col-md-12">
-                                    <label>Review Title</label>
-                                    <input type="text" class="form-control" placeholder="Enter your Review Subjects"
-                                        required="" />
-                                </div>
-                                <div class="col-md-12">
-                                    <label>Review Title</label>
-                                    <textarea class="form-control" placeholder="Wrire Your Testimonial Here"
-                                        id="exampleFormControlTextarea1" rows="6"></textarea>
-                                </div>
-                                <div class="col-md-12">
-                                    <button class="btn btn-normal" type="submit">Submit YOur
-                                        Review</button>
-                                </div>
-                            </div>
-                        </form>
+                        <write-review></write-review>
                     </div>
                     <div class="tab-pane fade" id="top-question" role="tabpanel" aria-labelledby="question-top-tab">
-                        <section class="ask-question q-n-r-section bg-white m-tb-15" id="ask-question">
-                            <div class="card mt-1">
-                                <div class="card-header d-flex gap-3 justify-content-between">
-                                    <div class="title-n-action">
-                                        <h2 class="ask_question_heading">Questions (1)</h2>
-                                        <p class="ask_question_pg p-0 mt-1">Have question about this
-                                            product? Get specific details about this product from
-                                            expert.
-                                        </p>
-                                    </div>
-                                    <div class="q-action">
-                                        <a href="#" class="btn btn-info">Ask Question</a>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div id="question" class="questions">
-                                        <div class="question-wrap">
-                                            <p class="author"><span class="name">Fahim Uddin </span> on
-                                                15 Nov 2023
-                                            </p>
-                                            <h3 class="question text-sm">
-                                                <span class="hint">Q:</span>
-                                                <span>
-                                                    Assalamu alaikum. Is this AMD Athlon 3000G Processor
-                                                    with Radeon Graphics good for programing. I am a
-                                                    student of CSE.
-                                                </span>
-                                            </h3>
-                                            <p class="answer">
-                                                <span class="hint">A:</span>
-                                                <span>
-                                                    Yes sir, you can do Basic programming with AMD
-                                                    Athlon 3000G Processor with Radeon Graphics. But for
-                                                    running heavy programming language, it will depend
-                                                    on your full PC configuration.
-                                                </span>
-                                            </p>
-                                            <p class="author answerer">
-                                                <span class="fade">By</span>
-                                                <span>Etek BD Support</span>
-                                                <span class="fade">15 Nov 2023</span>
-                                            </p>
-                                        </div>
-                                        <div class="text-right"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+                      <question></question>
                     </div>
                     <div class="tab-pane fade" id="top-policy" role="tabpanel" aria-labelledby="policy-top-tab">
                         <p>
@@ -496,6 +375,7 @@
                     </div>
                 </div>
             </div>
+            <hr class="my-3">
             <div class="col-xl-4">
                 <related-products :product="product"></related-products>
             </div>
@@ -504,10 +384,31 @@
 </template>
 
 <script>
+import Question from './Question.vue';
 import RelatedProducts from './RelatedProducts.vue';
+import WriteReview from './WriteReview.vue';
 export default {
-    props: ['product'],
-    components: { RelatedProducts },
+    props: {
+        product: Object
+    },
+    components: { RelatedProducts, WriteReview, Question },
+    data: () => ({
+        video_url: '',
+        is_auth: false
+    }),
+    created: function () {
+        this.video_url = this.getEmbedUrl(this.product.video_url);
+        this.is_auth = localStorage.getItem("token") ? true : false;
+    },
+    methods: {
+        getEmbedUrl(url) {
+            if (url) {
+                const videoId = url.split('v=')[1];
+                return `https://www.youtube.com/embed/${videoId}`;
+            }
+
+        }
+    }
 
 }
 </script>

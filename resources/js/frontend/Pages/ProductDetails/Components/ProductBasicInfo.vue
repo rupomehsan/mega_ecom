@@ -24,7 +24,7 @@
                                 {{ product.current_price }} BDT
                             </span>
                         </div>
-                        <span class="product-price-save">-{{ Math.floor(product.discount_amount) }}% SAVE</span>
+                        <span class="product-price-save">-{{  Math.floor(product.discount_amount) }} {{ product.discount_type=='percent'?'%':'BDT' }} SAVE</span>
                     </div>
                 </div>
                 <div class="product-core-info-list">
@@ -44,11 +44,12 @@
                 </div>
                 <div class="product-core-info-list">
                     <span class="p-core-info-list-title">Region</span>
-                    <span class="p-core-info-list-sub-title region-name">
+                    <span class="p-core-info-list-sub-title region-name" v-if="product.product_region?.length">
                         <template v-for="region in product.product_region" :key="region.id">
                             {{ region?.country?.name }} ,
                         </template>
                     </span>
+                    <span class="p-core-info-list-sub-title region-name" v-else>Bangladesh</span>
                 </div>
                 <color-varient></color-varient>
                 <common-varient></common-varient>
