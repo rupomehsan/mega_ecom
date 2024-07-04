@@ -15,11 +15,11 @@ return new class extends Migration
         Schema::create('product_varient_prices', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('product_id')->nullable();
+            $table->bigInteger('product_id')->nullable();
 
-            $table->integer('product_varient_group_id')->nullable();
-            $table->integer('product_varient_varient_id')->nullable();
-            $table->integer('product_varient_value_id')->nullable();
+            $table->bigInteger('product_varient_group_id')->nullable();
+            $table->bigInteger('product_varient_id')->nullable();
+            $table->bigInteger('product_varient_value_id')->nullable();
 
             $table->string('varient_title', 150)->nullable();
             $table->string('sku', 50)->nullable();

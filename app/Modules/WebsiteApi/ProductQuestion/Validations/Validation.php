@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\WebsiteApi\ProductReview\Validations;
+namespace App\Modules\WebsiteApi\ProductQuestion\Validations;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -42,8 +42,7 @@ class Validation extends FormRequest
     public function rules(): array
     {
         return [
-            'rating' => 'required | sometimes',
-            'review' => 'required | sometimes',
+            'question' => 'required | sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }

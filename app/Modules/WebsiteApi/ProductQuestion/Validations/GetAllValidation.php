@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\WebsiteApi\ProductReview\Validations;
+namespace App\Modules\WebsiteApi\ProductQuestion\Validations;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class Validation extends FormRequest
+class GetAllValidation extends FormRequest
 {
     /**
      * Determine if the  is authorized to make this request.
@@ -42,9 +42,13 @@ class Validation extends FormRequest
     public function rules(): array
     {
         return [
-            'rating' => 'required | sometimes',
-            'review' => 'required | sometimes',
-            'status' => ['sometimes', Rule::in(['active', 'inactive'])],
+            'limit' => 'required|sometimes',
+            'page' => 'required|sometimes',
+            'fields' => 'required|sometimes',
+            'sort_by_col' => 'required|sometimes',
+            'sort_type' => 'required|sometimes',
+            'status' => 'required|sometimes',
+
         ];
     }
 }

@@ -108,3 +108,6 @@ include_once  base_path("app/Modules/WebsiteApi/CompareList/Route.php");
 include_once  base_path("app/Modules/WebsiteApi/Order/Route.php");
 
 include_once  base_path("app/Modules/WebsiteApi/SearchHandling/Route.php");
+
+include_once  base_path("app/Modules/WebsiteApi/ProductReview/Route.php");
+include_once  base_path("app/Modules/WebsiteApi/ProductQuestion/Route.php");

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\WebsiteApi\ProductReview\Validations;
+namespace App\Modules\WebsiteApi\ProductQuestion\Validations;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class Validation extends FormRequest
+class BulkActionsValidation extends FormRequest
 {
     /**
      * Determine if the  is authorized to make this request.
@@ -42,9 +42,15 @@ class Validation extends FormRequest
     public function rules(): array
     {
         return [
-            'rating' => 'required | sometimes',
-            'review' => 'required | sometimes',
-            'status' => ['sometimes', Rule::in(['active', 'inactive'])],
+            'action' => 'required|sometimes|in:active,inactive,delete',
+            'ids' => [
+                'array',
+                function ($attribute, $value, $fail) {
+                    if (empty($value)) {
+                        $fail('The ' . $attribute . ' must contain at least one item.');
+                    }
+                },
+            ],
         ];
     }
 }

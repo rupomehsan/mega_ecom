@@ -7,17 +7,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     php artisan migrate --path='\App\Modules\WebsiteApi\ProductReview\Database\create_product_reviews_table.php'
+     php artisan migrate --path='\App\Modules\WebsiteApi\ProductQuestion\Database\create_product_questions_table.php'
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('product_reviews', function (Blueprint $table) {
+        Schema::create('product_questions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->nullable();
             $table->bigInteger('product_id')->nullable();
-            $table->integer('rating')->nullable();
-            $table->string('review', 100)->nullable();
+            $table->text('question')->nullable();
+            $table->text('answare')->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_reviews');
+        Schema::dropIfExists('product_questions');
     }
 };

@@ -45,6 +45,13 @@ use App\Modules\StockManagement\ProductWearHouse\Database\Seeder as ProductWearH
 //Sales order management seeder
 use App\Modules\SalesManagement\SalesEcommerceOrder\Database\Seeder as SalesEcommerceOrderSeeder;
 
+//Website seeder
+//Website seeder
+
+//HomeBanner  seeder
+use App\Modules\BannerManagement\HomeBanner\Database\Seeder as HomeBannerSeeder;
+use App\Modules\BannerManagement\HomeSideBanner\Database\Seeder as HomeSideBannerSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -96,6 +103,13 @@ class DatabaseSeeder extends Seeder
 
             //Sales order management seeder
             SalesEcommerceOrderSeeder::class,
+
+
+            //Website seeder
+            //Website seeder
+            //Home banner seeder
+            HomeBannerSeeder::class,
+            HomeSideBannerSeeder::class,
         ]);
     }
 }
