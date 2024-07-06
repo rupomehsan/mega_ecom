@@ -5,7 +5,7 @@
 
                 <div class=" d-flex gap-3 justify-content-between">
                     <div class="title-n-action">
-                        <h2 class="ask_question_heading">Questions & Answers Section</h2>
+                        <h2 class="ask_question_heading">Questions & Answare Section</h2>
                     </div>
                     <div class="q-action" v-if="is_auth">
                         <a href="javaScript:void();" class="btn btn-info"
@@ -26,50 +26,45 @@
                         </div>
                     </form>
                 </div>
-
             </div>
             <hr>
-            <div class="card-header d-flex gap-3 justify-content-between">
-                <div class="title-n-action">
-                    <h2 class="ask_question_heading">Questions (1)</h2>
-                    <p class="ask_question_pg p-0 mt-1">Have question about this
-                        product? Get specific details about this product from
-                        expert.
-                    </p>
-                </div>
-            </div>
-            <div class="card-body">
-                <div id="question" class="questions">
-                    <div class="question-wrap">
-                        <p class="author"><span class="name">Fahim Uddin </span> on
-                            15 Nov 2023
-                        </p>
-                        <h3 class="question text-sm">
-                            <span class="hint">Q:</span>
-                            <span>
-                                Assalamu alaikum. Is this AMD Athlon 3000G Processor
-                                with Radeon Graphics good for programing. I am a
-                                student of CSE.
-                            </span>
-                        </h3>
-                        <p class="answer">
-                            <span class="hint">A:</span>
-                            <span>
-                                Yes sir, you can do Basic programming with AMD
-                                Athlon 3000G Processor with Radeon Graphics. But for
-                                running heavy programming language, it will depend
-                                on your full PC configuration.
-                            </span>
-                        </p>
-                        <p class="author answerer">
-                            <span class="fade">By</span>
-                            <span>Etek BD Support</span>
-                            <span class="fade">15 Nov 2023</span>
+            <template v-for="(item, index) in product_question_and_answers.data" :key="item.id">
+                <div class="card-header d-flex gap-3 justify-content-between">
+                    <div class="title-n-action">
+                        <h2 class="ask_question_heading">Questions ({{ index + 1 }})</h2>
+                        <p class="ask_question_pg p-0 mt-1">
+                            {{ item.question }}
                         </p>
                     </div>
-                    <div class="text-right"></div>
                 </div>
-            </div>
+                <div class="card-body">
+                    <div id="question" class="questions">
+                        <div class="question-wrap">
+                            <p class="author"><span class="name">{{ item.user?.name }} </span> on
+                                {{ new Date(item.created_at).toDateString() }}
+                            </p>
+                            <h3 class="question text-sm">
+                                <span class="hint">Q:</span>
+                                <span>
+                                    {{ item.question }}
+                                </span>
+                            </h3>
+                            <p class="answer">
+                                <span class="hint">A:</span>
+                                <span>
+                                    {{ item.answare }}
+                                </span>
+                            </p>
+                            <p class="author" v-if="item.answare">
+                                <span class=""> By </span>
+                                <span class="px-2 fw-bold">Etek BD Support </span>
+                                <span class="">{{ new Date(item.updated_at).toDateString() }}</span>
+                            </p>
+                        </div>
+                        <div class="text-right"></div>
+                    </div>
+                </div>
+            </template>
         </div>
     </section>
 </template>
@@ -86,13 +81,14 @@ export default {
     }),
 
     created() {
-        this.get_all_question_and_answers();
+        // this.get_all_question_and_answers();
         this.is_auth = localStorage.getItem("token") ? true : false;
         let ProductDetailsStore = useProductDetailsStore();
         this.slug = ProductDetailsStore.slug;
     },
 
     methods: {
+
         submitQuestion(event) {
             let formData = new FormData(event.target);
             formData.append('slug', this.slug);
@@ -102,11 +98,17 @@ export default {
                 this.is_question_form_show = false
             }
         },
-        get_all_question_and_answers() {
-            let response = window.privateAxios('/get-customer-ecommerce-question-and-answers');
-            if (response.status === "success") {
-                this.product_question_and_answers = response.data
-                console.log(this.product_question_and_answers);
+
+        get_all_question_and_answers: async function () {
+            try {
+                let response = await window.privateAxios('/get-customer-ecommerce-question-and-answers');
+                if (response.status === "success") {
+                    this.product_question_and_answers = response.data
+                    this.get_all_question_and_answers();
+                }
+            }
+            catch (error) {
+                console.log(error);
             }
         }
 

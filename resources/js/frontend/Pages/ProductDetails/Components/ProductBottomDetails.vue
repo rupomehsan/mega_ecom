@@ -137,7 +137,7 @@
                     </div>
                     <div class="tab-pane fade active show" id="top-profile" role="tabpanel"
                         aria-labelledby="profile-top-tab">
-                        {{ product.description }}
+                        <div v-html="product.description"></div>
                     </div>
                     <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
                         <div class="mt-3 text-center" v-if="video_url">

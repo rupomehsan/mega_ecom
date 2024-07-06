@@ -16,7 +16,7 @@ class Model extends EloquentModel
     protected $table = "products";
     protected $guarded = [];
 
-    protected $appends = ['current_price', 'amount_in_percent'];
+    protected $appends = ['current_price', 'amount_in_percent', 'is_discount'];
 
     protected $casts = [
         'specifications' => 'array'
@@ -70,18 +70,12 @@ class Model extends EloquentModel
         return $this->hasMany(self::$ProductRegionModel, 'product_id', 'id');
     }
 
-
-
     public function getCurrentPriceAttribute()
     {
-
         $price = $this->customer_sales_price;
 
         if ($this->discount_amount && $this->discount_type) {
             switch ($this->discount_type) {
-                case 'off':
-                    $price -= $this->discount_amount;
-                    break;
                 case 'percent':
                     $price -= ($this->customer_sales_price * ($this->discount_amount / 100));
                     break;
@@ -94,15 +88,27 @@ class Model extends EloquentModel
         return $price;
     }
 
+
     public function getAmountInPercentAttribute()
     {
         if (($this->discount_amount && $this->discount_type) && $this->discount_type != 'percent') {
             switch ($this->discount_type) {
-                case 'off' || 'flat':
+                case 'flat':
                     return ($this->discount_amount / $this->customer_sales_price) * 100;
             }
         }
 
         return 0;
     }
+
+    public function getIsDiscountAttribute()
+    {
+        if ($this->discount_type == 'off') {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
 }
