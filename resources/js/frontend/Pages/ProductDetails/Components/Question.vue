@@ -8,7 +8,7 @@
                         <h2 class="ask_question_heading">Questions & Answare Section</h2>
                     </div>
                     <div class="q-action" v-if="is_auth">
-                        <a href="javaScript:void();" class="btn btn-info"
+                        <a  class="btn btn-info"
                             @click="is_question_form_show = !is_question_form_show">Ask
                             Question</a>
                     </div>
@@ -81,7 +81,7 @@ export default {
     }),
 
     created() {
-        // this.get_all_question_and_answers();
+        this.get_all_question_and_answers();
         this.is_auth = localStorage.getItem("token") ? true : false;
         let ProductDetailsStore = useProductDetailsStore();
         this.slug = ProductDetailsStore.slug;
@@ -89,26 +89,21 @@ export default {
 
     methods: {
 
-        submitQuestion(event) {
+        submitQuestion : async function (event) {
             let formData = new FormData(event.target);
             formData.append('slug', this.slug);
-            let response = window.privateAxios('/customer-ecommerce-question', 'post', formData);
+            let response = await window.privateAxios('/customer-ecommerce-question', 'post', formData);
             if (response.status === "success") {
-                window.s_alert(response.data.message);
+                window.s_alert(response.message);
                 this.is_question_form_show = false
+                this.get_all_question_and_answers();
             }
         },
 
         get_all_question_and_answers: async function () {
-            try {
-                let response = await window.privateAxios('/get-customer-ecommerce-question-and-answers');
-                if (response.status === "success") {
-                    this.product_question_and_answers = response.data
-                    this.get_all_question_and_answers();
-                }
-            }
-            catch (error) {
-                console.log(error);
+            let response = await axios.get('/get-customer-ecommerce-question-and-answers');
+            if (response.data.status === "success") {
+                this.product_question_and_answers = response.data.data
             }
         }
 

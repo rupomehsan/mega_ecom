@@ -156,15 +156,7 @@
                     </div>
                     <div class="tab-pane fade" id="top-policy" role="tabpanel" aria-labelledby="policy-top-tab">
                         <p>
-                            This electric device is covered by a one-year limited warranty from the date
-                            of purchase. The warranty covers defects in materials and workmanship under
-                            normal use. If a defect arises during the warranty period, we will repair or
-                            replace the device at no charge. This warranty does not cover damage caused
-                            by misuse, accidents, modifications, or unauthorized repairs. To obtain
-                            warranty service, please contact our customer support with proof of
-                            purchase. Shipping costs for returns may apply. This warranty gives you
-                            specific legal rights, and you may also have other rights which vary by
-                            jurisdiction.
+                           {{ product.warranty_policy }}
                         </p>
                     </div>
                     <div class="tab-pane fade" id="top-bestproduct" role="tabpanel"

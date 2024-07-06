@@ -9,7 +9,7 @@ class All
     public static function execute()
     {
         try {
-            $pageLimit = request()->input('limit') ?? 10;
+            $pageLimit = request()->input('limit') ?? 50;
             $orderByColumn = request()->input('sort_by_col') ?? 'id';
             $orderByType = request()->input('sort_type') ?? 'desc';
             $status = request()->input('status') ?? 'active';
