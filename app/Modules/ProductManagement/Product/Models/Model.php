@@ -12,11 +12,14 @@ class Model extends EloquentModel
     static $productImageModel = \App\Modules\ProductManagement\Product\Models\ProductImageModel::class;
     static $productVariantPriceModel = \App\Modules\ProductManagement\Product\Models\ProductVarientPriceModel::class;
     static $ProductRegionModel = \App\Modules\ProductManagement\Product\Models\ProductRegionModel::class;
+    static $relatedCompareProductModel = \App\Modules\ProductManagement\Product\Models\RelatedCompareProductModel::class;
+    static $ProductModel = \App\Modules\ProductManagement\Product\Models\Model::class;
+    static $ProductReviewModel = \App\Modules\WebsiteApi\ProductReview\Models\Model::class;
 
     protected $table = "products";
     protected $guarded = [];
 
-    protected $appends = ['current_price', 'amount_in_percent', 'is_discount'];
+    protected $appends = ['current_price', 'amount_in_percent', 'is_discount', 'average_rating'];
 
     protected $casts = [
         'specifications' => 'array'
@@ -69,6 +72,33 @@ class Model extends EloquentModel
     {
         return $this->hasMany(self::$ProductRegionModel, 'product_id', 'id');
     }
+    public function product_reviews()
+    {
+        return $this->hasMany(self::$ProductReviewModel, 'product_id');
+    }
+    public function getAverageRatingAttribute()
+    {
+        return $this->product_reviews()->avg('rating') ?? 0;
+    }
+
+    public function related_compare_products()
+    {
+        return $this->belongsToMany(
+            self::$ProductModel,
+            'related_compare_product',
+            'product_id',
+            'related_product_id'
+        );
+    }
+    public function related_price_review()
+    {
+        return $this->belongsToMany(
+            self::$ProductModel,
+            'price_review_product',
+            'product_id',
+            'related_product_id'
+        );
+    }
 
     public function getCurrentPriceAttribute()
     {
@@ -109,6 +139,4 @@ class Model extends EloquentModel
             return true;
         }
     }
-
-
 }
