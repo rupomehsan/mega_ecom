@@ -38,6 +38,8 @@ export const useProductDetailsStore = defineStore("useProductDetailsStore", {
         //     }
         // },
 
+
+
         // submitQuestion(event) {
         //     let formData = new FormData(event.target);
         //     formData.append('slug', this.slug);

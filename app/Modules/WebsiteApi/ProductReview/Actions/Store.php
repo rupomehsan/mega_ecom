@@ -23,7 +23,7 @@ class Store
                 "user_id" =>  auth()->id(),
                 "product_id" =>  $product->id,
                 "rating" =>  $requestData['rating'],
-                "review" =>  $requestData['review'],
+                "description" =>  $requestData['review'],
             ];
 
             if ($data = self::$model::query()->create($storeData)) {

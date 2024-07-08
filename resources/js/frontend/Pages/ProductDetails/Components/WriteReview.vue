@@ -18,13 +18,13 @@
 
                 <div class="col-md-12">
                     <label>Write Your Review</label>
-                    <textarea class="form-control" id="review" placeholder="Write Your Testimonial Here" v-model="review"
-                        rows="6"></textarea>
+                    <textarea class="form-control" id="review" placeholder="Write Your Testimonial Here"
+                        v-model="review" rows="6"></textarea>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-12 multifile">
                     <label>Upload files</label>
-                    <input type="file" ref="fileInput" class="form-control" multiple @change="handleFileUpload">
+                    <input type="file" ref="fileInput" class="form-control " multiple @change="handleFileUpload">
                     <div class="file-info my-2">
                         {{ fileInfo }}
                     </div>
@@ -39,6 +39,44 @@
 
                 <div class="col-md-12">
                     <button class="btn btn-normal" type="submit">Submit Your Review</button>
+                </div>
+                <hr class="my-3">
+
+                <div>
+                    <div class="card-header d-flex gap-3 justify-content-between">
+                        <div class="title-n-action">
+                            <p class="ask_question_pg p-0 mt-1">
+                                asdfasdf
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="question" class="questions">
+                            <div class="question-wrap">
+                                <p class="author"><span class="name">asdfas </span> on
+                                    asdfa
+                                </p>
+                                <h3 class="question text-sm">
+                                    <span class="hint">Q:</span>
+                                    <span>
+                                        asdfasdf
+                                    </span>
+                                </h3>
+                                <p class="answer">
+                                    <span class="hint">A:</span>
+                                    <span>
+                                        asdfas
+                                    </span>
+                                </p>
+                                <p class="author">
+                                    <span class=""> By </span>
+                                    <span class="px-2 fw-bold">Etek BD Support </span>
+                                    <span class="">asdfasd</span>
+                                </p>
+                            </div>
+                            <div class="text-right"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
@@ -140,5 +178,19 @@ export default {
 
 .c-pointer {
     cursor: pointer;
+}
+
+.multifile {
+    position: relative;
+}
+
+.file-info.my-2 {
+    position: absolute;
+    z-index: 3;
+    background: white;
+    width: 200px;
+    height: 30px;
+    top: 40px;
+    left: 140px;
 }
 </style>

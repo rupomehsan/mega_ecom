@@ -1,0 +1,15 @@
+product varient group title table create
+
+[
+  [
+    "group_title" => pysical specification
+     varients => [
+            [
+              color => red,green
+            ]
+            [
+              Weight =>238g,2778g
+            ]
+        ]
+  ]
+]

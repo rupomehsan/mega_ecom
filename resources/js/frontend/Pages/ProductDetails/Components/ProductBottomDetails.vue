@@ -69,8 +69,9 @@
                     </li>
                 </ul>
                 <div class="tab-content nav-material" id="top-tabContent">
+
                     <div class="tab-pane fade" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-                        <table class="data-table flex-table" cellpadding="0" cellspacing="0">
+                        <!-- <table class="data-table flex-table" cellpadding="0" cellspacing="0">
                             <colgroup>
                                 <col class="name" />
                                 <col class="value" />
@@ -133,6 +134,20 @@
                                     </td>
                                 </tr>
                             </tbody>
+                        </table> -->
+                        <table class="table data-table flex-table" cellpadding="0" cellspacing="0">
+
+
+                            <tbody>
+                                <tr v-for="item in product.product_varient_price" :key="item.id">
+                                    <!-- <td class="name">{{ item.product_varient_group_title?.title }}</td> -->
+                                    <td class="name fw-bold">{{ item.varient_title }}</td>
+                                    <td class="value ">{{ item.product_varient_values?.title }}</td>
+                                </tr>
+
+
+                            </tbody>
+
                         </table>
                     </div>
                     <div class="tab-pane fade active show" id="top-profile" role="tabpanel"
@@ -232,24 +247,31 @@
                         </table>
                     </div>
                 </div>
+                <hr>
+
+                <review-show :product="product"></review-show>
             </div>
-            <hr class="my-3">
+
             <div class="col-xl-4">
                 <related-products :product="product"></related-products>
             </div>
         </div>
+
+
+
     </section>
 </template>
 
 <script>
 import Question from './Question.vue';
 import RelatedProducts from './RelatedProducts.vue';
+import ReviewShow from './ReviewShow.vue';
 import WriteReview from './WriteReview.vue';
 export default {
     props: {
         product: Object
     },
-    components: { RelatedProducts, WriteReview, Question },
+    components: { RelatedProducts, WriteReview, Question, ReviewShow },
     data: () => ({
         video_url: '',
         is_auth: false,

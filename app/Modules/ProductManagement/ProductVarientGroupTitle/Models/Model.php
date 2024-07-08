@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\WebsiteApi\ProductReview\Models;
+namespace App\Modules\ProductManagement\ProductVarientGroupTitle\Models;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;
 
-class ReviewImageModel extends EloquentModel
+class Model extends EloquentModel
 {
-    protected $table = "product_review_images";
+    protected $table = "product_varient_group_titles";
     protected $guarded = [];
 
     protected static function booted()
@@ -30,6 +30,4 @@ class ReviewImageModel extends EloquentModel
     {
         return $q->where('status', 'active');
     }
-
-   
 }

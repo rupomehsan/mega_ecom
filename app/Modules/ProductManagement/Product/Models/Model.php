@@ -16,11 +16,10 @@ class Model extends EloquentModel
     static $ProductModel = \App\Modules\ProductManagement\Product\Models\Model::class;
     static $ProductReviewModel = \App\Modules\WebsiteApi\ProductReview\Models\Model::class;
 
+
     protected $table = "products";
     protected $guarded = [];
-
     protected $appends = ['current_price', 'amount_in_percent', 'is_discount', 'average_rating'];
-
     protected $casts = [
         'specifications' => 'array'
     ];
@@ -76,10 +75,12 @@ class Model extends EloquentModel
     {
         return $this->hasMany(self::$ProductReviewModel, 'product_id');
     }
-    public function getAverageRatingAttribute()
-    {
-        return $this->product_reviews()->avg('rating') ?? 0;
-    }
+
+
+
+
+
+
 
     public function related_compare_products()
     {
@@ -98,6 +99,22 @@ class Model extends EloquentModel
             'product_id',
             'related_product_id'
         );
+    }
+
+
+    public function product_varient_price()
+    {
+        return $this->hasMany(self::$productVariantPriceModel, 'product_id', 'id');
+    }
+
+    /**
+     * accessors.
+     */
+
+
+    public function getAverageRatingAttribute()
+    {
+        return $this->product_reviews()->avg('rating') ?? 0;
     }
 
     public function getCurrentPriceAttribute()

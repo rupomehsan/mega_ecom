@@ -821,6 +821,7 @@
                     </a>
                 </div>
             </div>
+            <div class="p-2 alert-danger mx-2 my-4">Please login for perform this action</div>
             <form class="theme-form" @submit.prevent="loginFormHandler($event)" method="post">
                 <div class="form-group">
                     <label>Email</label>
@@ -839,9 +840,9 @@
                 </a>
                 <div class="accout-fwd">
 
-                    <a href="https://themes.pixelstrap.com/bigdeal/html/register.html" class="d-block">
-                        <h6>you have no account ?<span>signup now</span></h6>
-                    </a>
+                    <Link href="/login" class="d-block">
+                    <h6>you have no account ?<span>signup now</span></h6>
+                    </Link>
                 </div>
             </form>
 
