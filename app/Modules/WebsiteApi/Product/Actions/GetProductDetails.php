@@ -9,14 +9,26 @@ class GetProductDetails
     public static function execute($slug)
     {
         try {
+
+
+            if (request()->has('initial') && request()->input('initial')) {
+                self::getProductInitialData(request(), $slug);
+            }
+
+
             $with = [
                 'product_images:id,product_id,url',
                 'product_categories:id,title',
                 'product_brand:id,title',
                 'product_region',
                 'product_region.country',
+
                 'related_compare_products',
                 'related_compare_products.product_image:id,product_id,url',
+
+                'related_products:id,title,customer_sales_price,slug',
+                'related_products.product_image:id,product_id,url',
+
                 'product_reviews',
                 'product_reviews.user:id,name',
                 'product_reviews.product_review_images:id,product_id,image',
@@ -48,7 +60,9 @@ class GetProductDetails
 
             $data->related_compare_products_filter = $relatedProductArray;
             $data->related_price_review = $data->related_price_review()->where('is_available', 1)->select('title', 'customer_sales_price')->get();
+            $data->related_products = $data->related_products()->where('is_available', 1)->select('title', 'customer_sales_price', 'slug')->get();
             $data->product_varient_price = $variantPriceData;
+
 
             return entityResponse($data);
         } catch (\Exception $e) {
@@ -123,5 +137,43 @@ class GetProductDetails
         }
 
         return $result;
+    }
+
+
+    public static function getProductInitialData($request, $slug)
+    {
+        try {
+
+            $with = [
+                'product_images:id,product_id,url',
+                'product_image:id,product_id,url',
+                'product_image:id,product_id,url',
+                'product_categories:id,title',
+                'product_brand:id,title',
+                'product_region',
+                'product_region.country',
+            ];
+
+            $fields = request()->input('fields') ?? ['*'];
+            if (empty($fields)) {
+                $fields = ['*'];
+            }
+
+            $data = self::$ProductModel::query()
+                ->with($with)
+                ->select($fields)
+                ->where('slug', $slug)
+                ->first();
+
+            if (!$data) {
+                return messageResponse('Data not found...', $data, 404, 'error');
+            }
+
+            // dd($data);
+
+            return entityResponse($data);
+        } catch (\Exception $e) {
+            return messageResponse($e->getMessage(), [], 500, 'server_error');
+        }
     }
 }

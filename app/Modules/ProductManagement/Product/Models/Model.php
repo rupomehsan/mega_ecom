@@ -76,17 +76,20 @@ class Model extends EloquentModel
         return $this->hasMany(self::$ProductReviewModel, 'product_id');
     }
 
-
-
-
-
-
-
     public function related_compare_products()
     {
         return $this->belongsToMany(
             self::$ProductModel,
             'related_compare_product',
+            'product_id',
+            'related_product_id'
+        );
+    }
+    public function related_products()
+    {
+        return $this->belongsToMany(
+            self::$ProductModel,
+            'related_product',
             'product_id',
             'related_product_id'
         );

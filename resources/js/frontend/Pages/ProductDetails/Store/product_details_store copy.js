@@ -18,55 +18,100 @@ export const useProductDetailsStore = defineStore("useProductDetailsStore", {
 
 
         fields: [
-            "id",
             "title",
             "short_description",
             "customer_sales_price",
             "discount_type",
             "discount_amount",
-            "product_brand_id",
-            "sku",
-
         ]
 
     }),
     getters: {},
     actions: {
-        /**
-        ## Product information
-        ## start
-        **/
+
+
         get_single_product_initial_data: async function () {
-            const fieldsQuery = this.fields.map(field => `fields[]=${field}`).join('&');
-            let response = await axios.get(`/get-product-details/${this.slug}?initial=true&${fieldsQuery}`)
+            let response = await axios.get(`/get-product-details/${this.slug}?fields=${this.fields.join(",")}`)
             if (response.data.status === "success") {
-                this.product_initial_data = response.data.data
+                this.product_details = response.data.data
             }
-            // console.log(this.product_details);
+            console.log(this.product_details);
         },
         get_single_product_details: async function () {
             let response = await axios.get('/get-product-details/' + this.slug)
             if (response.data.status === "success") {
                 this.product_details = response.data.data
             }
-            // console.log(this.product_details);
+            console.log(this.product_details);
         },
 
-        get_top_products: async function () {
-            let response = await axios.get('/featured-products');
-            this.top_products = response.data;
-            // console.log(this.top_products);
-        },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // async getProductDetails(slug) {
+        //     try {
+        //         const response = await axios.get(`/product-details/${slug} }`);
+        //         this.product_details = response.data;
+        //         this.slug = response.data.data.slug;
+        //     } catch (error) {
+        //         console.error('There was an error!', error);
+        //     }
+        // },
+
+
+
+        // get_all_question_and_answers: async function () {
+        //     try {
+        //         let response = await window.privateAxios('/get-customer-ecommerce-question-and-answers');
+        //         if (response.status === "success") {
+        //             this.product_question_and_answers = response.data
+
+        //         }
+        //     }
+        //     catch (error) {
+        //         console.log(error);
+        //     }
+        // },
+
+
+
+        // submitQuestion(event) {
+        //     let formData = new FormData(event.target);
+        //     formData.append('slug', this.slug);
+        //     let response = window.privateAxios('/customer-ecommerce-question', 'post', formData);
+        //     if (response.status === "success") {
+        //         window.s_alert(response.data.message);
+        //         this.is_question_form_show = false
+        //         this.get_all_question_and_answers();
+        //     }
+        // },
+
 
         /**
-        ## Product information
-        ## end
-        **/
-
-        /**
-       ## Review section
-       ## start
-       */
+        ## Review section
+        ## start
+        */
 
         async submitReview() {
             const formData = new FormData();
@@ -111,6 +156,5 @@ export const useProductDetailsStore = defineStore("useProductDetailsStore", {
         ## Review section
         ## end
         */
-
     }
 });

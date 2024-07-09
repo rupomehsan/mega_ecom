@@ -19,6 +19,9 @@ class All
 
             $data = self::$model::query()->where('is_approved', 1);
 
+            if (request()->has('slug') && request()->input('slug')) {
+               $condition['slug'] = request()->input('slug');
+            }
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {

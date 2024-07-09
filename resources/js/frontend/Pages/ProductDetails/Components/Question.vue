@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div id="question" class="questions">
+                        <div class="questions">
                             <div class="question-wrap">
                                 <p class="author"><span class="name">{{ item.user?.name }} </span> on
                                     {{ new Date(item.created_at).toDateString() }}
@@ -86,11 +86,13 @@ export default {
         product_question_and_answers: [],
     }),
 
+
+
     created() {
-        this.get_all_question_and_answers();
         this.is_auth = localStorage.getItem("token") ? true : false;
         let ProductDetailsStore = useProductDetailsStore();
         this.slug = ProductDetailsStore.slug;
+        this.get_all_question_and_answers();
     },
 
     methods: {
@@ -107,11 +109,13 @@ export default {
         },
 
         get_all_question_and_answers: async function () {
-            if (!this.is_auth) return false
-            let response = await axios.get('/get-customer-ecommerce-question-and-answers');
+
+            let response = await axios.get('/get-customer-ecommerce-question-and-answers?slug=' + this.slug);
             if (response.data.status === "success") {
                 this.product_question_and_answers = response.data.data
             }
+
+
         }
 
     }
