@@ -11,7 +11,7 @@
     "src": "resources/js/backend/app.js"
   },
   "resources/js/frontend/Components/Slider.vue": {
-    "file": "assets/Slider-aecb3285.js",
+    "file": "assets/Slider-157af36a.js",
     "imports": [
       "resources/js/frontend/app.js",
       "__plugin-vue_export-helper-5785fed7.js"
@@ -20,17 +20,17 @@
     "src": "resources/js/frontend/Components/Slider.vue"
   },
   "resources/js/frontend/app.css": {
-    "file": "assets/app-fdd153ee.css",
+    "file": "assets/app-f5692f16.css",
     "src": "resources/js/frontend/app.css"
   },
   "resources/js/frontend/app.js": {
     "css": [
-      "assets/app-fdd153ee.css"
+      "assets/app-f5692f16.css"
     ],
     "dynamicImports": [
       "resources/js/frontend/Components/Slider.vue"
     ],
-    "file": "assets/app-706476fa.js",
+    "file": "assets/app-cdbb6c25.js",
     "imports": [
       "__plugin-vue_export-helper-5785fed7.js"
     ],
