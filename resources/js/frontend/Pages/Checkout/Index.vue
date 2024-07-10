@@ -29,18 +29,17 @@
                                         <div class="row check-out ">
                                             <div class="checkout-title text-center">
                                                 <h3>Billing Details</h3>
+                                                <div>
+                                                    {{ user_info }}
+                                                </div>
                                                 <hr>
                                             </div>
-                                            <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                                <label>First Name</label>
-                                                <input type="text" name="first_name" id="first_name" value=""
-                                                    placeholder="">
+                                            <div class="form-group col-md-12 col-sm-16 col-xs-12">
+                                                <label>User full Name</label>
+                                                <input type="text" name="user_name" id="user_name"
+                                                    :value="`${user_info.name} ${user_info.user_name}`" placeholder="">
                                             </div>
-                                            <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                                <label>Last Name</label>
-                                                <input type="text" name="last_name" id="last_name" value=""
-                                                    placeholder="">
-                                            </div>
+
                                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                                 <label class="field-label">Phone</label>
                                                 <input type="text" name="phone" id="phone" value="" placeholder="">
@@ -49,7 +48,7 @@
                                                 <label class="field-label">Email Address</label>
                                                 <input type="text" name="email" id="email" value="" placeholder="">
                                             </div>
-                                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <!-- <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <label class="field-label">Country</label>
                                                 <select name="country">
                                                     <option>India</option>
@@ -57,7 +56,7 @@
                                                     <option>United State</option>
                                                     <option>Australia</option>
                                                 </select>
-                                            </div>
+                                            </div> -->
                                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <label class="field-label">Address</label>
                                                 <input type="text" name="address" id="address" value=""
@@ -219,8 +218,19 @@ import Layout from "../../Shared/Layout.vue";
 import { mapActions, mapState } from "pinia";
 import { common_store } from "../../Store/common_store";
 import { auth_store } from "../../Store/auth_store.js";
+import { computed, ref } from "vue"
 export default {
     components: { Layout },
+
+
+    setup() {
+        const authStore = auth_store();
+        const user_info = computed(() => authStore.auth_info);
+
+
+        return { user_info };
+    },
+
     created: async function () {
         const authStore = auth_store();
         await authStore.check_is_auth();

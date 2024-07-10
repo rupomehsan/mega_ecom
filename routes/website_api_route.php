@@ -56,12 +56,29 @@ Route::get('/set-related-compare-products', function () {
         ]);
     }
 });
+
 Route::get('/set-related-price-review-products', function () {
     DB::table('price_review_product')->truncate();
     for ($i = 1; $i <= 10; $i++) {
         DB::table('price_review_product')->insert([
             'product_id' => 1,
             'related_product_id' => $i + 1,
+        ]);
+    }
+});
+
+Route::get('/update-category-group-id', function () {
+    DB::table('product_category_products')->where('id', '>', '0')->update([
+        'product_category_group_id' => 3,
+    ]);
+});
+
+Route::get('/offer-product-create', function () {
+    DB::table('product_offer_product')->truncate();
+    for ($i = 1; $i <= 100; $i++) {
+        DB::table('product_offer_product')->insert([
+            'product_id' => $i,
+            'product_offer_id' => rand(1, 4),
         ]);
     }
 });

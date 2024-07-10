@@ -26,6 +26,7 @@ class Controller extends ControllersController
         $data = GetAllCategoryGroup::execute();
         return $data;
     }
+
     public function GetCategoryByCategoryGroupId($slug)
     {
         $data = GetAllCategoryByCategoryGroupId::execute($slug);

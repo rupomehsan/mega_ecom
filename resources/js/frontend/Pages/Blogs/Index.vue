@@ -8,9 +8,13 @@
                             <div>
                                 <h2>Blogs</h2>
                                 <ul>
-                                    <li><Link href="/">home</Link></li>
+                                    <li>
+                                        <Link href="/">home</Link>
+                                    </li>
                                     <li><i class="fa fa-angle-double-right"></i></li>
-                                    <li><Link href="/blogs">blogs</Link></li>
+                                    <li>
+                                        <Link href="/blogs">blogs</Link>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -52,96 +56,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row blog-media">
-                            <div class="col-xl-6">
-                                <div class="blog-left">
-                                    <a href="javascript:void(0)"><img src="/frontend/assets/images/blog/2.jpg"
-                                            class="img-fluid  " alt=""></a>
-                                    <div class="date-label">
-                                        26 nov 2019
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="blog-right">
-                                    <div>
-                                        <a href="javascript:void(0)">
-                                            <h4>you how all this mistaken idea of denouncing pleasure and praising pain
-                                                was born.</h4>
-                                        </a>
-                                        <ul class="post-social">
-                                            <li>Posted By : Admin Admin</li>
-                                            <li><i class="fa fa-heart"></i> 5 Hits</li>
-                                            <li><i class="fa fa-comments"></i> 10 Comment</li>
-                                        </ul>
-                                        <p>Consequences that are extremely painful. Nor again is there anyone who loves
-                                            or pursues or desires to obtain pain of itself, because it is pain, but
-                                            because occasionally circumstances occur in which toil and pain can procure
-                                            him some great pleasure.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row blog-media">
-                            <div class="col-xl-6">
-                                <div class="blog-left">
-                                    <a href="javascript:void(0)"><img src="/frontend/assets/images/blog/3.jpg"
-                                            class="img-fluid  " alt=""></a>
-                                    <div class="date-label">
-                                        26 nov 2019
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="blog-right">
-                                    <div>
-                                        <a href="javascript:void(0)">
-                                            <h4>you how all this mistaken idea of denouncing pleasure and praising pain
-                                                was born.</h4>
-                                        </a>
-                                        <ul class="post-social">
-                                            <li>Posted By : Admin Admin</li>
-                                            <li><i class="fa fa-heart"></i> 5 Hits</li>
-                                            <li><i class="fa fa-comments"></i> 10 Comment</li>
-                                        </ul>
-                                        <p>Consequences that are extremely painful. Nor again is there anyone who loves
-                                            or pursues or desires to obtain pain of itself, because it is pain, but
-                                            because occasionally circumstances occur in which toil and pain can procure
-                                            him some great pleasure.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row blog-media">
-                            <div class="col-xl-6">
-                                <div class="blog-left">
-                                    <a href="javascript:void(0)"><img src="/frontend/assets/images/blog/4.jpg"
-                                            class="img-fluid  " alt=""></a>
-                                    <div class="date-label">
-                                        26 nov 2019
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="blog-right">
-                                    <div>
-                                        <a href="javascript:void(0)">
-                                            <h4>you how all this mistaken idea of denouncing pleasure and praising pain
-                                                was born.</h4>
-                                        </a>
-                                        <ul class="post-social">
-                                            <li>Posted By : Admin Admin</li>
-                                            <li><i class="fa fa-heart"></i> 5 Hits</li>
-                                            <li><i class="fa fa-comments"></i> 10 Comment</li>
-                                        </ul>
-                                        <p>Consequences that are extremely painful. Nor again is there anyone who loves
-                                            or pursues or desires to obtain pain of itself, because it is pain, but
-                                            because occasionally circumstances occur in which toil and pain can procure
-                                            him some great pleasure.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="col-xl-3 col-lg-4 col-md-5 order-sec">
                         <div class="blog-sidebar">
@@ -149,43 +64,8 @@
                                 <h4>Recent Blog</h4>
                                 <ul class="recent-blog">
                                     <li>
-                                        <div class="media"> <img class="img-fluid " src="/frontend/assets/images/blog/1.jpg"
-                                                alt="Generic placeholder image">
-                                            <div class="media-body align-self-center">
-                                                <h6>25 Dec 2018</h6>
-                                                <p>0 hits</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media"> <img class="img-fluid " src="/frontend/assets/images/blog/2.jpg"
-                                                alt="Generic placeholder image">
-                                            <div class="media-body align-self-center">
-                                                <h6>25 Dec 2018</h6>
-                                                <p>0 hits</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media"> <img class="img-fluid " src="/frontend/assets/images/blog/3.jpg"
-                                                alt="Generic placeholder image">
-                                            <div class="media-body align-self-center">
-                                                <h6>25 Dec 2018</h6>
-                                                <p>0 hits</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media"> <img class="img-fluid " src="/frontend/assets/images/blog/4.jpg"
-                                                alt="Generic placeholder image">
-                                            <div class="media-body align-self-center">
-                                                <h6>25 Dec 2018</h6>
-                                                <p>0 hits</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media"> <img class="img-fluid " src="/frontend/assets/images/blog/5.jpg"
+                                        <div class="media"> <img class="img-fluid "
+                                                src="/frontend/assets/images/blog/1.jpg"
                                                 alt="Generic placeholder image">
                                             <div class="media-body align-self-center">
                                                 <h6>25 Dec 2018</h6>
@@ -260,8 +140,6 @@ export default {
     props: ["users"],
     created: function () {
         this.userData = this.users;
-
-        console.log(this.userData);
     }
 };
 </script>

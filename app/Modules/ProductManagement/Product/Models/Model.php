@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 class Model extends EloquentModel
 {
     static $productCategoryModel = \App\Modules\ProductManagement\ProductCategory\Models\Model::class;
+    static $productCategoryGroupModel = \App\Modules\ProductManagement\ProductCategoryGroup\Models\Model::class;
     static $productBrandModel = \App\Modules\ProductManagement\ProductBrand\Models\Model::class;
     static $productImageModel = \App\Modules\ProductManagement\Product\Models\ProductImageModel::class;
     static $productVariantPriceModel = \App\Modules\ProductManagement\Product\Models\ProductVarientPriceModel::class;
@@ -47,7 +48,11 @@ class Model extends EloquentModel
 
     public function product_categories()
     {
-        return $this->belongsToMany(self::$productCategoryModel, 'product_category_products', 'product_id', 'product_category_id', 'id');
+        return $this->belongsToMany(self::$productCategoryModel, 'product_category_products', 'product_id', 'product_category_group_id', 'product_category_id', 'id');
+    }
+    public function product_category_group_products()
+    {
+        return $this->belongsToMany(self::$productCategoryGroupModel, 'product_category_products', 'product_id', 'product_category_group_id',  'id');
     }
     public function product_brand()
     {
@@ -101,6 +106,15 @@ class Model extends EloquentModel
             'price_review_product',
             'product_id',
             'related_product_id'
+        );
+    }
+    public function offer_products()
+    {
+        return $this->belongsToMany(
+            self::$ProductModel,
+            'product_offer_product',
+            'product_id',
+            'product_offer_id'
         );
     }
 

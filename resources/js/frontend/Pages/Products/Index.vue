@@ -12,7 +12,6 @@
                 </h2>
                 <div class="page_header_description" v-if="category.page_header_description"
                     v-html="category.page_header_description"></div>
-
                 <ul class="page_sub_category_lists">
                     <li v-for="sub in childrens" :key="sub.id">
                         <Link :href="`/category/${sub.slug}`">
@@ -52,7 +51,9 @@
                                         <div class="top-banner-wrapper mb-2">
                                             <img v-if="advertise" :src="advertise.image" class="img-fluid"
                                                 :alt="advertise.title">
-                                            <img v-else src="https://digitalshopbd.com/public/uploads/all/2Zz2l45NAIEvYAGfBzfggucVEuk1UIg3pvpRer1c.png" class="img-fluid">
+                                            <img v-else
+                                                src="https://digitalshopbd.com/public/uploads/all/2Zz2l45NAIEvYAGfBzfggucVEuk1UIg3pvpRer1c.png"
+                                                class="img-fluid">
                                             <!-- <div class="top-banner-content small-section">
                                                 <h1 class="category_page_heading">
                                                     {{ category.title }}
@@ -115,7 +116,8 @@
                                                         <div class="col-xl-6 col-md-6 col-sm-12">
                                                             <nav aria-label="Page navigation">
                                                                 <ul class="pagination">
-                                                                    <li class="page-item" :class="{ active: link.active }"
+                                                                    <li class="page-item"
+                                                                        :class="{ active: link.active }"
                                                                         v-for="(link, index) in products.links"
                                                                         :key="index">
                                                                         <a :href="link.url"
@@ -130,7 +132,7 @@
                                                         <div class="col-xl-6 col-md-6 col-sm-12">
                                                             <div class="product-search-count-bottom">
                                                                 <h5>Showing Products {{ products.from }}-{{
-                                                                    products.to }} of {{ products.total }}
+                    products.to }} of {{ products.total }}
                                                                     Result</h5>
                                                             </div>
                                                         </div>

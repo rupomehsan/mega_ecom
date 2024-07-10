@@ -24,6 +24,7 @@ return new class extends Migration
             $table->tinyInteger('is_emi_support')->default(0);
             $table->tinyInteger('is_best_selling')->default(0);
             $table->tinyInteger('is_trending')->default(0);
+            $table->tinyInteger('is_free_delivery')->default(0);
             $table->bigInteger('total_sold')->default(0)->unsigned();
 
             $table->string('barcode', 100)->nullable();
@@ -39,10 +40,12 @@ return new class extends Migration
             $table->integer('product_brand_id')->nullable();
             $table->string('sku', 50)->nullable();
             $table->integer('product_unit_id')->nullable();
+            $table->float('height')->nullable();
+            $table->float('weight')->nullable();
 
             $table->integer('alert_quantity')->nullable();
 
-            $table->string('seller_points')->nullable();
+            $table->float('seller_points')->nullable();
             $table->tinyInteger('is_returnable')->nullable();
             $table->string('expiration_days')->nullable();
 

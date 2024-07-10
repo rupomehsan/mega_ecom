@@ -1,4 +1,19 @@
 product varient group title table create
+product_category_products -> product_category_group_id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 [
   [

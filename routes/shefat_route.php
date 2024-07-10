@@ -12,7 +12,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/blog-details/{slug}', 'Website\WebsiteController@blogDetails')->name('website_blog_details');
 
     Route::get('/category/{slug}', 'Website\WebsiteController@products')->name('website_products');
+    Route::get('/category-group/{slug}', 'Website\WebsiteController@category_group_products')->name('category_group_products');
+
     Route::get('/product-details/{slug}', 'Website\WebsiteController@products_details')->name('website_products_details');
+    Route::get('/offer-products/{slug}', 'Website\WebsiteController@offer_products')->name('offer_products');
 
     Route::get('/cart', 'Website\WebsiteController@cart')->name('website_cart');
     Route::get('/checkout', 'Website\WebsiteController@checkout')->name('website_checkout');
@@ -22,6 +25,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/terms_conditions', 'Website\WebsiteController@terms_conditions')->name('website_terms_conditions');
     Route::get('/returns_exchanges', 'Website\WebsiteController@returns_exchanges')->name('website_returns_exchanges');
     Route::get('/shipping_delivery', 'Website\WebsiteController@shipping_delivery')->name('website_shipping_delivery');
+    Route::get('/search-results', 'Website\WebsiteController@search_results')->name('search_results');
 
     Route::get('/profile', 'Website\ProfileController@profile')->name('website_profile');
     Route::get('/profile/orders', 'Website\ProfileController@orders')->name('website_profile_orders');
@@ -39,6 +43,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('/uploads_variant', 'Website\TestController@uploads_variant');
     Route::get('/attach_category_into_products', 'Website\TestController@attach_category_into_products');
+
 });
 
 // Route::get("/about", function () {
@@ -50,6 +55,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 //         ]
 //     ]);
 // });
+
 Route::get('/test', function () {
     dd(auth()->user());
 });

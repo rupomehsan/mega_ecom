@@ -54,11 +54,37 @@ class WebsiteController extends Controller
             ]
         ]);
     }
+    public function category_group_products($slug)
+    {
+        $page = request()->page ? request()->page : 1;
+        return Inertia::render('Products/CategoryGroupProduct', [
+            'slug' => $slug,
+            'event' => [
+                'title' => 'ETEK Products',
+                'image' => 'https://etek.com.bd/frontend/images/etek_logo.png',
+                'description' => 'Best eCommerce in bangladesh'
+            ]
+        ]);
+    }
 
     public function products_details($slug)
     {
         // $product = ProductModel::where('slug', $slug)->first();
         return Inertia::render('ProductDetails/Index', [
+            'slug' => $slug,
+            // 'product_details' => $product,
+            'event' => [
+                'title' => 'ETEK Product Details',
+                'image' => 'https://etek.com.bd/frontend/images/etek_logo.png',
+                'description' => 'Best eCommerce in bangladesh'
+            ]
+        ]);
+
+    }
+    public function offer_products($slug)
+    {
+        // $product = ProductModel::where('slug', $slug)->first();
+        return Inertia::render('Products/OfferProduct', [
             'slug' => $slug,
             // 'product_details' => $product,
             'event' => [
@@ -141,4 +167,14 @@ class WebsiteController extends Controller
         ]);
     }
 
+    public function search_results()
+    {
+        return Inertia::render('GlobalSearchResult/Index', [
+            'event' => [
+                'title' => 'ETEK Shipping & Delivery',
+                'image' => 'https://etek.com.bd/frontend/images/etek_logo.png',
+                'description' => 'Best eCommerce in bangladesh'
+            ]
+        ]);
+    }
 }

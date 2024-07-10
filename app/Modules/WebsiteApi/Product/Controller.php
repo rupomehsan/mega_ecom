@@ -11,6 +11,9 @@ use App\Modules\WebsiteApi\Product\Actions\GetAllFeaturedProductsByCategoryId;
 use App\Modules\WebsiteApi\Product\Actions\GetAllFeaturedProductsByBrandId;
 use App\Modules\WebsiteApi\Product\Actions\GetAllProductsByCategoryId;
 use App\Modules\WebsiteApi\Product\Actions\GetProductDetails;
+use App\Modules\WebsiteApi\Product\Actions\GetAllProductOffers;
+use App\Modules\WebsiteApi\Product\Actions\GetAllOfferProductsByOfferId;
+use App\Modules\WebsiteApi\Product\Actions\GetSingleCategoryGroupWithProduct;
 
 class Controller extends ControllersController
 {
@@ -48,6 +51,21 @@ class Controller extends ControllersController
     public function GetProductDetails($slug)
     {
         $data = GetProductDetails::execute($slug);
+        return $data;
+    }
+    public function GetAllProductOffers()
+    {
+        $data = GetAllProductOffers::execute();
+        return $data;
+    }
+    public function GetAllOfferProductsByOfferId($slug)
+    {
+        $data = GetAllOfferProductsByOfferId::execute($slug);
+        return $data;
+    }
+    public function GetSingleCategoryGroupWithProduct($slug)
+    {
+        $data = GetSingleCategoryGroupWithProduct::execute($slug);
         return $data;
     }
 
