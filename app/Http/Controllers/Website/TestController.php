@@ -269,62 +269,71 @@ class TestController extends Controller
                     file_put_contents(public_path('uploads/products/' . $image_name), $image);
 
                     $short_description = "<ul>";
-                    foreach ($product->product_page_short_description as $item) {
-                        $short_description .= "<li>$item</li>";
+                    if (isset($product->product_page_short_description)) {
+                        foreach ($product->product_page_short_description as $item) {
+                            $short_description .= "<li>$item</li>";
+                        }
                     }
                     $short_description .= "</ul>";
 
-                    $brand = ProductBrand::where('title', $product->brand)->first();
-                    if (!$brand) {
-                        $brand = ProductBrand::create([
-                            'title' => $product->brand
-                        ]);
+                    $brand = null;
+                    if (isset($product->brand)) {
+                        $brand = ProductBrand::where('title', $product->brand)->first();
+                        if (!$brand) {
+                            $brand = ProductBrand::create([
+                                'title' => $product->brand
+                            ]);
+                        }
                     }
 
                     $regularPrice = $product->price_single ? $product->price_single : 0;
 
-                    $product_info = ProductModel::create([
-                        'product_category_group_id' => 1,
-                        'title' => $product->title,
-                        'type' => "product",
+                    try {
+                        $product_info = ProductModel::create([
+                            'product_category_group_id' => 1,
+                            'title' => $product->title,
+                            'type' => "product",
 
-                        'short_description' => $short_description,
-                        'description' => $product->full_description,
-                        'specification' => json_encode($product->specifications),
+                            'short_description' => $short_description,
+                            'description' => $product->full_description ?? '',
+                            'specification' => isset($product->specifications) ? json_encode($product->specifications) : "[]",
 
-                        'product_menufecturer_id' => rand(1, 5),
-                        'product_brand_id' => $brand->id,
-                        'sku' => $product->code,
-                        'product_unit_id' => rand(1, 5),
-                        'alert_quantity' => 10,
-                        'seller_points' => rand(2, 5),
-                        'is_returnable' => rand(0, 1),
-                        'expiration_days' => Carbon::now()->addMonths(30)->toDateString(),
-                        // 'purchase_account' => facker()->name,
+                            'product_menufecturer_id' => rand(1, 5),
+                            'product_brand_id' => $brand->id ?? null,
+                            'sku' => $product->code ?? null,
+                            'product_unit_id' => rand(1, 5),
+                            'alert_quantity' => 10,
+                            'seller_points' => rand(2, 5),
+                            'is_returnable' => rand(0, 1),
+                            'expiration_days' => Carbon::now()->addMonths(30)->toDateString(),
+                            // 'purchase_account' => facker()->name,
 
-                        'discount_type' => "flat",
-                        'discount_amount' => $product->price_new,
+                            'discount_type' => "flat",
+                            'discount_amount' => $product->price_new,
 
-                        'price_type' => "single",
+                            'price_type' => "single",
 
-                        'purchase_price' => $regularPrice > 0 ? $regularPrice - 30 : 0,
+                            'purchase_price' => $regularPrice > 0 ? $regularPrice - 30 : 0,
 
-                        'customer_sales_price' => $regularPrice > 0 ? $regularPrice : 0,
-                        'retailer_sales_price' => $regularPrice > 0 ? $regularPrice - 5 : 0,
-                        'minimum_sale_price' => $regularPrice > 0 ? $regularPrice - 10 : 0,
-                        'maximum_sale_price' => $regularPrice > 0 ? $regularPrice + 20 : 0,
+                            'customer_sales_price' => $regularPrice > 0 ? $regularPrice : 0,
+                            'retailer_sales_price' => $regularPrice > 0 ? $regularPrice - 5 : 0,
+                            'minimum_sale_price' => $regularPrice > 0 ? $regularPrice - 10 : 0,
+                            'maximum_sale_price' => $regularPrice > 0 ? $regularPrice + 20 : 0,
 
-                        'tax_type' => ['inclusive', 'exclusive'][rand(0, 1)],
-                        'tax_amount' => .5,
-                        'is_featured' => rand(0, 1),
+                            'tax_type' => ['inclusive', 'exclusive'][rand(0, 1)],
+                            'tax_amount' => .5,
+                            'is_featured' => rand(0, 1),
 
-                        'meta_title' => $product->product_seo_title,
-                        'meta_description' => $product->product_seo_description,
-                        'meta_keywords' => $product->product_seo_keywords,
-                        'search_keywords' => $product->product_seo_keywords . ' ' . $product->title . ' ' . $product->product_seo_title,
+                            'meta_title' => $product->product_seo_title ?? null,
+                            'meta_description' => $product->product_seo_description ?? null,
+                            'meta_keywords' => $product->product_seo_keywords ?? null,
+                            'search_keywords' => ($product->product_seo_keywords ?? '') . ' ' . $product->title . ' ' . ($product->product_seo_title ?? ''),
 
-                        'slug' => Str::slug($product->title),
-                    ]);
+                            'slug' => Str::slug($product->title),
+                        ]);
+                    } catch (\Throwable $th) {
+                        dd($regularPrice, $product, $th->getMessage());
+                    }
 
                     $product_info->product_images()->create([
                         'url' => 'uploads/products/' . $image_name,
@@ -335,76 +344,89 @@ class TestController extends Controller
                         'is_thumb' => 1,
                     ]);
 
-                    foreach ($product->images as $p_image) {
-                        $image = file_get_contents($p_image);
-                        $image_name = getImageNameFromURL($p_image);
-                        file_put_contents(public_path('uploads/products/' . $image_name), $image);
-
-                        $product_info->product_images()->create([
-                            'url' => 'uploads/products/' . $image_name,
-                            'caption' => $product->title,
-                            'alt' => $product->title,
-                            'is_primary' => 0,
-                            'is_secondary' => 1,
-                            'is_thumb' => 0,
-                        ]);
-                    }
 
                     $product_info->product_categories()->attach($cat_ids);
 
                     $category_varients = [];
                     $product_varients = [];
 
-                    foreach ($product->specifications as $specifications) {
-                        foreach ($specifications->values as $varient) {
-                            if ($varient->key && $varient->value) {
-                                $check_varient = ProductVarient::where('title', $varient->key)->first();
-                                $check_varient_value = ProductVarientValue::where('title', $varient->value)->first();
-                                if (!$check_varient) {
-                                    $check_varient = ProductVarient::create([
-                                        "product_varient_group_id" => 2,
-                                        "title" => $varient->key,
-                                        "varient_type" => 'text',
-                                    ]);
-                                }
-                                if (!$check_varient_value) {
-                                    $check_varient_value = ProductVarientValue::create([
-                                        "product_varient_group_id" => 2,
-                                        "product_varient_id" => $check_varient->id,
-                                        "title" => $varient->value,
-                                    ]);
-                                }
+                    if (isset($product->specifications)) {
+                        foreach ($product->specifications as $specifications) {
+                            foreach ($specifications->values as $varient) {
 
-                                $category_varients[] = [
-                                    "product_category_id" => null,
-                                    "product_varient_group_id" => 2,
-                                    "product_varient_id" => $check_varient->id,
-                                    "product_varient_value_id" => $check_varient_value->id,
-                                    "total_product" => 0,
-                                ];
+                                if (isset($varient->key) && isset($varient->value)) {
+                                    try {
+                                        $check_varient = ProductVarient::where('title', $varient->key)->first();
+                                        $check_varient_value = ProductVarientValue::where('title', $varient->value)->first();
+                                        if (!$check_varient) {
+                                            $check_varient = ProductVarient::create([
+                                                "product_varient_group_id" => 2,
+                                                "title" => $varient->key,
+                                                "varient_type" => 'text',
+                                            ]);
+                                        }
+                                        if (!$check_varient_value) {
+                                            $check_varient_value = ProductVarientValue::create([
+                                                "product_varient_group_id" => 2,
+                                                "product_varient_id" => $check_varient->id,
+                                                "title" => $varient->value,
+                                            ]);
+                                        }
 
-                                $product_varients[] = [
-                                    "product_id" => $product_info->id,
-                                    "product_varient_group_id" => 2,
-                                    "product_varient_id" => $check_varient->id,
-                                    "product_varient_value_id" => $check_varient_value->id,
-                                    "varient_title" => $check_varient->title,
-                                ];
+                                        $category_varients[] = [
+                                            "product_category_id" => null,
+                                            "product_varient_group_id" => 2,
+                                            "product_varient_id" => $check_varient->id,
+                                            "product_varient_value_id" => $check_varient_value->id,
+                                            "total_product" => 0,
+                                        ];
+
+                                        $product_varients[] = [
+                                            "product_id" => $product_info->id,
+                                            "product_varient_group_id" => 2,
+                                            "product_varient_id" => $check_varient->id,
+                                            "product_varient_value_id" => $check_varient_value->id,
+                                            "varient_title" => $check_varient->title,
+                                        ];
+                                    } catch (\Throwable $th) {
+                                        dd($varient);
+                                    }
+                                }
                             }
                         }
+                        DB::table('product_varient_prices')->insert($product_varients);
+                        foreach ($cat_ids as $cat_id) {
+                            foreach ($category_varients as $key => $category_varient) {
+                                $category_varients[$key]['product_category_id'] = $cat_id;
+                                $category_varients[$key]['total_product'] = DB::table('product_varient_prices')
+                                    ->where('product_varient_value_id', $category_varient['product_varient_value_id'])
+                                    ->count();
+                            }
+                        }
+                        DB::table('product_category_varient')->insert($category_varients);
                     }
 
-                    DB::table('product_varient_prices')->insert($product_varients);
+                    if (isset($product->images)) {
+                        foreach ($product->images as $p_image) {
+                            try {
+                                $image = file_get_contents($p_image);
+                            } catch (\Throwable $th) {
+                                redirect('/upload_product#context-app-routing');
+                            }
+                            $image_name = getImageNameFromURL($p_image);
+                            file_put_contents(public_path('uploads/products/' . $image_name), $image);
 
-                    foreach ($cat_ids as $cat_id) {
-                        foreach ($category_varients as $key => $category_varient) {
-                            $category_varients[$key]['product_category_id'] = $cat_id;
-                            $category_varients[$key]['total_product'] = DB::table('product_varient_prices')
-                                ->where('product_varient_value_id', $category_varient['product_varient_value_id'])
-                                ->count();
+                            $product_info->product_images()->create([
+                                'url' => 'uploads/products/' . $image_name,
+                                'caption' => $product->title,
+                                'alt' => $product->title,
+                                'is_primary' => 0,
+                                'is_secondary' => 1,
+                                'is_thumb' => 0,
+                            ]);
                         }
                     }
-                    DB::table('product_category_varient')->insert($category_varients);
+
                 }
                 // dd($product, $product_info, $category_varients, $product_varients);
             }
