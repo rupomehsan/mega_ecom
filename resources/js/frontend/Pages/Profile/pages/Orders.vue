@@ -66,8 +66,19 @@ export default {
                 url: '/profile/orders',
                 active: true,
             },
-        ]
+        ],
+        order_list:[]
     }),
+    created: async function () {
+       await this.get_all_orders();
+    },
+    methods: {
+        get_all_orders: async function () {
+            let response = await window.privateAxios('/get-all-customer-ecommerce-order');
+            this.order_list = response.data;
+        },
+    },
+
 };
 </script>
 
