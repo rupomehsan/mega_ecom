@@ -29,6 +29,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('/profile', 'Website\ProfileController@profile')->name('website_profile');
     Route::get('/profile/orders', 'Website\ProfileController@orders')->name('website_profile_orders');
+    Route::get('/profile/order-details/{slug}', 'Website\ProfileController@order_details')->name('order_details');
     Route::get('/profile/wish-list', 'Website\ProfileController@wish_list')->name('website_profile_wish_list');
     Route::get('/profile/compare-list', 'Website\ProfileController@compare_list')->name('website_profile_compare_list');
     Route::get('/profile/account', 'Website\ProfileController@account')->name('website_profile_account');

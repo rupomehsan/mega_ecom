@@ -20,7 +20,7 @@
                                 <span class="text-capitalize" :class="order.order_status == 'pending' ? 'text-info' : 'text-success'">{{ order.order_status }}</span>
                             </div>
 
-                            <a href="" class="btn btn-primary text-light">Order Details</a>
+                            <Link :href="`/profile/order-details/${order.order_id}`" class="btn btn-primary text-light">Order Details</Link>
                         </div>
                     </div>
                     <div class="card-body p-0">
