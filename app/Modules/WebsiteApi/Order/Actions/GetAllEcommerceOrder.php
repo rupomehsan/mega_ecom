@@ -12,13 +12,19 @@ class GetAllEcommerceOrder
     public static function execute()
     {
         try {
+     
 
-            $orderInfo = self::$model::with('order_products','order_products.product','order_products.product.product_image')->where('user_id', auth()->id())->get();
+            $orderInfo = self::$model::with(
+                'order_products',
+                'order_products.product',
+                'order_products.product.product_image')
+                ->where('user_id', auth()->id())
+                ->paginate(10);
             if (!$orderInfo) {
                 return messageResponse('No order found', [], 200, 'success');
             }
 
-            return messageResponse('Order Successfully completed', $orderInfo, 200, 'success');
+            return entityResponse($orderInfo);
         } catch (\Exception $e) {
 
             return messageResponse($e->getMessage(), [], 500, 'server_error');
