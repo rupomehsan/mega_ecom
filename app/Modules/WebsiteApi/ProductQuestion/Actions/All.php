@@ -9,7 +9,7 @@ class All
     public static function execute()
     {
         try {
-            $pageLimit = request()->input('limit') ?? 10;
+            $pageLimit = request()->input('limit') ?? 50;
             $orderByColumn = request()->input('sort_by_col') ?? 'id';
             $orderByType = request()->input('sort_type') ?? 'desc';
             $status = request()->input('status') ?? 'active';
@@ -17,8 +17,11 @@ class All
             $with = ['user'];
             $condition = [];
 
-            $data = self::$model::query();
+            $data = self::$model::query()->where('is_approved', 1);
 
+            if (request()->has('slug') && request()->input('slug')) {
+               $condition['slug'] = request()->input('slug');
+            }
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {

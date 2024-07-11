@@ -10,6 +10,11 @@ class Model extends EloquentModel
     protected $table = "product_reviews";
     protected $guarded = [];
 
+    static $ProductModel = \App\Modules\ProductManagement\Product\Models\Model::class;
+
+    static $ProductReviewImageModel = \App\Modules\WebsiteApi\ProductReview\Models\ReviewImageModel::class;
+
+
     protected static function booted()
     {
         static::created(function ($data) {
@@ -29,5 +34,20 @@ class Model extends EloquentModel
     public function scopeActive($q)
     {
         return $q->where('status', 'active');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(self::$ProductModel, 'product_id');
+    }
+
+    public function product_review_images()
+    {
+        return $this->hasMany(self::$ProductReviewImageModel, 'product_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Modules\UserManagement\User\Models\Model::class, 'user_id');
     }
 }

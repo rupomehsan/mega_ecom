@@ -3,7 +3,7 @@
         <div class="dashboard">
             <div class="page-title">
                 <h2>
-                    Edit Address 
+                    Edit Address
                 </h2>
             </div>
             <div class="box-account box-info">
@@ -134,7 +134,6 @@ export default {
                     get_all: 1,
                 }
             })
-
             if (response.data.status === 'success') {
                 this.divisions = response.data.data
             }

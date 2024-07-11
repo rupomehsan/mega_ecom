@@ -22,3 +22,9 @@ yarn-error.log
 *.zip
 /**/*.zip
 public/backend/assets/css/fontawesome.css
+
+eteksql.sql
+
+public/uploads/products
+public/product_source
+public/build

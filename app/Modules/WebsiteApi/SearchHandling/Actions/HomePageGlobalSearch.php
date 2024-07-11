@@ -16,29 +16,30 @@ class HomePageGlobalSearch
 
             $searchKey = request()->input('search_key');
 
-            $product = self::$productModel::with('product_image:product_id,url')->where(function ($q) use ($searchKey) {
-                $q->where('title', $searchKey);
-                $q->orWhere('title', 'like', '%' . $searchKey . '%');
-                $q->orWhere('description', 'like', '%' . $searchKey . '%');
-                $q->orWhere('short_description', 'like', '%' . $searchKey . '%');
-            })->limit(50)
+            $product = self::$productModel::with('product_image:product_id,url')
+                ->where(function ($q) use ($searchKey) {
+                    $q->where('title', $searchKey)
+                        ->orWhere('title', 'like', '%' . $searchKey . '%')
+                        ->orWhere('description', 'like', '%' . $searchKey . '%')
+                        ->orWhere('short_description', 'like', '%' . $searchKey . '%');
+                })
                 ->where("status", "active")
-                ->get(['id', 'title', 'slug', 'purchase_price']);
+                ->paginate(10, ['id', 'title', 'slug', 'purchase_price']);
 
             $category = self::$productCategoryModel::where(function ($q) use ($searchKey) {
                 $q->where('title', $searchKey);
                 $q->orWhere('title', 'like', '%' . $searchKey . '%');
                 $q->orWhere('search_keywords', 'like', '%' . $searchKey . '%');
-            })->limit(50)
+            })->limit(10)
                 ->where("status", "active")
-                ->get(['title', 'slug', 'image']);
+                ->paginate(10, ['title', 'slug', 'image']);
 
             $brand = self::$productBrandModel::where(function ($q) use ($searchKey) {
                 $q->where('title', $searchKey);
                 $q->orWhere('title', 'like', '%' . $searchKey . '%');
-            })->limit(50)
+            })->limit(10)
                 ->where("status", "active")
-                ->get(['title', 'slug', 'image']);
+                ->paginate(10, ['title', 'slug', 'image']);
 
             $data = [
                 "product" => $product,

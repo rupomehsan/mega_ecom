@@ -191,11 +191,11 @@
                                             Home
                                             </Link>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <Link  href="/blogs" class="dark-menu-item" >
                                                 Blog
                                             </Link>
-                                        </li>
+                                        </li> -->
                                         <li>
                                             <Link  href="/contact" class="dark-menu-item" >
                                                 Contact us

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     php artisan migrate --path='\App\Modules\SalesManagement\SalesOrder\Database\create_sales_ecommerce_order_products_table.php'
+     php artisan migrate --path='\App\Modules\SalesManagement\SalesEcommerceOrder\Database\create_sales_ecommerce_order_products_table.php'
      * Run the migrations.
      */
     public function up(): void
@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->integer('product_id')->nullable();
             $table->float('product_price')->default(0);
-            $table->float('product_name')->default(0);
+            $table->string('product_name')->nullable();
 
             $table->enum('discount_type', ['fixed', 'percentage'])->nullable();
             $table->enum('tax', ['fixed', 'percentage'])->nullable();

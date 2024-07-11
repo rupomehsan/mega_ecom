@@ -68,24 +68,25 @@ class DatabaseSeeder extends Seeder
             UserPermissionSeeder::class,
             UserSeeder::class,
             //product management seeder
-            ProductCategoryGroupSeeder::class,
-            ProductCategorySeeder::class,
-            ProductCategoryWiseAdvertiseSeeder::class,
+            // ProductCategoryGroupSeeder::class,
+            // ProductCategorySeeder::class,
+            // ProductCategoryWiseAdvertiseSeeder::class,
 
-            ProductBrandSeeder::class,
-            ProductMenufacturerSeeder::class,
+            // ProductBrandSeeder::class,
+            // ProductMenufacturerSeeder::class,
 
-            ProductUnitGroupSeeder::class,
-            ProductUnitSeeder::class,
+            // ProductUnitGroupSeeder::class,
+            // ProductUnitSeeder::class,
 
-            ProductBarCodeSeeder::class,
+            // ProductBarCodeSeeder::class,
 
-            ProducVariantGroupSeeder::class,
-            ProductVariantSeeder::class,
-            ProductVariantValueSeeder::class,
+            // ProducVariantGroupSeeder::class,
+            // ProductVariantSeeder::class,
+            // ProductVariantValueSeeder::class,
 
 
-            ProductSeeder::class,
+            // ProductSeeder::class,
+            
             // location management
             CountrySeeder::class,
             StateDivisionSeeder::class,

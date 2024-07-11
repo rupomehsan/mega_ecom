@@ -18,7 +18,7 @@ class GetAllFeaturedProduct
             $with = ['product_images:id,product_id,url', 'product_categories:id,title', 'product_brand:id,title'];
             $condition = [];
 
-            $data = self::$ProductModel::query()->where('is_featured', 1);
+            $data = self::$ProductModel::query()->where('is_featured', 1)->where('is_available', 1);
 
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {
                 $data = $data

@@ -143,7 +143,7 @@
     </footer>
     <!-- footer end -->
 
-    <all-categories/>
+    <all-categories />
 
     <!--Newsletter modal popup start-->
     <!-- <div class="modal fade bd-example-modal-lg blackfriday-modal theme-modal " id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -580,21 +580,19 @@
                                 <Link :href="`/product-details/${cart?.product?.slug}`">
                                 <h4>{{ cart?.product?.title }}</h4>
                                 </Link>
-                                <h6>
-                                    ${{ cart?.product?.current_price }}
-                                    <span>${{
-                        cart?.product?.customer_sales_price
-                    }}</span>
+                                <h6 class="d-flex gap-1">
+                                    <p v-if="cart?.product?.is_discount">${{ cart?.product?.current_price }}</p>
+                                    <span v-else>${{ cart?.product?.customer_sales_price }}</span>
                                 </h6>
                                 <div class="addit-box">
                                     <div class="qty-box">
                                         <div class="input-group">
                                             <button class="qty-minus" @click="
-                    cart_quantity_update(
-                        cart.id,
-                        'minus',
-                        null
-                    )
+                        cart_quantity_update(
+                            cart.id,
+                            'minus',
+                            null
+                        )
                         "></button>
                                             <input class="qty-adj form-control" type="number" min="1"
                                                 v-model="cart.quantity" @keyup="
@@ -823,6 +821,7 @@
                     </a>
                 </div>
             </div>
+            <div class="p-2 alert-danger mx-2 my-4">Please login for perform this action</div>
             <form class="theme-form" @submit.prevent="loginFormHandler($event)" method="post">
                 <div class="form-group">
                     <label>Email</label>
@@ -841,9 +840,9 @@
                 </a>
                 <div class="accout-fwd">
 
-                    <a href="https://themes.pixelstrap.com/bigdeal/html/register.html" class="d-block">
-                        <h6>you have no account ?<span>signup now</span></h6>
-                    </a>
+                    <Link href="/login" class="d-block">
+                    <h6>you have no account ?<span>signup now</span></h6>
+                    </Link>
                 </div>
             </form>
 

@@ -6,10 +6,10 @@
             </li>
             <li v-for="category in top_categories" :key="category.id">
                 <Link :href="`/category/${category.slug}`">
-                    <img :src="category.image" :alt="category.title">
-                    <span class="link_title">
-                        {{ category.title }}
-                    </span>
+                <img :src="`/${category.image}`" :alt="category.title">
+                <span class="link_title">
+                    {{ category.title }}
+                </span>
                 </Link>
             </li>
         </ul>
@@ -29,7 +29,7 @@ export default {
             let data = res.data;
             this.top_categories = data;
         },
-        close_category: function(){
+        close_category: function () {
             document.querySelector('.modal_category_left_side_show').classList.toggle('modal_category');
             document.querySelector('.modal_category_left_side_show').classList.toggle('active');
         }

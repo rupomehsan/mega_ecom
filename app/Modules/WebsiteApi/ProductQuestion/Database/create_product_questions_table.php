@@ -12,18 +12,21 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::create('product_questions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->nullable();
             $table->bigInteger('product_id')->nullable();
             $table->text('question')->nullable();
             $table->text('answare')->nullable();
+            $table->tinyInteger('is_approved')->default(0);
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
+
     }
 
     /**

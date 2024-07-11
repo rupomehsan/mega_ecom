@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('sales_ecommerce_orders', function (Blueprint $table) {
             $table->id();
 
-            $table->string('order_id', 100)->nullable();
+            $table->string('order_id', 100)->unique()->nullable();
             $table->date('date')->nullable();
 
             $table->enum('user_type', ['ecommerce', 'retail_order'])->nullable();

@@ -38047,7 +38047,7 @@ ul.sosiyal.sosiyal-inverse li:hover {
 .add_to_cart {
     position: fixed;
     background-color: #ffffff;
-    z-index: 9999;
+    z-index: 105;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }

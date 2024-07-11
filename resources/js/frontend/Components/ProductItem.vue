@@ -7,12 +7,13 @@
                     <img :src="check_image_url(`${product.product_image?.url}`)
                         " class="img-fluid" alt="product" />
                     </Link>
-                    <a @click="is_auth ? buyNow(product.id) : openAccount()" class="buy_now_btn c-pointer">
+                    <a v-if="product.is_available" @click="is_auth ? buyNow(product.id) : openAccount()"
+                        class="buy_now_btn c-pointer">
                         <i class="icon-shopping-cart icon"></i>
                         Buy Now
                     </a>
                 </div>
-                <div class="product-icon">
+                <div class="product-icon" v-if="product.is_available">
                     <button @click="is_auth ? add_to_cart(product.id) : openAccount()" title="add to cart"
                         class="tooltip-left" data-tippy-content="Add to cart" tabindex="0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -61,13 +62,24 @@
                         </h6>
                         </Link>
                     </div>
-                    <div class="detail-right">
-                        <div class="check-price">
-                            $ {{ (Math.random() * 999).toFixed(2) }}
-                        </div>
-                        <div class="price">
-                            $ {{ (Math.random() * 100).toFixed(2) }}
-                        </div>
+
+                    <div class="detail-right" v-if="product.is_available">
+                        <template v-if="product.is_discount">
+                            <div class="price">
+                                $ {{ product.current_price }}
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div class="check-price">
+                                $ {{ product.customer_sales_price }}
+                            </div>
+                        </template>
+
+
+                    </div>
+
+                    <div v-else class="out-of-stock text-center text-warning border py-2">
+                        Unavailable
                     </div>
                 </div>
             </div>

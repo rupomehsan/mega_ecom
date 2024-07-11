@@ -18,13 +18,13 @@
 
                 <div class="col-md-12">
                     <label>Write Your Review</label>
-                    <textarea class="form-control" id="review" placeholder="Write Your Testimonial Here" v-model="review"
-                        rows="6"></textarea>
+                    <textarea class="form-control" id="review" placeholder="Write Your Testimonial Here"
+                        v-model="review" rows="6"></textarea>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-12 multifile">
                     <label>Upload files</label>
-                    <input type="file" ref="fileInput" class="form-control" multiple @change="handleFileUpload">
+                    <input type="file" ref="fileInput" class="form-control " multiple @change="handleFileUpload">
                     <div class="file-info my-2">
                         {{ fileInfo }}
                     </div>
@@ -40,6 +40,9 @@
                 <div class="col-md-12">
                     <button class="btn btn-normal" type="submit">Submit Your Review</button>
                 </div>
+
+
+
             </div>
         </form>
     </div>
@@ -140,5 +143,19 @@ export default {
 
 .c-pointer {
     cursor: pointer;
+}
+
+.multifile {
+    position: relative;
+}
+
+.file-info.my-2 {
+    position: absolute;
+    z-index: 3;
+    background: white;
+    width: 200px;
+    height: 30px;
+    top: 40px;
+    left: 140px;
 }
 </style>

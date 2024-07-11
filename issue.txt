@@ -46,7 +46,9 @@ accesor running price ,percentage -dn
 kon url theke current url a ashse oitar track
 
 
+category static pages 4 ta
 
+blog dynamic
 
 
 

@@ -4,7 +4,7 @@
             <div class="col-xl-8">
                 <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab"
+                        <a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab"
                             aria-selected="false">
                             <i class="icofont icofont-ui-home"></i>
                             Specifications
@@ -12,8 +12,8 @@
                         <div class="material-border"></div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile"
-                            role="tab" aria-selected="true">
+                        <a class="nav-link " id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab"
+                            aria-selected="true">
                             <i class="icofont icofont-man-in-glasses"></i>
                             Details
                         </a>
@@ -69,78 +69,23 @@
                     </li>
                 </ul>
                 <div class="tab-content nav-material" id="top-tabContent">
-                    <div class="tab-pane fade" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-                        <table class="data-table flex-table" cellpadding="0" cellspacing="0">
-                            <colgroup>
-                                <col class="name" />
-                                <col class="value" />
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <td class="heading-row py-2" colspan="3">
-                                        <b>
-                                            Lense
-                                        </b>
-                                    </td>
-                                </tr>
-                            </thead>
+
+                    <div class="tab-pane fade active show" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
+                        <table class="table data-table flex-table" cellpadding="0" cellspacing="0">
                             <tbody>
-                                <tr>
-                                    <td class="name">Focal Length</td>
-                                    <td class="value">3.6mm</td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Angle of View</td>
-                                    <td class="value">93°(H), 48°(V), 115°(D), 355°Pan &amp; -5~80°Tilt
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Others</td>
-                                    <td class="value">Night Vision: 10m(33ft) Distance<br /></td>
-                                </tr>
-                            </tbody>
-                            <thead>
-                                <tr>
-                                    <td class="heading-row py-2" colspan="3">
-                                        <b>
-                                            Physical Specification
-                                        </b>
-                                    </td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="name">Dimension</td>
-                                    <td class="value">106.1 × 77.4× 77.4mm (4.17× 3.04 × 3.04 inch)</td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Weight</td>
-                                    <td class="value">238g (0.52lb)</td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Power</td>
-                                    <td class="value">
-                                        DC 5V1A Power Supply<br />
-                                        Power Consumption:&lt; 3.5W
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Interface</td>
-                                    <td class="value">
-                                        Micro SD Card Slot (up to 256GB)<br />
-                                        Built-in Mic &amp; Speaker<br />
-                                        Reset Button
-                                    </td>
+                                <tr v-for="item in product.product_varient_price" :key="item.id">
+                                    <!-- <td class="name">{{ item.product_varient_group_title?.title }}</td> -->
+                                    <td class="name fw-bold">{{ item.varient_title }}</td>
+                                    <td class="value ">{{ item.product_varient_values?.title }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane fade active show" id="top-profile" role="tabpanel"
-                        aria-labelledby="profile-top-tab">
-                        {{ product.description }}
+                    <div class="tab-pane fade " id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
+                        <div v-html="product.description"></div>
                     </div>
                     <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
-                        <div class="mt-3 text-center" v-if="video_url">
+                        <div class="mt-3 text-center " v-if="video_url">
                             <iframe width="560" height="315" :src="video_url" allow="autoplay; encrypted-media"
                                 allowfullscreen=""></iframe>
                         </div>
@@ -152,19 +97,11 @@
                         <write-review></write-review>
                     </div>
                     <div class="tab-pane fade" id="top-question" role="tabpanel" aria-labelledby="question-top-tab">
-                      <question></question>
+                        <question :product="product"></question>
                     </div>
                     <div class="tab-pane fade" id="top-policy" role="tabpanel" aria-labelledby="policy-top-tab">
                         <p>
-                            This electric device is covered by a one-year limited warranty from the date
-                            of purchase. The warranty covers defects in materials and workmanship under
-                            normal use. If a defect arises during the warranty period, we will repair or
-                            replace the device at no charge. This warranty does not cover damage caused
-                            by misuse, accidents, modifications, or unauthorized repairs. To obtain
-                            warranty service, please contact our customer support with proof of
-                            purchase. Shipping costs for returns may apply. This warranty gives you
-                            specific legal rights, and you may also have other rights which vary by
-                            jurisdiction.
+                            {{ product.warranty_policy }}
                         </p>
                     </div>
                     <div class="tab-pane fade" id="top-bestproduct" role="tabpanel"
@@ -173,174 +110,38 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <td colspan="5"><strong>Product Details</strong></td>
+                                        <td colspan="5"><strong>Best product comparison</strong></td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="compare-name">
-                                        <td>Product</td>
-                                        <td>
-                                            <a href="https://www.ultratech.com.bd/intel-core-i5-3470-3rd-gen-processor"><strong>Intel
-                                                    Core i5-3470 3rd Gen Processor</strong></a>
-                                        </td>
-                                        <td>
-                                            <a
-                                                href="https://www.ultratech.com.bd/intel-core-i5-2400-2nd-gen-310-ghz-processor"><strong>Intel
-                                                    Core i5-2400 2nd Gen 3.10 GHz Processor</strong></a>
-                                        </td>
-                                        <td>
-                                            <a
-                                                href="https://www.ultratech.com.bd/intel-core-i3-6100-6th-gen-processor-bulk"><strong>Intel
-                                                    Core i3 6100 6th Gen Processor (Bulk)</strong></a>
-                                        </td>
-                                        <td>
-                                            <a
-                                                href="https://www.ultratech.com.bd/intel-core-i5-4460-4th-generation-32-ghz-processor-tray"><strong>Intel
-                                                    Core i5 4460 4th Generation 3.2 GHz Processor
-                                                    TRAY</strong></a>
-                                        </td>
-                                    </tr>
-                                    <tr class="compare-image">
-                                        <td>Image</td>
-                                        <td class="text-left">
-                                            <img src="https://www.ultratech.com.bd/image/cache/catalog/products_2023/intel-core-i5-3470-3rd-gen-processor-90x90.jpg.webp"
-                                                alt="Intel Core i5-3470 3rd Gen Processor"
-                                                title="Intel Core i5-3470 3rd Gen Processor" class="img-thumbnail" />
-                                        </td>
-                                        <td class="text-left">
-                                            <img src="https://www.ultratech.com.bd/image/cache/catalog/products_2023/intel-core-i5-2400-2nd-gen-310-ghz-processor-90x90.jpg.webp"
-                                                alt="Intel Core i5-2400 2nd Gen 3.10 GHz Processor"
-                                                title="Intel Core i5-2400 2nd Gen 3.10 GHz Processor"
-                                                class="img-thumbnail" />
-                                        </td>
-                                        <td class="text-left">
-                                            <img src="https://www.ultratech.com.bd/image/cache/catalog/processor/intel/core-i3-6100/intel-core-i3-6100-6th-gen-processor-bulk-90x90.jpg.webp"
-                                                alt="Intel Core i3 6100 6th Gen Processor (Bulk)"
-                                                title="Intel Core i3 6100 6th Gen Processor (Bulk)"
-                                                class="img-thumbnail" />
-                                        </td>
-                                        <td class="text-left">
-                                            <img src="https://www.ultratech.com.bd/image/cache/catalog/processor/intel%20/core-i5-4460/intel-core-i5-4460-4th-generation-32-ghz-processor-tray-90x90.jpg.webp"
-                                                alt="Intel Core i5 4460 4th Generation 3.2 GHz Processor TRAY"
-                                                title="Intel Core i5 4460 4th Generation 3.2 GHz Processor TRAY"
-                                                class="img-thumbnail" />
-                                        </td>
-                                    </tr>
-                                    <tr class="compare-price">
-                                        <td>Price</td>
-                                        <td class=""><del>2,500৳</del> 1,900৳</td>
-                                        <td class=""><del>2,500৳</del> 1,500৳</td>
-                                        <td class=""><del>5,200৳</del> 2,400৳</td>
-                                        <td class=""><del>4,800৳</del> 2,500৳</td>
-                                    </tr>
-                                    <tr class="compare-model">
-                                        <td>Model</td>
-                                        <td>Core i5-3470</td>
-                                        <td>Core i5-2400</td>
-                                        <td>6100</td>
-                                        <td>Core i5 4460</td>
-                                    </tr>
-                                    <tr class="compare-manufacturer">
-                                        <td>Brand</td>
-                                        <td>Intel</td>
-                                        <td>Intel</td>
-                                        <td>Intel</td>
-                                        <td>Intel</td>
-                                    </tr>
-                                    <tr class="compare-availability">
-                                        <td>Availability</td>
-                                        <td>In Stock</td>
-                                        <td>In Stock</td>
-                                        <td>In Stock</td>
-                                        <td>In Stock</td>
-                                    </tr>
-                                    <tr class="compare-rating">
-                                        <td>Rating</td>
-                                        <td class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span> <br />
-                                            Based on 1 reviews.
-                                        </td>
-                                        <td class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span> <br />
-                                            Based on 1 reviews.
-                                        </td>
-                                        <td class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span> <span
-                                                class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <br />
-                                            Based on 2 reviews.
-                                        </td>
-                                        <td class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                    class="fa fa-star-o fa-stack-2x"></i></span> <br />
-                                            Based on 1 reviews.
-                                        </td>
-                                    </tr>
+                                    <template
+                                        v-for="(related_products, index) in product.related_compare_products_filter">
+                                        <tr class="compare-name"
+                                            v-if="index !== product.related_compare_products_filter.length - 1"
+                                            :key="index">
+                                            <template v-for="(item, index2) in related_products" :key="index2">
+                                                <td v-html="item"></td>
+                                            </template>
+                                        </tr>
+                                    </template>
                                 </tbody>
                                 <tfoot>
-                                    <tr>
-                                        <td></td>
-                                        <td class="out-of-stock">
-                                            <div class="compare-buttons">
-                                                <button class="btn btn-primary btn-cart"
-                                                    onclick="cart.add('7955', '1');"><span>Add to
-                                                        Cart</span></button>
-                                            </div>
-                                        </td>
-                                        <td class="out-of-stock">
-                                            <div class="compare-buttons">
-                                                <button class="btn btn-primary btn-cart"
-                                                    onclick="cart.add('7956', '1');"><span>Add to
-                                                        Cart</span></button>
-                                            </div>
-                                        </td>
-                                        <td class="out-of-stock">
-                                            <div class="compare-buttons">
-                                                <button class="btn btn-primary btn-cart"
-                                                    onclick="cart.add('1333', '1');"><span>Add to
-                                                        Cart</span></button>
-                                            </div>
-                                        </td>
-                                        <td class="out-of-stock">
-                                            <div class="compare-buttons">
-                                                <button class="btn btn-primary btn-cart"
-                                                    onclick="cart.add('5549', '1');"><span>Add to
-                                                        Cart</span></button>
-                                            </div>
-                                        </td>
+                                    <tr v-if="product.related_compare_products_filter">
+                                        <template
+                                            v-for="(item, index2) in product.related_compare_products_filter[0].length"
+                                            :key="index2">
+                                            <td v-if="index2 == 0">add to cart</td>
+                                            <td v-else class="out-of-stock">
+                                                <div class="compare-buttons">
+
+                                                    <button class="btn btn-primary btn-cart"
+                                                        @click="is_auth ? add_to_cart(item) : openAccount()"><span>
+                                                            Add to
+                                                            Cart</span></button>
+                                                </div>
+
+                                            </td>
+                                        </template>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -349,24 +150,25 @@
                     <div class="tab-pane fade" id="top-pricereview" role="tabpanel"
                         aria-labelledby="pricereview-top-tab">
                         <table class="table table-bordered">
-                            <thead>
+                            <!-- <thead>
                                 <tr>
                                     <td class="compatibility-table-name">
                                         <strong>Best intel Processor Series Price list 2024</strong>
                                     </td>
                                     <td class="compatibility-table-price"><strong>Price</strong></td>
                                 </tr>
-                            </thead>
+                            </thead> -->
                             <tbody>
-                                <tr v-for="i in 10" :key="i">
+                                <tr v-for="item in product.related_price_review" :key="item.id">
                                     <td class="compatibility-table-name">
-                                        <a href="#" class="compatibility_product_title">Intel Core i5
-                                            6500 6th gen 3.20GHz Processor (Tray)</a>
+                                        <a href="#" class="compatibility_product_title">
+                                            {{ item.title }}
+                                        </a>
                                     </td>
                                     <td class="compatibility-table-price">
                                         <p class="price">
-                                            <span class="new">4,300৳</span>
-                                            <span class="old">6,800৳</span>
+                                            <span class="new">{{ item.current_price }}৳</span>
+                                            <span class="old">{{ item.customer_sales_price }}৳</span>
                                         </p>
                                     </td>
                                 </tr>
@@ -374,40 +176,63 @@
                         </table>
                     </div>
                 </div>
+                <hr>
+
+                <review-show :product="product"></review-show>
             </div>
-            <hr class="my-3">
+
             <div class="col-xl-4">
                 <related-products :product="product"></related-products>
             </div>
         </div>
+
+
+
     </section>
 </template>
 
 <script>
 import Question from './Question.vue';
 import RelatedProducts from './RelatedProducts.vue';
+import ReviewShow from './ReviewShow.vue';
 import WriteReview from './WriteReview.vue';
 export default {
     props: {
         product: Object
     },
-    components: { RelatedProducts, WriteReview, Question },
+    components: { RelatedProducts, WriteReview, Question, ReviewShow },
     data: () => ({
-        video_url: '',
-        is_auth: false
+        video_url: ' ',
+        is_auth: false,
+        footer_sections: [],
+
     }),
     created: function () {
         this.video_url = this.getEmbedUrl(this.product.video_url);
         this.is_auth = localStorage.getItem("token") ? true : false;
     },
+
     methods: {
         getEmbedUrl(url) {
             if (url) {
                 const videoId = url.split('v=')[1];
                 return `https://www.youtube.com/embed/${videoId}`;
             }
-
-        }
+        },
+        add_to_cart: async function (productId) {
+            const response = await window.privateAxios(`/add-to-cart`, 'post',
+                {
+                    product_id: productId,
+                }
+            );
+            if (response.status === "success") {
+                window.s_alert(response.message);
+                this.get_all_cart_data();
+            }
+        },
+        openAccount() {
+            document.getElementById("myAccount").classList.add('open-side');
+        },
     }
 
 }

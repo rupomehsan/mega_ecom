@@ -24,7 +24,8 @@
                                 {{ product.current_price }} BDT
                             </span>
                         </div>
-                        <span class="product-price-save">-{{  Math.floor(product.discount_amount) }} {{ product.discount_type=='percent'?'%':'BDT' }} SAVE</span>
+                        <span class="product-price-save">-{{ Math.floor(product.discount_amount) }} {{
+                    product.discount_type == 'percent' ? '%' : 'BDT' }} SAVE</span>
                     </div>
                 </div>
                 <div class="product-core-info-list">
@@ -51,9 +52,12 @@
                     </span>
                     <span class="p-core-info-list-sub-title region-name" v-else>Bangladesh</span>
                 </div>
-                <color-varient></color-varient>
-                <common-varient></common-varient>
-                <div class="product-core-info-list">
+                <div class="short-description" v-html="product.short_description">
+
+                </div>
+                <!-- <color-varient></color-varient> -->
+                <!-- <common-varient></common-varient> -->
+                <!-- <div class="product-core-info-list">
                     <span class="p-core-info-list-title">Sim</span>
                     <div class="product-sim-system product-storages display-flex-center">
                         <div class="single-sim">
@@ -69,7 +73,7 @@
                             </label>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="product-core-info-list" v-if="product.warranty">
                     <span class="p-core-info-list-title">Warranty</span>
                     <span class="p-core-info-list-sub-title emi-facility">
@@ -115,17 +119,19 @@ import ColorVarient from '../Components/ColorVarient.vue'
 import CommonVarient from '../Components/CommonVarient.vue'
 import ProductImage from '../Components/ProductImage.vue'
 
-import { mapActions, mapState } from "pinia";
+import { mapActions } from "pinia";
 import { common_store } from "../../../Store/common_store";
 
 export default {
     components: { ProductImage, ColorVarient, CommonVarient },
-    props: ["product"],
+    props: {
+        product: Object
+    },
     data: () => ({
         quantity: 1,
     }),
     created: async function () {
-        // console.log(this.slug);
+        console.log("ff", this.product);
         this.is_auth = localStorage.getItem("token") ? true : false;
     },
     methods: {
@@ -163,4 +169,13 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.short-description ul {
+    display: grid;
+    gap: 10px;
+}
+
+.short-description ul li {
+    font-weight: bold;
+}
+</style>

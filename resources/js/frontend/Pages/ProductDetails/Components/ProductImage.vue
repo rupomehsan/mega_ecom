@@ -1,5 +1,7 @@
 <template>
-    <img :src="check_image_url(product.product_images[0].url)" alt="" class="img-fluid image_zoom_cls-0" />
+    <template v-if="product.product_images.length > 0">
+        <img :src="check_image_url(product.product_images[0].url)" alt="" class="img-fluid image_zoom_cls-0" />
+    </template>
 </template>
 
 <script>

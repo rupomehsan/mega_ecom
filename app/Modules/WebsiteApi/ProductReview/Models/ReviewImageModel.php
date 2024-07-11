@@ -30,4 +30,6 @@ class ReviewImageModel extends EloquentModel
     {
         return $q->where('status', 'active');
     }
+
+   
 }
