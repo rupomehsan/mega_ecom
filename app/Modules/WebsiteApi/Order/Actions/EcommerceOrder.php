@@ -11,7 +11,7 @@ class EcommerceOrder
     static $orderProductmodel = \App\Modules\SalesManagement\SalesEcommerceOrder\Models\SalesEcommerceOrderProductModel::class;
     static $cartModel = \App\Modules\WebsiteApi\Cart\Models\Model::class;
 
-    public static function execute()
+    public static function execute($request)
     {
         try {
 

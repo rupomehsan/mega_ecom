@@ -8,7 +8,7 @@
             </div>
             <div class="box-account box-info">
 
-                <div class="card order_history_card my-3" v-for="i in 5" :key="i">
+                <div class="card order_history_card my-3" v-for="order in order_list" :key="order.id">
                     <div class="card-header">
                         <div class="left">
                             <b>Order# 152690</b>
