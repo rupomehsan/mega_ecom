@@ -17,7 +17,7 @@
                             <div class="cat_item"
                                 @click="selected = category"
                                 :class="{active: selected.id == category.id}">
-                                <img :src="`/${'/'+category.image}`" :alt="category.title">
+                                <img :src="`${'/'+category.image}`" :alt="category.title">
                                 <span class="link_title">
                                     {{ category.title }}
                                 </span>
@@ -31,7 +31,7 @@
                     </li>
                     <li v-for="category in nav_categories" :key="category.id">
                         <div @click="visit_category(category.slug)">
-                            <img :src="'/'+`/${category.image}`" :alt="category.title">
+                            <img :src="'/'+`${category.image}`" :alt="category.title">
                             <span class="link_title">
                                 {{ category.title }}
                             </span>
