@@ -18,12 +18,19 @@
 
 <script>
 export default {
-    props: ["product"],
+    props: {
+        product: Object
+    },
     data: () => ({
         imageUrl: '',
     }),
     created() {
-        this.imageUrl = this.check_image_url(this.product.product_images[0].url);
+        this.imageUrl = this.check_image_url(this.product.product_images[0].url ?? '');
+    },
+    watch: {
+        product() {
+            this.imageUrl = this.check_image_url(this.product.product_images[0].url ?? '');
+        }
     },
     methods: {
         check_image_url: function (url) {

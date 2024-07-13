@@ -13,8 +13,8 @@
                                 </td>
 
                                 <td>
-                                    Invoice #: {{ order_info.order_id }}<br />
-                                    Created: {{ new Date(order_info.created_at).toDateString() }}<br />
+                                    Invoice #: <span class="fw-bold"> {{ order_info.order_id }}</span><br />
+                                    Date : {{ new Date(order_info.created_at).toDateString() }}<br />
                                 </td>
                             </tr>
                         </table>
@@ -22,24 +22,23 @@
                 </tr>
 
                 <tr class="information">
-                    <td colspan="2">
-                        <table>
-                            <tr>
-                                <td>
-                                    {{ order_info.shipping_address }}
-                                </td>
+                    <td style="width: 50%">
+                        <h4>Delivery Information</h4><br>
+                        {{ order_info.order_delivery_address.address }}.<br />
+                        {{ order_info.order_delivery_address.station?.name }} ,
+                        {{ order_info.order_delivery_address.district?.name }}, {{
+        order_info.order_delivery_address.division?.name }} <br><br>
+                    </td>
 
-                                <td>
-                                    {{ order_info.billing_address }}
-                                </td>
-                            </tr>
-                        </table>
+                    <td>
+                        <h4>User Information</h4><br>
+                        {{ order_info.user?.name }}.<br />
+                        {{ order_info.user?.email }}<br />
+                        {{ order_info.user?.phone_number }}
                     </td>
                 </tr>
 
-
-
-                <tr class="heading">
+                <tr class="heading ">
                     <td>Item</td>
 
                     <td>Price</td>
@@ -50,15 +49,15 @@
 
                     <td>{{ item.product?.current_price }}</td>
                 </tr>
-
-
-
                 <tr class="total">
                     <td></td>
 
                     <td>Total: {{ order_info.total }}</td>
                 </tr>
             </table>
+        </div>
+        <div class="text-center">
+            <button id="printBtn" @click="printInvoice" class="btn btn-info mt-3 fw-bold text-white w-50 py-2">Print Invoice</button>
         </div>
     </ProfileLayout>
 </template>
@@ -95,6 +94,9 @@ export default {
 
 
         },
+        printInvoice() {
+            window.print();
+        }
     },
 
 };
@@ -190,5 +192,36 @@ export default {
 
 .invoice-box.rtl table tr td:nth-child(2) {
     text-align: left;
+}
+
+@media print {
+    header {
+        display: none;
+    }
+    footer {
+        display: none;
+    }
+    .account-sidebar {
+        display: none;
+    }
+    .breadcrumb {
+        display: none;
+    }
+    .category_modal_toggler {
+        display: none;
+    }
+    #printBtn {
+        display: none;
+    }
+    .card{
+      border: none !important;
+    }
+    .invoice-box{
+      border: none !important;
+      box-shadow: none !important;
+    }
+    .cart_total{
+      display: none;
+    }
 }
 </style>

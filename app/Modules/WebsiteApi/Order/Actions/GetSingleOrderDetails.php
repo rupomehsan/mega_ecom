@@ -19,7 +19,12 @@ class GetSingleOrderDetails
             $orderInfo = self::$model::with(
                 'order_products',
                 'order_products.product',
-                'order_products.product.product_image'
+                'order_products.product.product_image',
+                'order_delivery_address:id,address,district_id,division_id,station_id',
+                'order_delivery_address.division:id,name',
+                'order_delivery_address.district:id,name',
+                'order_delivery_address.station:id,name',
+                'user',
             )
                 ->where('order_id', $orderId)->where('user_id', auth()->id())
                 ->first();
