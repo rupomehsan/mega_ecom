@@ -20,8 +20,7 @@ class HomePageGlobalSearch
                 ->where(function ($q) use ($searchKey) {
                     $q->where('title', $searchKey)
                         ->orWhere('title', 'like', '%' . $searchKey . '%')
-                        ->orWhere('description', 'like', '%' . $searchKey . '%')
-                        ->orWhere('short_description', 'like', '%' . $searchKey . '%');
+                        ->orWhere('search_keywords', 'like', '%' . $searchKey . '%');
                 })
                 ->where("status", "active")
                 ->paginate(10, ['id', 'title', 'slug', 'purchase_price']);
