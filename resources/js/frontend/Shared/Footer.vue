@@ -902,8 +902,9 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { common_store } from "../Store/common_store";
+
 import { auth_store } from "../Store/auth_store.js";
-import AllCategories from '../Components/AllCategories.vue';
+import AllCategories from '../Pages/Home/Components/Category/AllCategories.vue';
 
 export default {
     components: { AllCategories },
@@ -936,6 +937,7 @@ export default {
             all_cart_data: "all_cart_data",
             total_cart_price: "total_cart_price",
         }),
+
 
     },
 };

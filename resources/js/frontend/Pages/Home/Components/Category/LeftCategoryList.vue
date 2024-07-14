@@ -4,7 +4,7 @@
             <li class="category_modal_close" @click="close_category">
                 <i class="fa fa-close"></i>
             </li>
-            <li v-for="category in top_categories" :key="category.id">
+            <li v-for="category in side_nav_categories" :key="category.id">
                 <Link :href="`/category/${category.slug}`">
                 <img :src="`/${category.image}`" :alt="category.title">
                 <span class="link_title">
@@ -16,22 +16,22 @@
     </div>
 </template>
 <script>
+
+import { use_home_page_store } from '../../Store/home_page_store.js';
+import { mapState } from 'pinia';
+
 export default {
-    data: () => ({
-        top_categories: [],
-    }),
-    created: function () {
-
-    },
     methods: {
-
         close_category: function () {
             document.querySelector('.modal_category_left_side_show').classList.toggle('modal_category');
             document.querySelector('.modal_category_left_side_show').classList.toggle('active');
         }
-    }
+    },
+    computed: {
+        ...mapState(use_home_page_store, {
+            side_nav_categories: "side_nav_categories",
+        }),
+    },
 }
 </script>
-<style lang="">
 
-</style>

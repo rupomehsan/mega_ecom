@@ -57,12 +57,12 @@
 </template>
 
 <script>
-import { computed, defineAsyncComponent, onMounted } from 'vue';
 import 'vue3-carousel/dist/carousel.css'
+import { defineAsyncComponent } from 'vue';
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
-import LeftCategoryList from './LeftCategoryList.vue';
-
-import { use_home_page_store } from '../Pages/Home/Store/home_page_store.js';
+import LeftCategoryList from '../Category/LeftCategoryList.vue';
+import { mapState } from 'pinia';
+import { use_home_page_store } from '../../Store/home_page_store.js';
 
 export default {
     components: {
@@ -75,17 +75,12 @@ export default {
             import('./Slider.vue')
         ),
     },
-    setup() {
-        const homePageStore = use_home_page_store()
-        const home_hero_slider_side_banner = computed(() => homePageStore.home_hero_slider_side_banner);
+    
+    computed: {
+        ...mapState(use_home_page_store, {
+            home_hero_slider_side_banner: 'home_hero_slider_side_banner',
+        }),
 
-        // onMounted(async () => {
-        //     await homePageStore.get_all_home_slider_side_banners()
-        // })
-
-        return {
-            home_hero_slider_side_banner
-        }
     },
 
 };

@@ -58,18 +58,21 @@ class CategoryController extends Controller
         ])
             ->where('status', 'active')
             ->orderBy('serial', 'ASC')
-            ->limit(10)
+            ->take(10)
             ->get();
-        return response()->json($data);
+        $response = entityResponse($data);
+        $response->header('Cache-Control', 'public, max-age=300')
+            ->header('Expires', now()->addMinutes(1)->toRfc7231String());
+        return $response;
     }
 
     public function varients()
     {
         $data = ProductVarient::select([
             'id', 'title',
-        ])->get()->map(function ($i) {
+        ])->take(10)->get()->map(function ($i) {
             $i->values = ProductVarientValue::where('product_varient_id', $i->id)
-                ->select('id', 'product_varient_id', 'title')->get();
+                ->select('id', 'product_varient_id', 'title')->take(10)->get();
             return $i;
         });
         return response()->json($data);
@@ -82,7 +85,7 @@ class CategoryController extends Controller
         $advertise = $category->advertises()->where('status', 'active')->first();
         $childrens = $category->childrens()->get();
 
-        $products->setPath('/category/'.$slug);
+        $products->setPath('/category/' . $slug);
 
         return response()->json([
             "category" => $category,

@@ -8,7 +8,6 @@
                     </div>
                 </div>
             </slide>
-
             <!-- <template #addons>
                 <navigation />
                 <pagination />
@@ -38,6 +37,10 @@
 
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+
+import { use_home_page_store } from '../../Store/home_page_store.js';
+import { mapState } from 'pinia';
+
 export default {
     components: {
         Carousel,
@@ -45,16 +48,18 @@ export default {
         Pagination,
         Navigation,
     },
+
     data: () => ({
-        home_hero_sliders: [],
+        is_loaded: false
     }),
-    created: async function () {
-        await this.get_all_home_hero_sliders()
+
+    computed: {
+
+        ...mapState(use_home_page_store, {
+            home_hero_sliders: 'home_hero_sliders',
+        })
+
     },
-    methods: {
 
-       
-
-    }
 };
 </script>

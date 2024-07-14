@@ -44,23 +44,19 @@
 </template>
 <script>
 import { router } from '@inertiajs/vue3'
+import { use_home_page_store } from "../../Store/home_page_store";
+import { mapState } from 'pinia';
 export default {
 
     data: () => ({
-        parent_categories: [],
-        nav_categories: [],
         selected: {},
     }),
-    created: function () {
-
-    },
     watch: {
         selected: function () {
             this.get_sub_categories();
         }
     },
     methods: {
-
         close_category: function () {
             document.querySelector('.modal_category_all_page').classList.toggle('active');
         },
@@ -71,7 +67,13 @@ export default {
             this.close_category();
             router.visit(`/category/${slug}`);
         }
-    }
+    },
+    computed: {
+        ...mapState(use_home_page_store, {
+            parent_categories: "parent_categories",
+            nav_categories: "side_nav_categories",
+        }),
+    },
 }
 </script>
 <style lang="">

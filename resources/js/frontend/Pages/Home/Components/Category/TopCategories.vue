@@ -51,22 +51,10 @@
 <script>
 import { computed, onMounted } from 'vue';
 
-import { use_home_page_store } from '../Pages/Home/Store/home_page_store.js';
-
+import { use_home_page_store } from '../../Store/home_page_store.js';
+import { mapState } from 'pinia';
 export default {
-    setup() {
 
-        const homePageStore = use_home_page_store();
-        const all_category_groups = computed(() => homePageStore.all_category_groups);
-        const all_top_products_offer = computed(() => homePageStore.all_top_products_offer);
-
-
-        return {
-            all_category_groups,
-            all_top_products_offer,
-        }
-
-    },
     data: () => ({
         categories: [
             {
@@ -120,7 +108,15 @@ export default {
                 image: '/frontend/assets/images/heating-cooling-air-quality.webp',
             },
         ]
-    })
+    }),
+
+    computed: {
+        ...mapState(use_home_page_store, {
+            all_category_groups: 'all_category_groups',
+            all_top_products_offer: 'all_top_products_offer',
+        })
+    }
+    
 }
 </script>
 
