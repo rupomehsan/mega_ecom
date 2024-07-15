@@ -10,6 +10,7 @@ class Model extends EloquentModel
     protected $table = "product_brands";
     protected $guarded = [];
     static $productModel = \App\Modules\ProductManagement\Product\Models\Model::class;
+    static $productCategoryBrandModel = \App\Modules\ProductManagement\Product\Models\ProductCategoryBrandModel::class;
 
     protected static function booted()
     {
@@ -31,6 +32,10 @@ class Model extends EloquentModel
     public function products()
     {
         return $this->hasMany(self::$productModel, 'product_brand_id');
+    }
+    public function product_category_brands()
+    {
+        return $this->hasMany(self::$productCategoryBrandModel, 'product_brand_id');
     }
 
 

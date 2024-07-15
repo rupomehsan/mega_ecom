@@ -11,6 +11,7 @@ class Model extends EloquentModel
 
     protected $table = "product_varient_values";
     protected $guarded = [];
+    static $ProductCategoryVarientModel = \App\Modules\ProductManagement\Product\Models\ProductCategoryVarientModel::class;
 
     protected static function booted()
     {
@@ -35,5 +36,9 @@ class Model extends EloquentModel
 
     public function product_varient(){
         return $this->belongsTo(self::$ProductVarientmodel,'product_varient_id');
+    }
+    public function productCategoryVarients()
+    {
+        return $this->hasMany(self::$ProductCategoryVarientModel, 'product_varient_value_id');
     }
 }

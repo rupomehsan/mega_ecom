@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 class Model extends EloquentModel
 {
     static $ProductVerientGroupModel = \App\Modules\ProductManagement\ProductVarientGroup\Models\Model::class;
+    static $ProductCategoryVarientModel = \App\Modules\ProductManagement\Product\Models\ProductCategoryVarientModel::class;
 
     protected $table = "product_varients";
     protected $guarded = [];
@@ -36,5 +37,9 @@ class Model extends EloquentModel
     public function product_varient_group()
     {
         return $this->belongsTo(self::$ProductVerientGroupModel, 'product_varient_group_id');
+    }
+    public function productCategoryVarients()
+    {
+        return $this->hasMany(self::$ProductCategoryVarientModel, 'product_varient_id');
     }
 }

@@ -15,6 +15,8 @@ Route::prefix('v1')->group(function () {
     Route::get('get-all-top-product-offer', [Controller::class, 'GetAllProductOffers']);
     Route::get('get-all-top-products-offer-by-offer-id/{slug}', [Controller::class, 'GetAllOfferProductsByOfferId']);
     Route::get('get-all-products-and-single-group-by-category-group-id/{slug}', [Controller::class, 'GetSingleCategoryGroupWithProduct']);
+    Route::get('get-product-category-varients/{slug}', [Controller::class, 'GetProductCategoryVarients']);
+    Route::get('get-product-category-brands/{slug}', [Controller::class, 'GetProductCategoryBrands']);
 
 
 });

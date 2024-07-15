@@ -24,12 +24,12 @@
 <script>
 import Layout from "../../Shared/Layout.vue";
 import HeroSlider from "./Components/Slider/HeroSlider.vue";
-import BreakingNews from "./Components/BreakingNews.vue";
+import BreakingNews from "./Sections/BreakingNews.vue";
 import TopCategories from "./Components/Category/TopCategories.vue";
 import OurServiceType from "../../Components/OurServiceType.vue";
-import FeaturedProducts from "./Components/FeaturedProducts.vue";
+import FeaturedProducts from "./Sections/FeaturedProducts.vue";
 import BottomDescription from "./Sections/BottomDescription.vue";
-import Brands from "./Components/Brands.vue";
+import Brands from "./Sections/Brands.vue";
 import JoinNewsLetter from "./Sections/JoinNewsLetter.vue";
 
 import { mapActions, mapState } from 'pinia';

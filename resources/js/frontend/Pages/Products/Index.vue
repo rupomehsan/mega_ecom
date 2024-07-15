@@ -14,7 +14,7 @@
                     v-html="category.page_header_description"></div>
                 <ul class="page_sub_category_lists">
                     <li v-for="sub in childrens" :key="sub.id">
-                        <Link :href="`/category/${sub.slug}`">
+                        <Link :href="`/products/${sub.slug}`">
                         {{ sub.title }}
                         </Link>
                     </li>
@@ -104,7 +104,7 @@
 
                                             <div class=" py-5">
                                                 <div class="product_list"
-                                                    :class="{ product_left: products.data.length < 5 }">
+                                                    :class="{ product_left: products.data?.length < 5 }">
                                                     <div v-for="i in products.data" :key="i.name">
                                                         <ProductItem :product="i" />
                                                     </div>
@@ -169,66 +169,74 @@ import Layout from "../../Shared/Layout.vue";
 import PriceRange from "./CategoryVarients/PriceRange.vue";
 import BrandVarients from "./CategoryVarients/BrandVarients.vue";
 import AllVarients from "./CategoryVarients/AllVarients.vue";
-import ProductItem from "../../Components/ProductItem.vue";
-import axios from "axios";
+import ProductItem from "./Components/ProductItem.vue";
+
 import BreadCumb from '../../Components/BreadCumb.vue';
+import { product_store } from "./Store/product_store.js"
+import { mapActions, mapState } from 'pinia';
 export default {
     components: { Layout, PriceRange, BrandVarients, AllVarients, ProductItem, BreadCumb },
     props: ['slug', 'page'],
-    data: () => ({
-        category: {},
-        products: {
-            data: [],
-            links: [],
-        },
-        childrens: [],
-        advertise: null,
-        bread_cumb: [
-            {
-                title: 'category',
-                url: '#',
-                active: false,
-            },
-        ],
-    }),
-    created: function () {
-        this.get_category();
+
+    setup(props) {
+        let use_product_store = product_store();
+        use_product_store.slug = props.slug;
+    },
+
+    created: async function () {
+        await this.get_products_by_category_id();
+        await this.get_product_category_wise_brands(this.slug);
+        await this.get_product_category_varients(this.slug);
+        await this.set_bread_cumb();
     },
     methods: {
-        get_category: async function () {
-            let url = new URL(location.origin + `/api/v1/category/${this.slug}`);
-            url.searchParams.set('page', this.page);
+        ...mapActions(product_store, {
+            get_products_by_category_id: "get_products_by_category_id",
+            get_product_category_varients: "get_product_category_varients",
+            get_product_category_wise_brands: "get_product_category_wise_brands",
+            load_product: "load_product",
+            set_bread_cumb: "set_bread_cumb",
+            get_min_max_price: "get_min_max_price",
+        }),
 
-            let res = await axios.get(url.href);
-            let data = res.data;
-            this.category = data.category;
-            this.products = data.products;
-            this.advertise = res.data.advertise;
-            this.childrens = res.data.childrens;
-            this.bread_cumb.push({
-                title: this.category.title,
-                url: '/category/' + this.category.slug,
-                active: true,
-            },)
-        },
         toggle_list: function () {
             $(this.$refs.items).slideToggle();
         },
-        load_product: async function (link) {
-            try {
-                let link_url = new URL(location.origin + link.url);
+    },
 
-                let url = new URL(location.origin + `/api/v1/category/${this.slug}`);
-                url.searchParams.set('page', link_url.searchParams.get('page'));
+    computed: {
+        ...mapState(product_store, {
+            products: 'products',
+            category: 'category',
+            advertise: 'advertise',
+            childrens: 'childrens',
+            bread_cumb: 'bread_cumb',
+            variant_values_id: 'variant_values_id',
+            brand_id: 'brand_id',
+        })
+    },
 
-                let res = await axios.get(url.href);
-                this.products = res.data.products;
-            } catch (error) {
+    watch: {
+        variant_values_id: {
+            handler: async function () {
+                await this.get_products_by_category_id();
+            },
 
-            }
+            deep: true
+        },
+        brand_id: {
+            handler: async function () {
+                await this.get_products_by_category_id();
+            },
+
+            deep: true
         }
     }
+
+
+
 };
+
 </script>
 
 

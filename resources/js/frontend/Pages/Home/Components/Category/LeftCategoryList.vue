@@ -5,7 +5,7 @@
                 <i class="fa fa-close"></i>
             </li>
             <li v-for="category in side_nav_categories" :key="category.id">
-                <Link :href="`/category/${category.slug}`">
+                <Link :href="`/products/${category.slug}`">
                 <img :src="`/${category.image}`" :alt="category.title">
                 <span class="link_title">
                     {{ category.title }}
