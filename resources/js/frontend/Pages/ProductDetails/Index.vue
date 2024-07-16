@@ -46,6 +46,7 @@ export default {
     created: async function () {
         await this.get_single_product_initial_data();
         await this.get_single_product_details();
+        await this.get_all_question_and_answers();
         await this.get_top_products();
     },
 
@@ -54,6 +55,7 @@ export default {
         ...mapActions(useProductDetailsStore, {
             get_single_product_initial_data: "get_single_product_initial_data",
             get_single_product_details: "get_single_product_details",
+            get_all_question_and_answers: "get_all_question_and_answers",
             get_top_products: "get_top_products",
         })
     },

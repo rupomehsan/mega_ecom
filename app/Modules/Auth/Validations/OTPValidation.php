@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class LoginValidation extends FormRequest
+class OTPValidation extends FormRequest
 {
     /**
      * Determine if the  is authorized to make this request.
@@ -42,9 +42,8 @@ class LoginValidation extends FormRequest
     public function rules(): array
     {
         return [
-            'phone_number' => 'required | sometimes',
-            // 'email' => 'required | sometimes',
-            // 'password' => 'required | sometimes|min:8',
+            'otp' => 'required',
+            'phone_number' => 'sometimes',
         ];
     }
 }

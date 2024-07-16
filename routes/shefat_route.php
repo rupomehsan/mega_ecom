@@ -40,7 +40,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('/profile/edit-address', 'Website\ProfileController@edit_address')->name('website_edit_address');
 
     Route::get('/login', 'Website\AuthController@login')->name('login');
-    Route::post('/login', 'Website\AuthController@login_submit')->name('login_submit');
+    Route::get('/register', 'Website\AuthController@register')->name('register');
 
     Route::get('/uploads_variant', 'Website\TestController@uploads_variant');
     Route::get('/attach_category_into_products', 'Website\TestController@attach_category_into_products');

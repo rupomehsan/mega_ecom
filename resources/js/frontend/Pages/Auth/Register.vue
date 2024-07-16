@@ -8,37 +8,40 @@
 
         <section class="login-page section-big-py-space b-g-light">
             <div class="custom-container">
-                <div class="row" v-if="is_login">
+                <div class="row" v-if="is_register">
                     <div class="col-xl-4 col-lg-6 col-md-8 offset-xl-4 offset-lg-3 offset-md-2">
                         <div class="theme-card">
-                            <h3 class="text-center">Login</h3>
-                            <form class="theme-form" @submit.prevent="loginFormHandler($event)" method="post">
-                                <label>Enter your Phone</label>
-                                <input type="number" name="phone_number" id="phone_number" class="form-control"
-                                    placeholder="Enter your phone number" />
-
-                                <!-- <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="text" name="email" id="email" class="form-control"
-                                        placeholder="Email" />
-                                </div> -->
+                            <h3 class="text-center">Register</h3>
+                            <form class="theme-form" @submit.prevent="registerFormHandler($event)" method="post">
+                                <div class="form-group">
+                                    <label>Enter your Phone</label>
+                                    <input type="number" name="phone_number" id="phone_number" class="form-control"
+                                        placeholder="Enter your phone number" />
+                                </div>
                                 <!-- <div class="form-group">
                                     <label>Password</label>
-                                    <input type="password" name="password" id="password" class="form-control"
-                                        placeholder="Enter your password" />
+                                    <div class="password-icon">
+                                        <input :type="type" name="password" id="password"
+                                            class="form-control position-relative" placeholder="Enter your password" />
+                                        <i class="fa fa-eye" :class="{ 'fa-eye-slash': type === 'password' }"
+                                            @click="showPassword"></i>
+                                    </div>
                                 </div> -->
-
-                                <button class="btn btn-normal mt-2">Login</button>
+                                <button class="btn btn-normal">Register</button>
                                 <a class="float-end txt-default mt-2" href="#">
                                     Forgot your password?
                                 </a>
                             </form>
-                            <p class="mt-3">Sign up for a free account at our store. Registration is quick and easy. It
-                                allows you to be able to order from our shop. To start shopping click register.</p>
-                            <Link href="/register" class="txt-default pt-3 d-block">Create an Account</Link>
+
+                            <p class="mt-3 d-flex align-items-center gap-2">
+                                <span> Already have an account?</span>
+                                <Link href="login" class="txt-default  d-block">Login</Link>
+                            </p>
+
                         </div>
                     </div>
                 </div>
+
                 <div class="row" v-if="is_otp_verify">
                     <div class="col-xl-4 col-lg-6 col-md-8 offset-xl-4 offset-lg-3 offset-md-2">
                         <div class="theme-card">
@@ -69,13 +72,13 @@ export default {
     data: () => ({
         bread_cumb: [
             {
-                title: 'login',
-                url: '/login',
+                title: 'register',
+                url: '/register',
                 active: true,
             },
         ],
-
-        is_login: true,
+        type: "password",
+        is_register: true,
         is_otp_verify: false,
         phone_number: "",
 
@@ -85,21 +88,24 @@ export default {
         if (token) {
             window.location.href = "/profile";
         }
-
     },
     methods: {
-
-        loginFormHandler: async function (event) {
+        ...mapActions(auth_store, {
+            check_is_auth: "check_is_auth",
+            user_login: "user_login",
+        }),
+        registerFormHandler: async function (event) {
             let formData = new FormData(event.target);
-            let response = await axios.post('/login', formData)
+            let response = await axios.post('/register', formData)
             if (response.data?.status === "success") {
                 window.s_alert(response.data?.message);
                 this.is_register = false;
                 this.is_otp_verify = true;
                 this.phone_number = response.data?.data?.phone_number;
+                console.log(this.phone_number);
+
             }
         },
-
         OtpVerifyFormHandler: async function (event) {
             let formData = new FormData(event.target);
             formData.append("phone_number", this.phone_number);
@@ -114,10 +120,31 @@ export default {
 
             }
         },
-
+        showPassword: function () {
+            if (this.type === "password") {
+                this.type = "text";
+            } else {
+                this.type = "password";
+            }
+        }
     },
-
+    computed: {
+        ...mapState(auth_store, {
+            is_auth: "is_auth",
+        }),
+    },
 };
 </script>
 
-<style></style>
+<style>
+.password-icon {
+    position: relative;
+}
+
+.password-icon i {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    cursor: pointer;
+}
+</style>

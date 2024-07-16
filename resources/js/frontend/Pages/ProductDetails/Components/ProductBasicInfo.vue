@@ -131,7 +131,6 @@ export default {
         quantity: 1,
     }),
     created: async function () {
-        console.log("ff", this.product);
         this.is_auth = localStorage.getItem("token") ? true : false;
     },
     methods: {
@@ -139,8 +138,6 @@ export default {
             add_to_wish_list: "add_to_wish_list",
             get_all_cart_data: "get_all_cart_data",
         }),
-
-
         openAccount() {
             document.getElementById("myAccount").classList.add('open-side');
         },
