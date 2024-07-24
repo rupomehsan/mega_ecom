@@ -39,6 +39,11 @@ class Model extends EloquentModel
         return $this->hasMany(Model::class, 'parent_id');
     }
 
+    public function all_childrens()
+    {
+        return $this->hasMany(Model::class, 'parent_id')->with('all_childrens');
+    }
+
     public function advertises()
     {
         return $this->hasMany(AdvertiseModel::class, 'product_category_id');

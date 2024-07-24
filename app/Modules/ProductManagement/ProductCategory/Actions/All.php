@@ -36,7 +36,7 @@ class All
 
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
-                $data = $data->where(function ($q) use ($searchKey) {
+                $data->where(function ($q) use ($searchKey) {
                     $q->where('title', $searchKey);
                     $q->orWhere('title', 'like', '%' . $searchKey . '%');
                 });
