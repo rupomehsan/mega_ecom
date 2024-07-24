@@ -11,7 +11,6 @@ class Model extends EloquentModel
     protected $table = "product_categories";
     protected $guarded = [];
     static $productModel = \App\Modules\ProductManagement\Product\Models\Model::class;
-    static $brandsModel = \App\Modules\ProductManagement\ProductBrand\Models\Model::class;
 
     protected static function booted()
     {
@@ -34,11 +33,6 @@ class Model extends EloquentModel
         return $this->belongsToMany(self::$productModel,'product_category_products',
             'product_category_id', 'product_id');
     }
-    public function brands()
-    {
-        return $this->belongsToMany(self::$brandsModel,'product_category_brand',
-            'product_category_id', 'product_brand_id');
-    }
 
     public function childrens()
     {
@@ -53,5 +47,10 @@ class Model extends EloquentModel
     public function scopeActive($q)
     {
         return $q->where('status', 'active');
+    }
+
+    public function scopeInactive($q)
+    {
+        return $q->where('status', 'inactive');
     }
 }

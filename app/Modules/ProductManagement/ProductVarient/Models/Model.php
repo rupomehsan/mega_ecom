@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 class Model extends EloquentModel
 {
     static $ProductVerientGroupModel = \App\Modules\ProductManagement\ProductVarientGroup\Models\Model::class;
-    static $ProductCategoryVarientModel = \App\Modules\ProductManagement\Product\Models\ProductCategoryVarientModel::class;
 
     protected $table = "product_varients";
     protected $guarded = [];
@@ -38,8 +37,13 @@ class Model extends EloquentModel
     {
         return $this->belongsTo(self::$ProductVerientGroupModel, 'product_varient_group_id');
     }
-    public function productCategoryVarients()
+
+    public function values(){
+        return $this->hasMany(\App\Modules\ProductManagement\ProductVarientValue\Models\Model::class,'product_varient_id');
+    }
+
+    public function scopeInactive($q)
     {
-        return $this->hasMany(self::$ProductCategoryVarientModel, 'product_varient_id');
+        return $q->where('status', 'inactive');
     }
 }

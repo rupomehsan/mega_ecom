@@ -12,6 +12,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/blog-details/{slug}', 'Website\WebsiteController@blogDetails')->name('website_blog_details');
 
     Route::get('/products/{slug}', 'Website\WebsiteController@products')->name('website_products');
+    Route::get('/category/{slug}', 'Website\WebsiteController@products')->name('website_products');
     Route::get('/category-group/{slug}', 'Website\WebsiteController@category_group_products')->name('category_group_products');
 
     Route::get('/product-details/{slug}', 'Website\WebsiteController@products_details')->name('website_products_details');
