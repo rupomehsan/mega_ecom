@@ -14,7 +14,10 @@ class All
             $orderByType = request()->input('sort_type') ?? 'ASC';
             $status = request()->input('status') ?? 'active';
             $fields = request()->input('fields') ?? ['id', 'title', "status", 'slug', 'created_at'];
-            $with = [];
+            $with = [
+                'parent:id,title',
+                'group:id,title',
+            ];
             $condition = [];
 
             if (request()->has('with')) {

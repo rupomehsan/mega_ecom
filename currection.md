@@ -1,3 +1,7 @@
+all management
+1. local and live er default fields gulo thik kora
+
+
 user management
 
 1. all data api te by default query parameter gulo validation kora
