@@ -48,9 +48,14 @@ class Model extends EloquentModel
         return $q->where('status', 'active');
     }
 
+    public function scopeInactive($q)
+    {
+        return $q->where('status', 'inactive');
+    }
+
     public function product_categories()
     {
-        return $this->belongsToMany(self::$productCategoryModel, 'product_category_products', 'product_id', 'product_category_id', 'product_category_group_id');
+        return $this->belongsToMany(self::$productCategoryModel, 'product_category_products', 'product_id', 'product_category_id');
     }
     public function product_category_group_products()
     {
