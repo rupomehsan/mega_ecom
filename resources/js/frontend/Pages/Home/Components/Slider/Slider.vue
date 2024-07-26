@@ -4,7 +4,7 @@
             <slide v-for="slider in home_hero_sliders" :key="slider.id">
                 <div>
                     <div class="slider-banner">
-                        <img :src="`/${slider.image}`" class="w-100" />
+                        <img :src="`${load_image(slider.image, true)}`" alt="top gadgets in bd" class="w-100" />
                     </div>
                 </div>
             </slide>
@@ -52,6 +52,10 @@ export default {
     data: () => ({
         is_loaded: false
     }),
+
+    methods: {
+        load_image: window.load_image,
+    },
 
     computed: {
 

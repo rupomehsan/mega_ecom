@@ -18,7 +18,7 @@ class GetProductDetails
 
             $with = [
                 'product_images:id,product_id,url',
-                'product_categories:id,title',
+                'product_categories:id,title,slug',
                 'product_brand:id,title',
                 'product_region',
                 'product_region.country',

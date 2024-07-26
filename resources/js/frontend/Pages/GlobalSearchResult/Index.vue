@@ -114,7 +114,7 @@ import BreadCumb from '../../Components/BreadCumb.vue';
 
 import { use_global_search_store } from "./Store/global_search_store.js"
 
-import ProductItem from "../../Components/ProductItem.vue";
+import ProductItem from "../Products/Components/ProductItem.vue";
 import { mapActions, mapState, mapWritableState } from 'pinia';
 
 export default {
@@ -139,6 +139,7 @@ export default {
         ...mapActions(use_global_search_store,[
             'set_search_key',
             'global_search',
+            'reset_search',
         ])
     },
     computed: {
@@ -148,9 +149,16 @@ export default {
         ...mapWritableState(use_global_search_store,{
             search_key: 'search_key'
         }),
+    },
+    beforeUnmount: function(){
+        this.reset_search();
     }
 };
 </script>
 
 
-<style></style>
+<style scoped>
+.product_list.product_left {
+    grid-template-columns: repeat(auto-fit, minmax(87px, 240px))!important;
+}
+</style>

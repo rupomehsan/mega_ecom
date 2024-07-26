@@ -12,20 +12,22 @@
                         {{ product.title }}
                     </h3>
                     <div class="single-product-price display-flex-center mb-24">
-                        <div class="product-price-widget regular-price">
+                        <div v-if="product.customer_sales_price" class="product-price-widget regular-price">
                             <span class="regular-price-title">Regular price:</span>
                             <span class="regular-main-price">
                                 {{ product.customer_sales_price }} BDT
                             </span>
                         </div>
-                        <div class="product-price-widget offer-price">
+                        <div v-if="product.current_price" class="product-price-widget offer-price">
                             <span class="offer-price-title">Offer price: </span>
                             <span class="offer-main-price">
                                 {{ product.current_price }} BDT
                             </span>
                         </div>
-                        <span class="product-price-save">-{{ Math.floor(product.discount_amount) }} {{
-                    product.discount_type == 'percent' ? '%' : 'BDT' }} SAVE</span>
+                        <span v-if="product.discount_amount" class="product-price-save">
+                            -{{ Math.floor(product.discount_amount) }}
+                            {{ product.discount_type == 'percent' ? '%' : 'BDT' }} SAVE
+                        </span>
                     </div>
                 </div>
                 <div class="product-core-info-list">

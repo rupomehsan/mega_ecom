@@ -252,6 +252,7 @@
 
             img {
                 transition-duration: .3s;
+                min-height: 169px;
             }
 
             .product-front {

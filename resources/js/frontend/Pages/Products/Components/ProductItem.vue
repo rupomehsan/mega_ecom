@@ -4,7 +4,7 @@
             <div class="product-imgbox">
                 <div class="product-front">
                     <Link :href="`/product-details/${product.slug}`">
-                    <img :src="check_image_url(`${product.product_image?.url}`)
+                    <img :src="load_image(`${product.product_image?.url}`)
                         " class="img-fluid" alt="product" />
                     </Link>
                     <a v-if="product.is_available" @click="is_auth ? buyNow(product.id) : openAccount()"
@@ -49,7 +49,7 @@
                 <div class="new-label" v-if="product.is_new">
                     <div>new</div>
                 </div>
-                <div class="on-sale">
+                <div class="on-sale" v-if="product.discount_amount > 0">
                     save {{ product.discount_amount }} ৳
                 </div>
             </div>
@@ -106,6 +106,7 @@ export default {
     },
 
     methods: {
+        load_image: window.load_image,
         check_image_url: function (url) {
             try {
                 new URL(url);

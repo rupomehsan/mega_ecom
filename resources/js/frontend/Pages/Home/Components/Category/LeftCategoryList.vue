@@ -6,7 +6,7 @@
             </li>
             <li v-for="category in side_nav_categories" :key="category.id">
                 <Link :href="`/products/${category.slug}`">
-                <img :src="`/${category.image}`" :alt="category.title">
+                <img :src="load_image(`/${category.image}`)" :alt="category.title">
                 <span class="link_title">
                     {{ category.title }}
                 </span>
@@ -25,7 +25,8 @@ export default {
         close_category: function () {
             document.querySelector('.modal_category_left_side_show').classList.toggle('modal_category');
             document.querySelector('.modal_category_left_side_show').classList.toggle('active');
-        }
+        },
+        load_image: window.load_image,
     },
     computed: {
         ...mapState(use_home_page_store, {

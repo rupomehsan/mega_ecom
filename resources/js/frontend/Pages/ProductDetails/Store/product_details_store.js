@@ -42,7 +42,7 @@ export const useProductDetailsStore = defineStore("useProductDetailsStore", {
             if (response.data.status === "success") {
                 this.product_initial_data = response.data.data
             }
-            console.log(this.product_initial_data);
+            // console.log(this.product_initial_data);
         },
         get_single_product_details: async function (slug) {
             let response = await axios.get('/get-product-details/' + slug)

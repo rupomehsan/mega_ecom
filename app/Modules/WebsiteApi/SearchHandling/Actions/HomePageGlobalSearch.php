@@ -21,8 +21,18 @@ class HomePageGlobalSearch
                         ->orWhere('title', 'like', '%' . $searchKey . '%')
                         ->orWhere('search_keywords', 'like', '%' . $searchKey . '%');
                 })
+                ->select([
+                    'id',
+                    'title',
+                    'is_available',
+                    'customer_sales_price',
+                    'discount_type',
+                    'discount_amount',
+                    'slug',
+                    'is_new',
+                ])
                 ->where("status", "active")
-                ->paginate(10, ['id', 'title', 'slug', 'purchase_price']);
+                ->paginate(24);
 
             $product->appends('search_key', $searchKey);
 

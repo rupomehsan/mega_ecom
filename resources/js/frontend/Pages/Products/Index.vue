@@ -1,5 +1,8 @@
 <template>
     <Layout>
+        <Head>
+            <title>{{ category.title }} Price in Bangladesh</title>
+        </Head>
         <div class="breadcrumb-main py-3">
             <div class="custom-container">
                 <BreadCumb :bread_cumb="bread_cumb" />
@@ -49,10 +52,10 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="top-banner-wrapper mb-2">
-                                            <img v-if="advertise" :src="advertise.image" class="img-fluid"
+                                            <img v-if="advertise" :src="load_image(advertise.image)" class="img-fluid"
                                                 :alt="advertise.title">
                                             <img v-else
-                                                src="https://digitalshopbd.com/public/uploads/all/2Zz2l45NAIEvYAGfBzfggucVEuk1UIg3pvpRer1c.png"
+                                                :src="load_image('uploads/categories/etek-category.png')"
                                                 class="img-fluid">
                                             <!-- <div class="top-banner-content small-section">
                                                 <h1 class="category_page_heading">
@@ -102,10 +105,10 @@
 
                                         <div class="collection-product-wrapper">
 
-                                            <div class=" py-5">
+                                            <div class="py-5">
                                                 <div class="product_list"
                                                     :class="{ product_left: products.data?.length < 5 }">
-                                                    <div v-for="i in products.data" :key="i.name">
+                                                    <div v-for="i in products.data" :key="i.id">
                                                         <ProductItem :product="i" />
                                                     </div>
                                                 </div>
@@ -131,9 +134,11 @@
                                                         </div>
                                                         <div class="col-xl-6 col-md-6 col-sm-12">
                                                             <div class="product-search-count-bottom">
-                                                                <h5>Showing Products {{ products.from }}-{{
-                    products.to }} of {{ products.total }}
-                                                                    Result</h5>
+                                                                <h5>
+                                                                    Showing Products {{ products.from }} -
+                                                                    {{ products.to }} of {{ products.total }}
+                                                                    Result
+                                                                </h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -150,7 +155,6 @@
                                                         v-html="category.page_full_description"></div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -190,6 +194,7 @@ export default {
         await this.set_bread_cumb();
     },
     methods: {
+        load_image: window.load_image,
         ...mapActions(product_store, {
             get_products_by_category_id: "get_products_by_category_id",
             get_product_category_varients: "get_product_category_varients",
@@ -232,8 +237,6 @@ export default {
             deep: true
         }
     }
-
-
 
 };
 

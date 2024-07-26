@@ -69,7 +69,7 @@
                     <div class="header-left">
                         <div class="brand-logo logo-sm-center">
                             <Link href="/">
-                            <img src="/frontend/images/etek_logo.png" class="img-fluid  " alt="logo">
+                                <img src="/cache/frontend/images/etek_logo.png" class="img-fluid" alt="ETEK Enterprise Logo">
                             </Link>
                         </div>
                     </div>

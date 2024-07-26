@@ -32,14 +32,14 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => public_path(''),
             'throw' => false,
         ],
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'root' => public_path(''),
+            'url' => env('APP_URL'),
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -49,7 +49,7 @@ return [
             'host'     => env('ETEK_FTP_HOST'),
             'username' => env('ETEK_FTP_USERNAME'),
             'password' => env('ETEK_FTP_PASSWORD'),
-            'root' => '/uploads',
+            'root' => 'public',
             'port' => 21,
             'ssl' => false,
             'timeout' => 90,

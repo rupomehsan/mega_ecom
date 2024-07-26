@@ -7,7 +7,8 @@
             <div class="top_categries">
                 <div class="category" v-for="item in all_top_products_offer" :key="item.id">
                     <Link :href="`offer-products/${item.slug}`" class="category_link">
-                    <div class="title"></div><img :src="`${item.image}`">
+                    <div class="title"></div>
+                    <img :src="load_image(`${item.image}`, true)" :alt="`ETEK Top Offer ${item.slug}`">
                     </Link>
                 </div>
                 <!-- <div class="category">
@@ -39,7 +40,7 @@
                 <div v-for="(item, index) in all_category_groups" :key="index" class="category">
                     <Link :href="`/category-group/${item.slug}`" class="category_link">
                     <div class="title"> {{ item.title }}</div>
-                    <img :src="item.image" />
+                    <img :src="load_image(item.image, true)" :alt="`ETEK Top Category ${item.title}`" />
                     </Link>
                 </div>
 
@@ -56,59 +57,12 @@ import { mapState } from 'pinia';
 export default {
 
     data: () => ({
-        categories: [
-            {
-                title: '',
-                image: '/frontend/assets/images/summer_collection.webp',
-            },
-            {
-                title: '',
-                image: '/frontend/assets/images/popular_products.webp',
-            },
-            {
-                title: '',
-                image: '/frontend/assets/images/flash_sale.webp',
-            },
-            {
-                title: '',
-                image: '/frontend/assets/images/super_saver.webp',
-            },
 
-            {
-                title: 'grocery',
-                image: '/frontend/assets/images/khaddo_sosso.webp',
-            },
-            {
-                title: 'Cooking',
-                image: '/frontend/assets/images/ranna_samogri.webp',
-            },
-            {
-                title: 'Bath and Body',
-                image: '/frontend/assets/images/bath_and_body.webp',
-            },
-            {
-                title: 'baby care',
-                image: '/frontend/assets/images/baby-care.webp',
-            },
-
-            {
-                title: 'laptop and desktop',
-                image: '/frontend/assets/images/laptops-desktops.webp',
-            },
-            {
-                title: 'mobile and tablets',
-                image: '/frontend/assets/images/mobiles-tablets.webp',
-            },
-            {
-                title: 'large kitchen',
-                image: '/frontend/assets/images/large-kitchen-appliances.webp',
-            },
-            {
-                title: 'heating and cooling',
-                image: '/frontend/assets/images/heating-cooling-air-quality.webp',
-            },
-        ]
     }),
+
+    methods: {
+        load_image: window.load_image,
+    },
 
     computed: {
         ...mapState(use_home_page_store, {
@@ -116,7 +70,7 @@ export default {
             all_top_products_offer: 'all_top_products_offer',
         })
     }
-    
+
 }
 </script>
 

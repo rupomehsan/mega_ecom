@@ -12,6 +12,14 @@ export const use_global_search_store = defineStore("use_global_search_store", {
     }),
 
     actions: {
+        reset_search: function(){
+            this.search_key = "",
+            this.search_result_data = {
+                category: {},
+                brand: {},
+                product: {},
+            };
+        },
         set_search_key: function(v){
             this.search_key = v;
         },

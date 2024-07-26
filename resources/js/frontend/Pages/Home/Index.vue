@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <Head>
-            <title>home page</title>
+            <title>ETEK Enterprise - Leading Electronics and Gadgets</title>
         </Head>
         <HeroSlider />
 

@@ -54,7 +54,7 @@
                                                 :src="products?.productOfferDetails?.image" class="img-fluid"
                                                 :alt="products?.productOfferDetails?.title">
                                             <img v-else
-                                                src="https://digitalshopbd.com/public/uploads/all/2Zz2l45NAIEvYAGfBzfggucVEuk1UIg3pvpRer1c.png"
+                                                src="https://files.etek.com.bd/cache/uploads/categories/etek-category.png"
                                                 class="img-fluid">
                                             <!-- <div class="top-banner-content small-section">
                                                 <h1 class="category_page_heading">
