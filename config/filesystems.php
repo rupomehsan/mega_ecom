@@ -44,6 +44,24 @@ return [
             'throw' => false,
         ],
 
+        'etek' => [
+            'driver'   => 'ftp',
+            'host'     => 'files.etek.com.bd',
+            'username' => 'files@files.etek.com.bd',
+            'password' => 'Ib#Z2o+(.Pov', // required
+            'root' => '/uploads', // required
+            'port' => 21,
+            'ssl' => false,
+            'timeout' => 90,
+            'utf8' => false,
+            'passive' => true,
+            'transferMode' => FTP_BINARY,
+            'systemType' => null, // 'windows' or 'unix'
+            'ignorePassiveAddress' => null, // true or false
+            'timestampsOnUnixListingsEnabled' => false, // true or false
+            'recurseManually' => true // true
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

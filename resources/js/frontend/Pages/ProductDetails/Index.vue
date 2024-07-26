@@ -46,7 +46,7 @@ export default {
         product: null,
     }),
     created: async function () {
-        console.log(this.slug);
+        // console.log(this.slug);
 
         this.product_initial_data = {};
 
@@ -56,7 +56,7 @@ export default {
         await this.get_single_product_details(this.slug);
         await this.get_all_question_and_answers(this.slug);
 
-        this.get_top_products();
+        await this.get_top_products();
 
         // axios.get('/product/'+this.slug)
         //     .then(res=>{

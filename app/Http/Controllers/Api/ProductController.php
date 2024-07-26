@@ -11,8 +11,9 @@ class ProductController extends Controller
 {
     public function featured_products()
     {
-        $data = Product::where('is_featured', 1)->limit(10)->with('product_image')->get();
-        return $data;
+        $data = Product::where('is_featured', 1)->limit(20)->with('product_image')->get();
+        return response()->json($data)->header('Cache-Control', 'public, max-age=300')
+            ->header('Expires', now()->addMinutes(120)->toRfc7231String());
     }
 
     public function product($slug)
@@ -38,8 +39,8 @@ class ProductController extends Controller
             ])
             ->first();
         $data->product_images = $data->product_images()
-        ->select('id', 'product_id', 'url')->skip(1)
-        ->take(10)->get()->reverse();
+            ->select('id', 'product_id', 'url')->skip(1)
+            ->take(10)->get()->reverse();
 
         return response()->json($data);
     }

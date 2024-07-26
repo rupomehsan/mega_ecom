@@ -21,7 +21,8 @@ class CategoryController extends Controller
             ->where('status', 'active')
             ->orderBy('serial', 'ASC')
             ->get();
-        return response()->json($data);
+        return response()->json($data)->header('Cache-Control', 'public, max-age=300')
+            ->header('Expires', now()->addMinutes(120)->toRfc7231String());
     }
 
     public function sub_categories($slug)
@@ -32,9 +33,11 @@ class CategoryController extends Controller
 
         if ($data->count()) {
             $data->prepend($category);
-            return response()->json($data);
+            return response()->json($data)->header('Cache-Control', 'public, max-age=300')
+                ->header('Expires', now()->addMinutes(120)->toRfc7231String());
         } else {
-            return response()->json([$category]);
+            return response()->json([$category])->header('Cache-Control', 'public, max-age=300')
+                ->header('Expires', now()->addMinutes(120)->toRfc7231String());
         }
     }
 
@@ -48,7 +51,8 @@ class CategoryController extends Controller
             ->where('status', 'active')
             ->orderBy('serial', 'ASC')
             ->get();
-        return response()->json($data);
+        return response()->json($data)->header('Cache-Control', 'public, max-age=300')
+            ->header('Expires', now()->addMinutes(120)->toRfc7231String());
     }
 
     public function brands()
@@ -62,7 +66,7 @@ class CategoryController extends Controller
             ->get();
         $response = entityResponse($data);
         $response->header('Cache-Control', 'public, max-age=300')
-            ->header('Expires', now()->addMinutes(1)->toRfc7231String());
+            ->header('Expires', now()->addMinutes(120)->toRfc7231String());
         return $response;
     }
 
@@ -75,7 +79,8 @@ class CategoryController extends Controller
                 ->select('id', 'product_varient_id', 'title')->take(10)->get();
             return $i;
         });
-        return response()->json($data);
+        return response()->json($data)->header('Cache-Control', 'public, max-age=300')
+            ->header('Expires', now()->addMinutes(120)->toRfc7231String());
     }
 
     public function category($slug)
@@ -103,8 +108,8 @@ class CategoryController extends Controller
             $products->whereIn('product_brand_id', $brand_id);
         }
 
-        $min_price = $products->clone()->orderBy('customer_sales_price', 'ASC')->where("customer_sales_price", ">", 0)->first()->customer_sales_price??0;
-        $max_price = $products->clone()->orderBy('customer_sales_price', 'DESC')->where("customer_sales_price", ">", 0)->first()->customer_sales_price??0;
+        $min_price = $products->clone()->orderBy('customer_sales_price', 'ASC')->where("customer_sales_price", ">", 0)->first()->customer_sales_price ?? 0;
+        $max_price = $products->clone()->orderBy('customer_sales_price', 'DESC')->where("customer_sales_price", ">", 0)->first()->customer_sales_price ?? 0;
 
         if (request()->min && request()->max) {
             $products->whereBetween('customer_sales_price', [request()->min, request()->max])
@@ -126,6 +131,7 @@ class CategoryController extends Controller
             "childrens" => $childrens,
             "min_price" => $min_price,
             "max_price" => $max_price,
-        ]);
+        ])->header('Cache-Control', 'public, max-age=300')
+            ->header('Expires', now()->addMinutes(60)->toRfc7231String());
     }
 }
