@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @inertiaHead
-    {{-- <title>
-        {{ isset($page['props']['event']['title']) ? 'ETEK | ' . $page['props']['event']['title'] : 'ETEK' }}
-    </title> --}}
     @if (isset($page['props']['event']))
+    <title>
+        {{ isset($page['props']['event']['title']) ? $page['props']['event']['title'] : 'ETEK Enterprise' }}
+    </title>
     <meta name="twitter:card"
         content="{{ isset($page['props']['event']['card']) ? $page['props']['event']['card'] : 'summary' }}" />
     <meta name="twitter:site" content="@sitename" />

@@ -314,11 +314,11 @@
                     padding-top: 15px;
 
                     .check-price {
-                        font-size: unset;
+                        font-size: 18px;
                     }
 
                     .price {
-                        font-size: unset;
+                        font-size: 18px;
                     }
                 }
             }
