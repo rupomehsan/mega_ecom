@@ -7,9 +7,9 @@
                     <div class="title-n-action">
                         <h2 class="ask_question_heading">Questions & Answare Section</h2>
                     </div>
-                    <div class="q-action" v-if="is_auth">
-                        <a class="btn btn-info" @click="toggle_question_form">Ask
-                            Question</a>
+                    <div class="q-action">
+                        <a class="btn btn-info" @click="toggle_question_form">
+                            Ask Question</a>
                     </div>
                 </div>
 
@@ -104,6 +104,9 @@ export default {
         }),
 
         submitQuestionForm: async function (event) {
+            if(!this.is_auth){
+                return alert('Please Login to ask your question.');
+            }
             this.submit_question(event.target);
         },
 

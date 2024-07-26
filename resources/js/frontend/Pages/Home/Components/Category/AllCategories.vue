@@ -29,7 +29,15 @@
                     <li class="category_modal_close" @click="close_category">
                         <i class="fa fa-close"></i>
                     </li>
-                    <li v-for="category in nav_categories" :key="category.id">
+                    <li v-if="sub_categories.length" v-for="category in sub_categories" :key="category.id">
+                        <div @click="visit_category(category.slug)">
+                            <img :src="`/${category.image}`" :alt="category.title">
+                            <span class="link_title">
+                                {{ category.title }}
+                            </span>
+                        </div>
+                    </li>
+                    <li v-else v-for="category in nav_categories" :key="category.id">
                         <div @click="visit_category(category.slug)">
                             <img :src="`/${category.image}`" :alt="category.title">
                             <span class="link_title">
@@ -46,10 +54,12 @@
 import { router } from '@inertiajs/vue3'
 import { use_home_page_store } from "../../Store/home_page_store";
 import { mapState } from 'pinia';
+import axios from 'axios';
 export default {
 
     data: () => ({
         selected: {},
+        sub_categories: [],
     }),
     watch: {
         selected: function () {
@@ -66,6 +76,12 @@ export default {
         visit_category: function (slug) {
             this.close_category();
             router.visit(`/category/${slug}`);
+        },
+        get_sub_categories: function(){
+            axios.get(`/category/${this.selected.slug}/subcategories`)
+                .then(res=>{
+                    this.sub_categories = res.data;
+                });
         }
     },
     computed: {

@@ -119,8 +119,8 @@ import ColorVarient from '../Components/ColorVarient.vue'
 import CommonVarient from '../Components/CommonVarient.vue'
 import ProductImage from '../Components/ProductImage.vue'
 
-import { mapActions } from "pinia";
-import { common_store } from "../../../Store/common_store";
+// import { mapActions } from "pinia";
+// import { common_store } from "../../../Store/common_store";
 
 export default {
     components: { ProductImage, ColorVarient, CommonVarient },
@@ -134,10 +134,10 @@ export default {
         this.is_auth = localStorage.getItem("token") ? true : false;
     },
     methods: {
-        ...mapActions(common_store, {
-            add_to_wish_list: "add_to_wish_list",
-            get_all_cart_data: "get_all_cart_data",
-        }),
+        // ...mapActions(common_store, {
+        //     add_to_wish_list: "add_to_wish_list",
+        //     get_all_cart_data: "get_all_cart_data",
+        // }),
         openAccount() {
             document.getElementById("myAccount").classList.add('open-side');
         },

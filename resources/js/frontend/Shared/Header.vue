@@ -216,10 +216,10 @@
                             </div>
                             <div class="category-right">
                                 <div class="contact-block">
-                                    <div>
+                                    <a href="tel:+8801793199803">
                                         <i class="fa fa-volume-control-phone"></i>
-                                        <span>call us<span>123-456-76890</span></span>
-                                    </div>
+                                        <span>call us<span>01793-199803</span></span>
+                                    </a>
                                 </div>
                             </div>
                         </div>

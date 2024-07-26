@@ -10,6 +10,7 @@ class Model extends EloquentModel
     protected $table = "product_brands";
     protected $guarded = [];
     static $productModel = \App\Modules\ProductManagement\Product\Models\Model::class;
+    // static $productCategoryBrandModel = \App\Modules\ProductManagement\Product\Models\ProductCategoryBrandModel::class;
     static $productCategoryBrandModel = \App\Modules\ProductManagement\Product\Models\ProductCategoryBrandModel::class;
 
     protected static function booted()

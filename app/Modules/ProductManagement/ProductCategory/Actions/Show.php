@@ -24,10 +24,10 @@ class Show
                 ->select($fields)
                 ->where('slug', $slug)
                 ->first();
-            $data->total_products = $data->products()->count();
             if (!$data) {
                 return messageResponse('Data not found...', $data, 404, 'error');
             }
+            $data->total_products = $data->products()->count();
             return entityResponse($data);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), [], 500, 'server_error');

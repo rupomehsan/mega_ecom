@@ -1,15 +1,15 @@
 <template>
 
     <div class="input-box header_search_area">
-        <form class="hungry_coder-form">
+        <form class="hungry_coder-form" :action="`/search-results?search_key=${search_key}`">
             <div class="input-group ">
                 <div class="input-group-text">
                     <span class="search"><i class="fa fa-search"></i></span>
                 </div>
-                <input type="search" v-model="search_key" class="form-control" placeholder="Search a Product">
+                <input type="search" name="search_key" v-model="search_key" class="form-control" placeholder="Search a Product">
             </div>
         </form>
-        <div v-if="search_key.length" class="search_results">
+        <div v-if="!is_in_search_page && search_key.length" class="search_results">
             <div class="search_types">
                 <ul>
                     <li><a href="#" @click.prevent="search_type = 'products'"
@@ -120,9 +120,9 @@
                 </div>
             </div>
             <div class="search_action">
-                <Link :href="`search-results?search_key=${search_key}`" :preserve-state="true" :preserve-scroll="true">
-                See all
-                results</Link>
+                <Link :href="`/search-results?search_key=${search_key}`" :preserve-state="true" :preserve-scroll="true">
+                    See all results
+                </Link>
             </div>
         </div>
     </div>
@@ -160,6 +160,15 @@ export default {
         // search_key: '',
 
     }),
+    created: function(){
+        // console.log(window.location.pathname);
+    },
+    computed: {
+        is_in_search_page: function(){
+            let path = window.location.pathname;
+            return path.includes('search-results')
+        }
+    }
 
     // watch: {
     //     search_key(newVal) {

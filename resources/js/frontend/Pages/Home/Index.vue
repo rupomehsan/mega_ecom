@@ -49,10 +49,10 @@ export default {
     },
 
     created: async function () {
+        // await this.get_side_nav_categories()
         await this.get_all_home_hero_sliders()
         await this.get_home_slider_side_banner()
-        await this.get_side_nav_categories()
-        await this.get_parent_categories()
+        // await this.get_parent_categories()
         await this.get_all_top_products_offer()
         await this.get_all_category_groups()
         await this.get_all_featured_products()

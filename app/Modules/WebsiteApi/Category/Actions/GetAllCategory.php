@@ -41,7 +41,7 @@ class GetAllCategory
 
             $response = entityResponse($data);
             $response->header('Cache-Control', 'public, max-age=300')
-                ->header('Expires', now()->addMinutes(1)->toRfc7231String());
+                ->header('Expires', now()->addMinutes(5)->toRfc7231String());
             return $response;
 
         } catch (\Exception $e) {

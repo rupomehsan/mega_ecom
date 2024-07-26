@@ -53,6 +53,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('/upload_product_list', 'Website\TestController@upload_product_list');
     Route::get('/upload_product', 'Website\TestController@upload_product');
+
+    Route::get('/undefined',function(){});
+    Route::get('/null',function(){});
 });
 
 // Route::get("/about", function () {

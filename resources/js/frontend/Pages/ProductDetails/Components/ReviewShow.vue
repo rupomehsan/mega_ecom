@@ -1,11 +1,11 @@
 <template>
-    <div class="my-3">
+    <div class="my-3" v-if="product.product_reviews?.length">
         <div class="row">
             <div class="col-lg-12">
                 <div>
                     <h3 class="alert-secondary px-2 py-2 mb-1">Customer Reviews</h3>
                 </div>
-                <template v-if="product.product_reviews?.length">
+                <template >
                     <div v-for="review in product.product_reviews" :key="review.id" class="card review-card mb-3">
                         <div class="row g-0">
                             <div class="col-md-12">
@@ -33,11 +33,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </template>
-                <template v-else>
-                    <div>
-                        <p class="text-center py-3 fw-bold alert-danger">No reviews given yet</p>
                     </div>
                 </template>
             </div>

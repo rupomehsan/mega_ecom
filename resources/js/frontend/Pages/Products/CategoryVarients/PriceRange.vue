@@ -49,7 +49,7 @@ export default {
 
     watch: {
         min_price: function (v) {
-            console.log(this.min_price, this.max_price);
+            // console.log(this.min_price, this.max_price);
             this.slider.noUiSlider.updateOptions(
                 {
                     start: [(this.price_range.min_price ), this.price_range.max_price],
@@ -64,7 +64,7 @@ export default {
             // this.slider.noUiSlider.set([v, this.max_price]);
         },
         max_price: function (v) {
-            console.log(this.min_price, this.max_price);
+            // console.log(this.min_price, this.max_price);
             this.slider.noUiSlider.updateOptions(
                 {
                     start: [(this.price_range.min_price ), (this.price_range.max_price)],

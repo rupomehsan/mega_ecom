@@ -36,16 +36,16 @@ export const useProductDetailsStore = defineStore("useProductDetailsStore", {
         ## Product information
         ## start
         **/
-        get_single_product_initial_data: async function () {
-            const fieldsQuery = this.fields.map(field => `fields[]=${field}`).join('&');
-            let response = await axios.get(`/get-product-details/${this.slug}?initial=true&${fieldsQuery}`)
+        get_single_product_initial_data: async function (slug) {
+            const fieldsQuery = this.fields.map((field, index) => `fields[${index}]=${field}`).join('&');
+            let response = await axios.get(`/get-initial-product-details/${slug}?${fieldsQuery}`)
             if (response.data.status === "success") {
                 this.product_initial_data = response.data.data
             }
-            // console.log(this.product_details);
+            console.log(this.product_initial_data);
         },
-        get_single_product_details: async function () {
-            let response = await axios.get('/get-product-details/' + this.slug)
+        get_single_product_details: async function (slug) {
+            let response = await axios.get('/get-product-details/' + slug)
             if (response.data.status === "success") {
                 this.product_details = response.data.data
             }
@@ -81,10 +81,10 @@ export const useProductDetailsStore = defineStore("useProductDetailsStore", {
             }
         },
 
-        get_all_question_and_answers: async function () {
+        get_all_question_and_answers: async function (slug) {
             let is_auth = localStorage.getItem("token") ? true : false;
             if (is_auth) {
-                let response = await axios.get('/get-customer-ecommerce-question-and-answers?slug=' + this.slug);
+                let response = await axios.get('/get-customer-ecommerce-question-and-answers?slug=' + slug);
                 if (response.data.status === "success") {
                     this.product_question_and_answers = response.data.data
                 }

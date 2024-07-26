@@ -47,7 +47,7 @@ class GetAllSubCategoryByCategoryId
 
             $response = entityResponse($data);
             $response->header('Cache-Control', 'public, max-age=300')
-                ->header('Expires', now()->addMinutes(1)->toRfc7231String());
+                ->header('Expires', now()->addMinutes(25)->toRfc7231String());
             return $response;
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), [], 500, 'server_error');
