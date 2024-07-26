@@ -46,10 +46,10 @@ return [
 
         'etek' => [
             'driver'   => 'ftp',
-            'host'     => 'files.etek.com.bd',
-            'username' => 'files@files.etek.com.bd',
-            'password' => 'Ib#Z2o+(.Pov', // required
-            'root' => '/uploads', // required
+            'host'     => env('ETEK_FTP_HOST'),
+            'username' => env('ETEK_FTP_USERNAME'),
+            'password' => env('ETEK_FTP_PASSWORD'),
+            'root' => '/uploads',
             'port' => 21,
             'ssl' => false,
             'timeout' => 90,
