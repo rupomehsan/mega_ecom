@@ -1,12 +1,7 @@
 <template>
-
-    <Head>
-        <title>
-            {{ product_initial_data.title }}
-        </title>
-    </Head>
     <Layout>
-        <div class="breadcrumb-main py-3">
+        <h1>General Product</h1>
+        <!-- <div class="breadcrumb-main py-3">
             <div class="custom-container">
                 <BreadCumb :bread_cumb="bread_cumb" />
             </div>
@@ -17,20 +12,12 @@
                     <div class="container-fluid">
                         <ProductBasicInfo :product="product_initial_data"></ProductBasicInfo>
                     </div>
-
                     <ProductBottomDetails :product="product_details"></ProductBottomDetails>
                 </div>
             </div>
-        </section>
-        <section v-else>
-            <div class="custom-container">
-                <img src="/frontend/images/product_skeleton.png" class="w-100" alt="product-loading">
-            </div>
-        </section>
-        <TopProducts :products="top_products"></TopProducts>
+        </section> -->
     </Layout>
 </template>
-
 <script>
 
 import Layout from "../../Shared/Layout.vue";
@@ -60,53 +47,12 @@ export default {
     }),
     created: async function () {
         // console.log(this.slug);
-
-        await this.set_slug(this.slug);
-
-        this.product_initial_data = {};
-
-        await this.get_single_product_initial_data(this.slug);
-        this.loaded = true;
-
-        await this.get_single_product_details(this.slug);
-
-        let bread_cumb = [];
-        this.product_details?.product_categories?.forEach(i => {
-            bread_cumb.push({
-                title: i.title,
-                url: '/products/' + i.slug,
-                active: false,
-            })
-        });
-        bread_cumb.push({
-            title: this.product_details.title,
-            url: '/product-details/' + this.product_details.slug,
-            active: true,
-        });
-        this.bread_cumb = [...this.bread_cumb, ...bread_cumb];
-
-        await this.get_all_question_and_answers(this.slug);
-        await this.get_top_products();
     },
-    methods: {
 
-        ...mapActions(useProductDetailsStore, {
-            get_single_product_initial_data: "get_single_product_initial_data",
-            get_single_product_details: "get_single_product_details",
-            get_all_question_and_answers: "get_all_question_and_answers",
-            get_top_products: "get_top_products",
-            set_slug: "set_slug",
-        }),
-
-    },
 
     computed: {
-        ...mapState(useProductDetailsStore, {
-            top_products: "top_products",
-        }),
         ...mapWritableState(useProductDetailsStore, {
             product_details: 'product_details',
-            store_slug: 'slug',
             product_initial_data: 'product_initial_data',
         })
     }

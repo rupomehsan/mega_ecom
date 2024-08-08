@@ -11,6 +11,7 @@ class ProductController extends Controller
 {
     public function featured_products()
     {
+
         $data = Product::where('is_featured', 1)->limit(24)->with('product_image')->get();
         return response()->json($data)->header('Cache-Control', 'public, max-age=300')
             ->header('Expires', now()->addMinutes(120)->toRfc7231String());
