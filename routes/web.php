@@ -43,7 +43,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/search-results', 'Website\WebsiteController@search_results')->name('search_results');
     Route::get('/invoice', 'Website\WebsiteController@invoice');
 
-    
+
     Route::get('/profile', 'Website\ProfileController@profile')->name('website_profile');
     Route::get('/profile/orders', 'Website\ProfileController@orders')->name('website_profile_orders');
     Route::get('/profile/order-details/{slug}', 'Website\ProfileController@order_details')->name('order_details');
@@ -77,5 +77,3 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
 require_once __DIR__ . '/test_route.php';
 require_once __DIR__ . '/ssl_route.php';
-// require_once __DIR__ . '/shefat_route.php';
-// require_once __DIR__ . '/website_api_route.php';

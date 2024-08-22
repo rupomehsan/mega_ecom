@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Modules\PaymentGateway\SSLCommerZ\Controller;
 
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Library\SslCommerz\SslCommerzNotification;
+use App\Modules\PaymentGateway\SSLCommerZ\Library\SslCommerz\SslCommerzNotification;
 use Illuminate\Support\Facades\DB;
 use App\Modules\SalesManagement\SalesEcommerceOrder\Models\Model as SalesEcommerceOrder;
-
 class SslCommerzPaymentController extends Controller
 {
 
     public function exampleEasyCheckout()
     {
-        return view('exampleEasycheckout');
+        return view('ssl_checkout.exampleEasycheckout');
     }
 
     public function exampleHostedCheckout()
     {
-        return view('exampleHosted');
+        return view('ssl_checkout.exampleHosted');
     }
 
     public function index(Request $request)

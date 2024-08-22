@@ -303,7 +303,6 @@ export default {
             this.station_id = this.user_address_info?.station_id
         }
 
-        this.checkoutPopUp();
 
     },
 
@@ -376,7 +375,7 @@ export default {
 
         checkoutPopUp: async function (data) {
             let payload = JSON.stringify(data);
-            let payment_res = await window.axios.get(`http://127.0.0.1:9000/pay-via-ajax?payload=${payload}`);
+            let payment_res = await window.axios.get(`pay-via-ajax?payload=${payload}`);
             this.payment_link = payment_res.data?.data;
             window.open(this.payment_link, "_blank");
         }

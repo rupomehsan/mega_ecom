@@ -4,7 +4,7 @@
             <div class="section_title">
                 <h4 class="text">Top Offers</h4>
             </div>
-            <div class="d-flex gap-3" v-if="preloader">
+            <div class="d-flex gap-3" v-if="preloader.top_products">
                 <skeleton :height="`200px`" :width="`400px`"></skeleton>
                 <skeleton :height="`200px`" :width="`400px`"></skeleton>
                 <skeleton :height="`200px`" :width="`400px`"></skeleton>
@@ -41,7 +41,7 @@
             <div class="section_title">
                 <h4 class="text my-5">Top Categories</h4>
             </div>
-            <div class="d-flex gap-3" v-if="preloader">
+            <div class="d-flex gap-3" v-if="preloader.category_group">
                 <skeleton :height="`200px`" :width="`400px`"></skeleton>
                 <skeleton :height="`200px`" :width="`400px`"></skeleton>
                 <skeleton :height="`200px`" :width="`400px`"></skeleton>

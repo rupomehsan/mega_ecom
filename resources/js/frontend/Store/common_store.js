@@ -213,12 +213,16 @@ export const common_store = defineStore("common_store", {
 
         //navbar_menu
         //navbar_menu
-        get_all_website_navbar_menu: async function () {
-            let fieldsQueryString = this.fields.map((field, index) => `fields[${index}]=${field}`).join('&');
-            let response = await axios.get(`/navbar-menus?get_all=1&${fieldsQueryString}`);
-            if (response.data.status == "success") {
-                this.navbar_menu_data = response.data.data;
-            }
+        get_all_website_navbar_menu: async function (all_parent = false) {
+            // let fieldsQueryString = this.fields.map((field, index) => `fields[${index}]=${field}`).join('&');
+            // let url = `/navbar-menus?get_all=1&${fieldsQueryString}`;
+            // if (all_parent) {
+            //     url = `/navbar-menus?get_all=1&all_parent=1&${fieldsQueryString}`;
+            // }
+            // let response = await axios.get(url);
+            // if (response.data.status == "success") {
+            //     this.navbar_menu_data = response.data.data;
+            // }
         },
 
 
@@ -294,7 +298,7 @@ export const common_store = defineStore("common_store", {
                         new_price = Math.round(product.current_price)
                         old_price = Math.round(product.customer_sales_price)
                     } else {
-                        old_price = Math.round(product.customer_sales_price)
+                        old_price = Math.round(product.current_price)
                     }
                 }
             }

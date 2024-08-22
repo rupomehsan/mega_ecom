@@ -36,7 +36,7 @@ class Register
                 'updated_at' => now(),
             ]);
 
-            // self::sendOTP($requestData['phone_number'], $otp);
+            SendOTPViaSMS($requestData['phone_number'], $otp);
 
             return messageResponse('OTP sent successfully', ['phone_number' => $requestData['phone_number'],]);
         } catch (\Exception $e) {

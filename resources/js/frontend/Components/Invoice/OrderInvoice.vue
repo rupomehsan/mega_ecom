@@ -67,7 +67,7 @@
         </table>
     </div>
     <div class="text-center">
-        <button id="printBtn" @click="printInvoice" class="btn btn-info mt-3 fw-bold text-white  py-2 px-5 my-5">Print
+        <button id="printBtn" @click="printInvoice" class="btn btn-success mt-3 fw-bold text-white  py-2 px-5 my-5">Print
             Invoice</button>
     </div>
 </template>

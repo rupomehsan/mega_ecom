@@ -49,8 +49,8 @@ export default {
     },
 
     created: async function () {
-        // await this.get_side_nav_categories()
-        // await this.get_parent_categories()
+        await this.get_side_nav_categories()
+        await this.get_parent_categories()
         this.get_all_home_hero_sliders();
         this.get_home_slider_side_banner();
         let that = this;
