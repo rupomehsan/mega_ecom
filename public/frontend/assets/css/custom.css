@@ -24,9 +24,19 @@
         margin-left: 10px;
     }
 }
+
 .c-pointer {
     cursor: pointer;
 }
+
+.bg-dummy-image {
+    background-image: url('/dummy.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 1px solid rgba(128, 128, 128, 0.192);
+}
+
 .marquee_body {
     border-radius: 40px;
     background: white;

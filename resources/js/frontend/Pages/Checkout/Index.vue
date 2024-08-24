@@ -400,14 +400,12 @@ export default {
 
     },
 
-
     computed: {
         ...mapState(common_store, {
             all_cart_data: "all_cart_data",
             total_cart_price: "total_cart_price",
             get_price: "get_price",
             website_settings_data: "website_settings_data",
-
         }),
     },
 };

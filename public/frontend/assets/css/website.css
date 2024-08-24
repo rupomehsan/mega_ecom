@@ -14808,6 +14808,7 @@ fieldset:disabled .btn {
 .w-40 {
     width: 40% !important;
 }
+
 .w-20 {
     width: 20% !important;
 }
@@ -28232,6 +28233,8 @@ header {
     padding: 30px;
     background-color: #f2f2f2;
     border-right: 1px solid #dddddd;
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 .media-banner .media-banner-box {

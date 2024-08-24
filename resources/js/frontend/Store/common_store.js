@@ -7,7 +7,7 @@ export const common_store = defineStore("common_store", {
         all_wish_list_data: [],
         all_compare_list_data: [],
         navbar_menu_data: [],
-        website_settings_data: {},
+        website_settings_data: [],
         total_cart_price: 0,
         preloader: false,
         fields: ['title', 'external_link'],
@@ -23,7 +23,6 @@ export const common_store = defineStore("common_store", {
             "slug",
             "is_available",
         ]
-
     }),
 
     actions: {
@@ -182,32 +181,35 @@ export const common_store = defineStore("common_store", {
 
         },
 
-
         get_setting_value: function (key, multiple = false) {
-
-            // console.log(key, this.website_settings_data);
-
-
-            this.preloader = true;
+            // this.preloader = true;
+            let is_empty = false;
+            if(this.website_settings_data.length == 0){
+                is_empty = true;
+            }
             try {
                 if (!multiple) {
+                    if(is_empty) return '';
+
                     let data = ''
                     let value = this.website_settings_data.find(item => item.title === key);
                     if (value && value.setting_values.length > 0) {
                         data = value.setting_values[0].value
-                        this.preloader = false;
+                        // this.preloader = false;
                     }
                     return data
                 } else {
+                    if(is_empty) return [];
+
                     let values = this.website_settings_data.filter(item => item.title === key);
                     if (values && values.length > 0) {
                         return values[0].setting_values;
-                        this.preloader = false;
+                        // this.preloader = false;
                     }
                     return [];
                 }
             } catch (error) {
-                // console.error(error.message);
+                console.error(error);
             }
         },
 

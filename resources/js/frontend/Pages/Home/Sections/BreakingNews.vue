@@ -13,7 +13,7 @@
 <script>
 import MarqueeText from 'vue-marquee-text-component'
 import { common_store } from "../../../Store/common_store";
-import { mapState } from "pinia";
+import { mapActions, mapState } from "pinia";
 export default {
     components: {
         MarqueeText
@@ -21,8 +21,8 @@ export default {
     data: () => ({
         is_paused: false,
     }),
-    computed: {
-        ...mapState(common_store, {
+    methods: {
+        ...mapActions(common_store, {
             get_setting_value: "get_setting_value",
         }),
     },
