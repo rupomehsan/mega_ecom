@@ -14,6 +14,9 @@
             </li>
         </ul>
     </template>
+    <template v-else>
+        <img src="/dummy.png" :alt="product.title" class="img-fluid image_zoom_cls-0" />
+    </template>
 </template>
 
 <script>
@@ -33,7 +36,7 @@ export default {
         }
     },
     methods: {
-        
+
         load_image: window.load_image,
     }
 }

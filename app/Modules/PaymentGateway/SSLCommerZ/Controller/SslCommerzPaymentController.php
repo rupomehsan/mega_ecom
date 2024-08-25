@@ -7,17 +7,18 @@ use Illuminate\Http\Request;
 use App\Modules\PaymentGateway\SSLCommerZ\Library\SslCommerz\SslCommerzNotification;
 use Illuminate\Support\Facades\DB;
 use App\Modules\SalesManagement\SalesEcommerceOrder\Models\Model as SalesEcommerceOrder;
+
 class SslCommerzPaymentController extends Controller
 {
 
     public function exampleEasyCheckout()
     {
-        return view('ssl_checkout.exampleEasycheckout');
+        return view('exampleEasycheckout');
     }
 
     public function exampleHostedCheckout()
     {
-        return view('ssl_checkout.exampleHosted');
+        return view('exampleHosted');
     }
 
     public function index(Request $request)
@@ -90,6 +91,7 @@ class SslCommerzPaymentController extends Controller
 
     public function payViaAjax(Request $request)
     {
+        // dd($request->all());
 
         # Here you have to receive all the order data to initate the payment.
         # Lets your oder trnsaction informations are saving in a table called "orders"
@@ -104,15 +106,15 @@ class SslCommerzPaymentController extends Controller
         $post_data['tran_id'] = $order_details->order_id; // tran_id must be unique
 
         # CUSTOMER INFORMATION
-        $post_data['cus_name'] = $order_details->user?->name;
-        $post_data['cus_email'] = $order_details->user?->email;
-        $post_data['cus_add1'] = $address_details->address;
+        $post_data['cus_name'] = $order_details->user?->name ?? 'Customer Name';
+        $post_data['cus_email'] = $order_details->user?->email ?? 'Customer Email ';
+        $post_data['cus_add1'] = $address_details->address ?? 'Customer Address';
         $post_data['cus_add2'] = "";
         $post_data['cus_city'] = "";
         $post_data['cus_state'] = "";
         $post_data['cus_postcode'] = "";
         $post_data['cus_country'] = "Bangladesh";
-        $post_data['cus_phone'] = $order_details->user?->phone_number;
+        $post_data['cus_phone'] = $order_details->user?->phone_number ?? '8801XXXXXXXXX';
         $post_data['cus_fax'] = "";
 
         # SHIPMENT INFORMATION
@@ -151,9 +153,13 @@ class SslCommerzPaymentController extends Controller
                 'currency' => $post_data['currency']
             ]);
 
+
         $sslc = new SslCommerzNotification();
+
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
         $payment_options = $sslc->makePayment($post_data, 'checkout', 'json');
+
+
 
         if (!is_array($payment_options)) {
             print_r($payment_options);
@@ -165,7 +171,7 @@ class SslCommerzPaymentController extends Controller
     {
 
 
-
+    
         $tran_id = $request->input('tran_id');
         $amount = $request->input('amount');
         $currency = $request->input('currency');

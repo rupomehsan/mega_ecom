@@ -75,5 +75,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
 
 
-require_once __DIR__ . '/test_route.php';
 require_once __DIR__ . '/ssl_route.php';
+require_once __DIR__ . '/test_route.php';

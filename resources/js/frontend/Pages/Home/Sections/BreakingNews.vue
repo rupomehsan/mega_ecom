@@ -1,5 +1,5 @@
 <template>
-    <section class=" pb-4 my-5 pt-1">
+    <section class="   mt-5">
         <div class="custom-container">
             <div class="marquee_body py-3" @mouseover="is_paused = true" @mouseleave="is_paused = false">
                 <marquee-text :paused="is_paused" :duration="60">

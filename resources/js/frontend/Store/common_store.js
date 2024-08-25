@@ -230,9 +230,6 @@ export const common_store = defineStore("common_store", {
 
         get_price(product) {
 
-            // console.log("search",product);
-
-
             let old_price = 0;
             let new_price = 0;
 

@@ -374,10 +374,12 @@ export default {
         },
 
         checkoutPopUp: async function (data) {
+
             let payload = JSON.stringify(data);
             let payment_res = await window.axios.get(`pay-via-ajax?payload=${payload}`);
             this.payment_link = payment_res.data?.data;
             window.open(this.payment_link, "_blank");
+
         }
 
     },

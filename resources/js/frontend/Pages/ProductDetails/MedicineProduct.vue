@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-lg-6">
 
-                <div class="card my-3">
+                <div class="card my-3 bg-dummy-image w-100" style="min-height: 300px;">
                     <a :href="load_image(`${product_initial_data.product_image?.url}`)" data-lightbox="prouct-set"
-                        data-title="Product image">
+                        data-title="Product image" class="bg-white">
                         <img :src="load_image(`${product_initial_data.product_image?.url}`)"
                             :alt="product_initial_data.product_image?.url" class="img-fluid image_zoom_cls-0">
                     </a>
@@ -35,18 +35,19 @@
 
             <div class="col-lg-6 my-3">
                 <div class="card ">
-                    <div class="bg-dark" style="border-radius: 5px;">
-                        <div class="d-flex p-3">
-                            <h3 class="single-product-title text-white">
+                    <div class="c-bg-primary" style="border-radius: 5px;">
+                        <div class="d-flex p-3 gap-2">
+                            <p class="single-product-title text-white fw-bold">
                                 ফার্মেসীর জন্য পাইকারি দামে ঔষধ কিনতে রেজিস্টেশন করুন
-                            </h3>
+                            </p>
                             <div>
-                                <Link href="/retailer-register" type="button" class="btn btn-solid ">Register</Link>
+                                <Link href="/retailer-register" type="button" class="btn btn-solid btn-sm ">Register
+                                </Link>
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between gap-2 p-3">
-                        <p>3887 People recently viewed this</p>
+                    <div class="d-flex justify-content-between gap-2 p-2 align-items-center">
+                        <p> <span class="fw-bold">{{ product_initial_data?.total_views }}</span> People viewed this</p>
                         <div class="d-flex align-items-center gap-2">
                             <div class="position-relative c-pointer" title="Availablity">
                                 <svg @click="is_availablity_show = !is_availablity_show"
@@ -140,9 +141,10 @@
                                 </a>
                                 <div :class="is_share_show ? 'd-block' : 'd-none'"
                                     class="position-absolute dropdown_dropdown-menu__SPSjk dropdown_bottomRight__nODPm">
-                                    <div class="d-flex items-center gap-10 p-10  "
-                                        style="cursor: pointer; display: flex; align-items: center;"><svg
-                                            stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                    <!-- Copy Link -->
+                                    <div class="d-flex items-center gap-10 p-10" @click="copyLink"
+                                        style="cursor: pointer; display: flex; align-items: center;">
+                                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
                                             stroke-linecap="round" stroke-linejoin="round" height="24" width="24"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -155,37 +157,40 @@
                                             <path d="M2 10l1 4l1.5 -4l1.5 4l1 -4"></path>
                                             <path d="M17 10l1 4l1.5 -4l1.5 4l1 -4"></path>
                                             <path d="M9.5 10l1 4l1.5 -4l1.5 4l1 -4"></path>
-                                        </svg> Copy link</div>
-                                    <div class="d-flex items-center gap-10 p-10  "
-                                        style="cursor: pointer; display: flex; align-items: center;"><svg
-                                            stroke="currentColor" fill="currentColor" stroke-width="0"
+                                        </svg>
+                                        Copy link
+                                    </div>
+
+                                    <!-- Facebook Share -->
+                                    <div class="d-flex items-center gap-10 p-10" @click="shareOnFacebook"
+                                        style="cursor: pointer; display: flex; align-items: center;">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
                                             viewBox="0 0 512 512" height="24" width="24"
                                             xmlns="http://www.w3.org/2000/svg" style="color: rgb(59, 89, 152);">
                                             <path
                                                 d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z">
                                             </path>
-                                        </svg> Facebook</div>
-                                    <div class="d-flex items-center gap-10 p-10  "
-                                        style="cursor: pointer; display: flex; align-items: center;"><svg
-                                            stroke="currentColor" fill="currentColor" stroke-width="0"
-                                            viewBox="0 0 512 512" height="24" width="24"
-                                            xmlns="http://www.w3.org/2000/svg" style="color: rgb(37, 211, 102);">
-                                            <path
-                                                d="M260.062 32C138.605 32 40.134 129.701 40.134 250.232c0 41.23 11.532 79.79 31.559 112.687L32 480l121.764-38.682c31.508 17.285 67.745 27.146 106.298 27.146C381.535 468.464 480 370.749 480 250.232 480 129.701 381.535 32 260.062 32zm109.362 301.11c-5.174 12.827-28.574 24.533-38.899 25.072-10.314.547-10.608 7.994-66.84-16.434-56.225-24.434-90.052-83.844-92.719-87.67-2.669-3.812-21.78-31.047-20.749-58.455 1.038-27.413 16.047-40.346 21.404-45.725 5.351-5.387 11.486-6.352 15.232-6.413 4.428-.072 7.296-.132 10.573-.011 3.274.124 8.192-.685 12.45 10.639 4.256 11.323 14.443 39.153 15.746 41.989 1.302 2.839 2.108 6.126.102 9.771-2.012 3.653-3.042 5.935-5.961 9.083-2.935 3.148-6.174 7.042-8.792 9.449-2.92 2.665-5.97 5.572-2.9 11.269 3.068 5.693 13.653 24.356 29.779 39.736 20.725 19.771 38.598 26.329 44.098 29.317 5.515 3.004 8.806 2.67 12.226-.929 3.404-3.599 14.639-15.746 18.596-21.169 3.955-5.438 7.661-4.373 12.742-2.329 5.078 2.052 32.157 16.556 37.673 19.551 5.51 2.989 9.193 4.529 10.51 6.9 1.317 2.38.901 13.531-4.271 26.359z">
-                                            </path>
-                                        </svg> Whatsapp</div>
-                                    <div class="d-flex items-center gap-10 p-10  "
-                                        style="cursor: pointer; display: flex; align-items: center;"><svg
-                                            stroke="currentColor" fill="currentColor" stroke-width="0"
+                                        </svg>
+                                        Facebook
+                                    </div>
+
+                                    <!-- Twitter Share -->
+                                    <div class="d-flex items-center gap-10 p-10" @click="shareOnTwitter"
+                                        style="cursor: pointer; display: flex; align-items: center;">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
                                             viewBox="0 0 16 16" height="24" width="24"
                                             xmlns="http://www.w3.org/2000/svg" style="color: black;">
                                             <path
                                                 d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z">
                                             </path>
-                                        </svg> Twitter</div>
-                                    <div class="d-flex items-center gap-10 p-10  "
-                                        style="cursor: pointer; display: flex; align-items: center;"><svg
-                                            stroke="currentColor" fill="currentColor" stroke-width="0" version="1.2"
+                                        </svg>
+                                        Twitter
+                                    </div>
+
+                                    <!-- LinkedIn Share -->
+                                    <div class="d-flex items-center gap-10 p-10" @click="shareOnLinkedIn"
+                                        style="cursor: pointer; display: flex; align-items: center;">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.2"
                                             baseProfile="tiny" viewBox="0 0 24 24" height="24" width="24"
                                             xmlns="http://www.w3.org/2000/svg" style="color: rgb(14, 118, 168);">
                                             <g>
@@ -193,18 +198,21 @@
                                                     d="M10.033 15.3h-1.6v-5.199h1.6v5.199zm-.8-5.866c-.577 0-.866-.267-.866-.8 0-.223.082-.412.25-.567.166-.155.371-.233.616-.233.577 0 .866.268.866.801s-.288.799-.866.799zm6.734 5.866h-1.633v-2.9c0-.755-.268-1.133-.801-1.133-.422 0-.699.211-.834.633-.043.067-.066.201-.066.4v3h-1.633v-3.533c0-.8-.012-1.355-.033-1.666h1.4l.1.699c.367-.556.9-.833 1.633-.833.557 0 1.006.194 1.35.583.346.389.518.95.518 1.684v3.066zM12 21c-4.963 0-9-4.037-9-9s4.037-9 9-9 9 4.037 9 9-4.037 9-9 9zm0-16c-3.859 0-7 3.141-7 7s3.141 7 7 7 7-3.141 7-7-3.141-7-7-7z">
                                                 </path>
                                             </g>
-                                        </svg> Linkedin</div>
+                                        </svg>
+                                        LinkedIn
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                     </div>
                     <hr class="m-0 p-0">
-                    <div class="single-product-info p-3">
+                    <div class="single-product-info py-2 px-3">
                         <div class="position-relative">
                             <div class="border-b1-grey300 py-10">
                                 <div class="d-flex  justify-content-between my-2">
-                                    <h3 class="text-capitalize text-24 fw-600">{{ product_initial_data.title }}</h3>
+                                    <h5 class="text-capitalize text-24 fw-600 text-black">{{ product_initial_data.title
+                                        }}</h5>
                                     <div @click="is_originality_show = !is_originality_show"
                                         style="position: relative; cursor: pointer;"><span
                                             title="100% Original Medicine"
@@ -230,7 +238,6 @@
                                 style="position: absolute; top: 100%; right: 0px; background-color: white; z-index: 1000; width: max-content; border-radius: 10px; padding: 10px; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px 0px;">
                                 <div style="display: flex; gap: 10px;">
                                     <div>
-
                                         <div class="mt-10">
                                             <div class="text-14 mb-10" style="max-width: 300px;">ETEK কিভাবে ঔষধ সংগ্রহ
                                                 করে?
@@ -242,16 +249,16 @@
                                                 থেকেই আসছে, তাই আমাদের থেকে ক্রয়কৃত ঔষধ নিয়ে আপনি শতভাগ নিশ্চিত থাকতে
                                                 পারেন৷ ঔষধ নকল হওয়ার সুযোগ তখনই থাকে, যখন কেউ কোম্পানি ব্যাতিত অন্য কোন
                                                 উৎস
-                                                থেকে ঔষধ সংগ্রহ করে।</div>
+                                                থেকে ঔষধ সংগ্রহ করে।
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <hr>
                         <div class="product-core-info-list w-100">
-                            <span class="p-core-info-list-title ">Brand</span>
+                            <span class="p-core-info-list-title w-15">Brand</span>
                             <div class="d-flex align-items-center">
                                 <!-- <img :src="load_image(`${product_initial_data.product_brand?.image}`)" height="60"
                                     width="80" alt=""> -->
@@ -262,7 +269,7 @@
                         </div>
                         <hr>
                         <div class="product-core-info-list w-100">
-                            <span class="p-core-info-list-title">Generic</span>
+                            <span class="p-core-info-list-title  w-15">Generic</span>
                             <span @click="genericProducts"
                                 class="p-core-info-list-sub-title c-pointer region-name text-info">
                                 {{ product_initial_data.medicine_product?.p_generic_name }}
@@ -300,7 +307,7 @@
                             </div>
 
                         </div>
-                        <div class="single-product-price display-flex-center mb-24">
+                        <div class=" display-flex-center mb-24">
 
                             <div class="product-price-widget offer-price p-0">
                                 <span class="offer-price-title">Offer price: </span>
@@ -322,7 +329,7 @@
                     </div>
                     <hr>
                     <div class="ps-3">
-                        <h6 class="product-title d-block mt-3">quantity</h6>
+                        <h6 class="product-title d-block ">quantity</h6>
                         <div>
                             <select name="quantity" class="form-select w-50" id="" v-model="quantity">
                                 <option value="" selected disabled>Select quantity</option>
@@ -334,7 +341,7 @@
                         </div>
                     </div>
 
-                    <div class="product-buttons ps-3 d-flex flex-wrap gap-2 mt-4">
+                    <div class="product-buttons ps-3 d-flex flex-wrap gap-2 mt-2">
                         <button @click="is_auth ? add_to_cart(product_initial_data.id) : openAccount()"
                             class="btn btn-normal">
                             <i class="icon icon-shopping-cart"></i>
@@ -348,7 +355,7 @@
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between px-3 border-b1-grey300 align-items-center">
-                        <div class="text-18 text-grey900 fw-500 d-flex items-center" style="width: 55%;">
+                        <div class="text-18 text-grey900 fw-500 d-flex items-center " style="width: 55%;">
                             <h4 class="ml-5 mb-0">Alternative Brands For {{ product_initial_data.title }}</h4>
                         </div>
 
@@ -365,8 +372,7 @@
 
                     <div class="media-banner  b-g-white1 ">
                         <hr>
-                        <div class="media-banner-box " v-for="item in related_generic_products_data"
-                            :key="item.id">
+                        <div class="media-banner-box " v-for="item in related_generic_products_data" :key="item.id">
                             <div class="media">
                                 <Link class="bg-dummy-image " height="100" width="100"
                                     :href="`/product-details/${item.product?.slug}`" tabindex="0">
@@ -396,7 +402,8 @@
 
                                             </div>
                                             <div class="cart-info">
-                                                <button class="tooltip-top add-cartnoty">
+                                                <button class="tooltip-top add-cartnoty"
+                                                    @click="add_to_cart(item.product_id)">
                                                     <i class="fa fa-shopping-cart"></i>
                                                 </button>
                                                 <Link :href="`/product-details/${item.product?.slug}`" tabindex="0">
@@ -526,6 +533,28 @@ export default {
             }
 
         },
+
+        copyLink() {
+            const link = window.location.href; // You can replace this with the specific URL you want to copy
+            navigator.clipboard.writeText(link).then(() => {
+                alert('Link copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        },
+        shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href); // URL to share
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+        },
+        shareOnTwitter() {
+            const url = encodeURIComponent(window.location.href); // URL to share
+            const text = encodeURIComponent("Check this out!"); // Optional tweet text
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+        },
+        shareOnLinkedIn() {
+            const url = encodeURIComponent(window.location.href); // URL to share
+            window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${url}`, '_blank');
+        }
     },
 
 

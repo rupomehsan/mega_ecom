@@ -19,15 +19,26 @@ class EcommerceOrder
             $orderDetails = $request->all();
 
 
+            $userType = auth()->user()->role?->name;
 
-            $cartItems  = self::$cartModel::where('user_id', auth()->id())->get();
-            $cartSubtotal = $cartItems->sum(function ($cartItem) {
-                return $cartItem->product->current_price * $cartItem->quantity;
+            $cartItems = self::$cartModel::with(['product', 'product.medicine_product_verient'])
+                ->where('user_id', auth()->id())
+                ->get();
+
+            $cartSubtotal = $cartItems->sum(function ($cartItem) use ($userType) {
+                if ($cartItem->product_type == 'medicine') {
+                    return $cartItem->product->medicine_price * $cartItem->quantity;
+                } else {
+                    return $cartItem->product->current_price * $cartItem->quantity;
+                }
+
+                return 0;
             });
 
 
 
             $total = $cartSubtotal;
+
 
             // dd($orderDetails, auth()->user()->toArray(), $cartItems->toArray(), $cartSubtotal);
 
@@ -69,11 +80,11 @@ class EcommerceOrder
                     self::$orderProductmodel::create([
                         'sales_ecommerce_order_id' => $order->id,
                         'product_id' => $cartItem->product_id,
-                        'product_price' => $cartItem->product->current_price,
+                        'product_price' => $cartItem->product->type == 'medicine' ? $cartItem->product->medicine_price : $cartItem->product->current_price,
                         'product_name' => $cartItem->product->title,
                         'discount_type' => null,
                         'tax' => null,
-                        'price' => $cartItem->product->current_price,
+                        'price' => $cartItem->product->type == 'medicine' ? $cartItem->product->medicine_price : $cartItem->product->current_price,
                         'qty' => $cartItem->quantity,
                         'subtotal' => $order->subtotal,
                         'tax_total' =>  0,

@@ -28,15 +28,15 @@
             </template>
 
             <template v-if="is_otp_verify">
-                <div class="theme-card">
+                <div class="theme-card m-0 p-0">
                     <h3 class="text-center my-2">Verify otp</h3>
                     <form class="theme-form" @submit.prevent="OtpVerifyFormHandler($event)" method="post">
                         <div class="form-group">
                             <label>Enter your otp</label>
                             <input type="number" name="otp" id="otp" class="form-control">
                         </div>
-                        <button class="btn btn-normal">Send</button>
-                        <button type="button" @click="resendOtp" class="btn btn-normal mx-1">Resend</button>
+                        <button class="btn btn-normal btn-sm">Send</button>
+                        <button type="button" @click="resendOtp" class="btn btn-normal mx-1 btn-sm">Resend</button>
                     </form>
                 </div>
             </template>
