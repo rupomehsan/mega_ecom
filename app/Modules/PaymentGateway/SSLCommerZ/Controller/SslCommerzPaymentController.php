@@ -170,8 +170,6 @@ class SslCommerzPaymentController extends Controller
     public function success(Request $request)
     {
 
-
-    
         $tran_id = $request->input('tran_id');
         $amount = $request->input('amount');
         $currency = $request->input('currency');

@@ -30,7 +30,7 @@ window.privateAxios = async function (apiEndPoint = null, type = 'get', payload 
         localStorage.removeItem("token");
         let myaccount = document.getElementById("myAccount");
         if(myaccount){
-            myaccount.classList.add('open-side');
+            // myaccount.classList.add('open-side');
         }
         return false;
     }

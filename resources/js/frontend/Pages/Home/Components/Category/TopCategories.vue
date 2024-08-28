@@ -33,9 +33,7 @@
                     <div class="title"></div><img src="/frontend/assets/images/super_saver.webp">
                     </Link>
                 </div> -->
-
             </div>
-
         </div>
         <div class="custom-container">
             <div class="section_title">

@@ -50,7 +50,7 @@ export const common_store = defineStore("common_store", {
         },
 
         add_to_cart: async function (productId) {
-            console.log(productId);
+            // console.log(productId);
             const response = await window.privateAxios(`/add-to-cart`, 'post',
                 {
                     product_id: productId,
@@ -169,6 +169,9 @@ export const common_store = defineStore("common_store", {
         //website settigns
         //website settigns
         get_all_website_settings: async function () {
+            if(this.website_settings_data.length !== 0){
+               return false;
+            }
             this.preloader = true;
             try {
                 let response = await axios.get(`/get-website-settings`);

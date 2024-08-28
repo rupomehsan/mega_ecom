@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 
@@ -73,6 +74,59 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 });
 
 
+Route::get('/tt', function () {
+    $images = DB::table('product_images')
+        ->where('url', 'LIKE', '%\%20%')
+        // ->where('product_id', 67553)
+        // ->take(2)
+        ->get();
+
+    foreach ($images as $key => $image) {
+        $currentFilePath = public_path($image->url);
+        $newFileName = str_replace('%20', '-', basename($currentFilePath)); // Replace '%20' with '-'
+        $newFilePath = dirname($currentFilePath) . '/' . $newFileName;
+
+        if (rename($currentFilePath, $newFilePath)) {
+            DB::table('product_images')
+                ->where('id', $image->id)
+                ->update([
+                    'url' => "uploads/products/".$image->product_id."/".$newFileName,
+                ]);
+            echo "File renamed successfully to: $newFilePath </br>";
+        } else {
+            echo "<mark>Failed to rename file.</mark>";
+        }
+        // dd($newFileName, $newFilePath);
+    }
+    // dd($images);
+});
+Route::get('/t', function () {
+    function readAllFilesFromFolder($directory)
+    {
+        $files = [];
+        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
+        foreach ($iterator as $file) {
+            if ($file->isDir()) {
+                continue;
+            }
+            $files[] = str_replace('\\', '/', $file->getPathname());
+        }
+        return $files;
+    }
+    $directory = public_path('uploads/files');
+    $fileList = readAllFilesFromFolder($directory);
+
+    foreach ($fileList as $currentFilePath) {
+        $newFileName = str_replace('%20', '-', basename($currentFilePath)); // Replace '%20' with '-'
+        $newFilePath = dirname($currentFilePath) . '/' . $newFileName;
+        if (rename($currentFilePath, $newFilePath)) {
+            echo "File renamed successfully to: $newFilePath";
+        } else {
+            echo "Failed to rename file.";
+        }
+    }
+    dd($fileList);
+});
 
 
 require_once __DIR__ . '/ssl_route.php';
