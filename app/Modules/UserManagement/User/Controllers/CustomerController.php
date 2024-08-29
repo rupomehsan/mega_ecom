@@ -76,24 +76,5 @@ class CustomerController extends ControllersController
         $data = Import::execute();
         return $data;
     }
-    public function AccountInfoUpdate(Validation $request)
-    {
-        $data = AccountInfoUpdate::execute($request);
-        return $data;
-    }
-    public function AddressInfoUpdate(AddressValidation $request)
-    {
-        $data = AddressInfoUpdate::execute($request);
-        return $data;
-    }
-    public function UpdateProfilePicture()
-    {
-        $data = UpdateProfilePicture::execute();
-        return $data;
-    }
-    public function ChangePassword(PasswordValidation $request)
-    {
-        $data = ChangePassword::execute($request);
-        return $data;
-    }
+  
 }

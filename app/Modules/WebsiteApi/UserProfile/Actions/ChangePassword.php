@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Modules\UserManagement\User\Actions\Customer;
+namespace App\Modules\WebsiteApi\UserProfile\Actions;
+
 
 use Illuminate\Support\Facades\Hash;
 

@@ -355,8 +355,10 @@
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between px-3 border-b1-grey300 align-items-center">
-                        <div class="text-18 text-grey900 fw-500 d-flex items-center " style="width: 55%;">
-                            <h4 class="ml-5 mb-0">Alternative Brands For {{ product_initial_data.title }}</h4>
+                        <div class="text-18 text-grey900 fw-500 d-flex items-center ">
+                            <p class="ml-5 mb-0">Alternative Brands For <span class="fw-bold">{{
+                        product_initial_data.title }}</span> </p>
+
                         </div>
 
                         <!-- <div class="d-flex  gap-20 align-items-center">
@@ -368,10 +370,10 @@
                         </div> -->
                     </div>
 
-
+                    <hr>
 
                     <div class="media-banner  b-g-white1 ">
-                        <hr>
+
                         <div class="media-banner-box " v-for="item in related_generic_products_data" :key="item.id">
                             <div class="media">
                                 <Link class="bg-dummy-image " height="100" width="100"
@@ -385,11 +387,11 @@
                                             <div class="product-detail">
                                                 <ul class="rating">
 
-                                                    <li>
+                                                    <!-- <li>
                                                         <i class="fa fa-star" v-for="n in 5" :key="n"
                                                             :class="{ active: n <= item.product?.average_rating }">
                                                         </i>
-                                                    </li>
+                                                    </li> -->
 
                                                 </ul>
                                                 <Link tabindex="0">

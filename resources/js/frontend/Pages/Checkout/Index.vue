@@ -28,7 +28,7 @@
                                     <div class="theme-form">
                                         <div class="row check-out ">
                                             <div class="checkout-title text-center">
-                                                <h3>Billing Details</h3>
+                                                <h3>Billing & Shiping Details</h3>
 
                                                 <hr>
                                             </div>
@@ -62,7 +62,7 @@
                                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <label class="field-label">Address</label>
                                                 <input type="text" name="address" id="address"
-                                                    :value="user_info.user_delivery_address?.address ?? 'aaa'"
+                                                    :value="user_info.user_delivery_address?.address"
                                                     placeholder="Street address">
                                             </div>
                                             <div class="form-group required">
@@ -297,10 +297,12 @@ export default {
         } else {
 
             await this.all_division();
-            this.user_address_info = authStore.auth_info?.user_delivery_address ?? "asasdf"
+            this.user_address_info = authStore.auth_info?.user_delivery_address
             this.state_division_id = this.user_address_info?.state_division_id
             this.district_id = this.user_address_info?.district_id
             this.station_id = this.user_address_info?.station_id
+
+            this.delivery_charge = this.get_setting_value('inside_dhaka');
         }
 
 
@@ -314,6 +316,7 @@ export default {
             remove_cart_item: "remove_cart_item",
             cart_quantity_update: "cart_quantity_update",
             get_setting_value: "get_setting_value",
+            get_price: "get_price",
         }),
 
         checkoutFormSubmit: async function ($event) {
@@ -406,7 +409,7 @@ export default {
         ...mapState(common_store, {
             all_cart_data: "all_cart_data",
             total_cart_price: "total_cart_price",
-            get_price: "get_price",
+
             website_settings_data: "website_settings_data",
         }),
     },

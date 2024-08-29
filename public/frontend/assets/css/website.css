@@ -28361,17 +28361,17 @@ header {
     margin-left: 5px;
 }
 
-.media-banner .media-banner-box .media:hover .media-body .media-contant .product-detail {
+/* .media-banner .media-banner-box .media:hover .media-body .media-contant .product-detail {
     opacity: 0;
     visibility: hidden;
-}
+} */
 
-.media-banner .media-banner-box .media:hover .media-body .media-contant .cart-info {
+/* .media-banner .media-banner-box .media:hover .media-body .media-contant .cart-info {
     opacity: 1;
     visibility: visible;
     -webkit-transform: translateY(0);
     transform: translateY(0);
-}
+} */
 
 .media-banner .media-banner-box .media:hover .media-body .media-contant .cart-info button {
     -webkit-animation: fadeInUp 300ms ease-in-out;

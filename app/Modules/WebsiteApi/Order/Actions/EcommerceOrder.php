@@ -16,6 +16,7 @@ class EcommerceOrder
     {
         try {
 
+            // dd($request->all());
             $orderDetails = $request->all();
 
 
@@ -41,6 +42,15 @@ class EcommerceOrder
 
 
             // dd($orderDetails, auth()->user()->toArray(), $cartItems->toArray(), $cartSubtotal);
+            $delivery_address_details = [
+                "user_name" => $request->user_name,
+                "phone" => $request->phone,
+                "email" => $request->email,
+                "address" => $request->address,
+                "division_name" => DB::table('location_state_divisions')->where('id', $request->state_division_id)->first()->name,
+                "district_name" => DB::table('location_districts')->where('id', $request->district_id)->first()->name,
+                "station_name" => DB::table('location_stations')->where('id', $request->station_id)->first()->name,
+            ];
 
             $orderInfo = [
                 "order_id" => self::generateUniqueOrderId(),
@@ -48,11 +58,9 @@ class EcommerceOrder
                 "user_type" => "ecommerce",
                 "user_id" => auth()->user()->id,
                 "is_delivered" => 0,
+                "delivery_address_details" => ($delivery_address_details),
                 "order_status" => 'pending',
-                // "user_address_id" => ($orderDetails["address_id"] ?? auth()->user()?->user_address->id) ?? null,
                 "delivery_method" => "home_delivery",
-                // "delivery_address_id" => ($orderDetails["address_id"] ?? auth()->user()?->user_address->id) ?? null,
-
                 "delivery_charge" => $orderDetails["delivery_charge"] ?? 0,
                 "additional_charge" => 0,
                 "product_coupon_id" => null,
@@ -67,9 +75,6 @@ class EcommerceOrder
                 "subtotal" => $cartSubtotal,
                 "total" =>  $total + $orderDetails["delivery_charge"] ?? 0,
             ];
-
-            // dd($orderInfo);
-
 
 
 

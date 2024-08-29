@@ -11,7 +11,7 @@ class Show
     public static function execute($slug)
     {
         try {
-            $with = ['user_address', 'user_address_contact_person', 'user_employee_information'];
+            $with = ['user_address', 'user_address.contact_persons', 'user_employee_information'];
             $fields = request()->fields ?? ["*"];
             if (!$data = self::$model::query()->with($with)->select($fields)->where('slug', $slug)->first()) {
                 return messageResponse('Data not found...', [], 404, 'error');

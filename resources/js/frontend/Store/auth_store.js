@@ -9,7 +9,7 @@ export const auth_store = defineStore("auth_store", {
     }),
     getters: {},
     actions: {
-       
+
         set_is_auth: function (status) {
             this.is_auth = status;
         },
@@ -22,6 +22,14 @@ export const auth_store = defineStore("auth_store", {
         },
         check_is_auth: async function () {
             let response = await window.privateAxios("/check_user");
+            if (response.status == 'success') {
+                this.auth_info = response.data;
+                this.is_auth = 1;
+                this.role = response.data.role;
+            }
+        },
+        auth_check: async function () {
+            let response = await window.privateAxios("/auth_check");
             if (response.status == 'success') {
                 this.auth_info = response.data;
                 this.is_auth = 1;

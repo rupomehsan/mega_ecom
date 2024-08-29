@@ -14,4 +14,5 @@ Route::prefix('v1')->group(function () {
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('check_user', [Controller::class, 'checkUser']);
+    Route::get('auth-check', [Controller::class, 'authCheck']);
 });

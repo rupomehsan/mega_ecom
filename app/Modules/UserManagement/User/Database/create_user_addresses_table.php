@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('user_addresses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->tinyInteger('is_default')->nullable();
             $table->tinyInteger('is_shipping')->nullable();
             $table->tinyInteger('is_billing')->nullable();
             $table->enum('address_types', ['office', 'pickup_point', 'store','delivery','personal'])->nullable();
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->bigInteger('station_id')->nullable();
             $table->bigInteger('city_id')->nullable();
             $table->string('zip_code')->nullable();
+            $table->string('phone_number')->nullable();
             $table->tinyInteger('is_present_address')->nullable();
             $table->bigInteger('is_permanent_address')->nullable();
 

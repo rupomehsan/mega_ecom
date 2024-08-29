@@ -8,6 +8,7 @@ use App\Modules\Auth\Actions\RetailerRegister;
 use App\Modules\Auth\Actions\VerifyOtp;
 use App\Modules\Auth\Actions\ResendOtp;
 use App\Modules\Auth\Actions\CheckUser;
+use App\Modules\Auth\Actions\AuthCheck;
 
 use App\Http\Controllers\Controller as ControllersController;
 use App\Modules\Auth\Validations\LoginValidation;
@@ -43,6 +44,11 @@ class Controller extends ControllersController
     public function checkUser()
     {
         $data = CheckUser::execute();
+        return $data;
+    }
+    public function authCheck()
+    {
+        $data = AuthCheck::execute();
         return $data;
     }
     public function RetailerRegister(RetailerRegisterValidation $request)

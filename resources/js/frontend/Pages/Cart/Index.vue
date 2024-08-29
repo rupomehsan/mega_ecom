@@ -42,7 +42,7 @@
                                         <td class="d-flex justify-content-center">
                                             <div class="bg-dummy-image" style="height: 100px;width: 100px;background-color: white;">
                                                 <Link  :href="`/product-details/${cart?.product?.slug}`">
-                                                <img class="w-100 h-100"  :src="load_image(`${cart.product.product_image.url}`)" alt="cart">
+                                                <img class="w-100 h-100"  :src="load_image(`${cart.product.product_image?.url}`)" alt="cart">
                                                 </Link>
                                             </div>
                                         </td>

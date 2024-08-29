@@ -28,7 +28,7 @@ class UserAddressModel extends EloquentModel
 
     public function division()
     {
-        return $this->belongsTo(self::$divisionModel, 'division_id', 'id');
+        return $this->belongsTo(self::$divisionModel, 'state_division_id', 'id');
     }
     public function district()
     {
